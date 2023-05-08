@@ -1,0 +1,14 @@
+# main links
+main:
+#   - title: "Quick-Start Guide"
+#     url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
+  - title: "About"
+    url: https://blog.kevin-haas.com/about
+  - title: "Recent Posts"
+    url: https://blog.kevin-haas.com/
+  - title: "Contact Me"
+    url: https://blog.kevin-haas.com/contact
+  - title: "All Articles"
+    url: https://blog.kevin-haas.com/all-articles
+
+posts:
