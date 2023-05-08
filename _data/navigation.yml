@@ -12,3 +12,8 @@ main:
     url: https://blog.kevin-haas.com/all-articles
 
 posts:
+  - title: "Test Pages"
+    children:
+      - title: "Test Page"
+      - url: "https://blog.kevin-haas.com/test-pages/test-page/
+
