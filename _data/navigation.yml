@@ -15,20 +15,20 @@ posts:
     - title: 'CTF Writeups'
       children:
           - title: 'CTF Writeup: HTB - Lame'
-            url: https://kevin-haas.com/ctf-writeup/lame/
+            url: https://kevin-haas.com/htb/writeups/lame
           - title: 'CTF Writeup: HTB - Photobomb'
-            url: https://kevin-haas.com/ctf-writeup/photobomb/
+            url: https://kevin-haas.com/htb/writeups/photobomb
 
     - title: 'Hacking'
       children:
           - title: 'Penetration Testing Workflow'
-            url: https://kevin-haas.com/penetration-testing-workflow/
+            url: https://kevin-haas.com/hacking/penetration-testing-workflow/
           - title: 'Intro to Web Exploitation'
-            url: https://kevin-haas.com/intro-to-web-exploitation/
+            url: https://kevin-haas.com/hacking/intro-to-web-exploitation/
           - title: 'Penetration Testing Tools & Resources'
-            url: https://kevin-haas.com/penetration-testing-tools-resources/
+            url: https://kevin-haas.com/hacking/penetration-testing-tools-resources/
 
     - title: 'Programming'
       children:
           - title: 'Learn Python'
-            url: https://kevin-haas.com/learn-python/
+            url: https://kevin-haas.com/programming/learn-python/

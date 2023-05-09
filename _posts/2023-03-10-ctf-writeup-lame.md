@@ -1,8 +1,8 @@
 ---
-title: "CTF Writeup: HTB - Lame"
+title: "CTF: Lame"
 categories:
-  - CTF
-  - Writeup
+  - HTB
+  - Writeups
 ---
 
 In this write-up, we will explore how to tackle the Lame machine from HackTheBox. Lame is an easy-level machine that was released on 14th March 2017 and runs on Linux. Our objective is to exploit a vulnerability in the smb port to achieve direct root access. Follow along as we break down the process step-by-step.
