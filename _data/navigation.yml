@@ -37,3 +37,6 @@ posts:
       children:
           - title: 'Personalizing Vim Config'
             url: https://kevin-haas.com/linux/personalizing-vim-config/
+          - title: 'Linux Permissions'
+            url: https://kevin-haas.com/linux/linux-permissions/
+
