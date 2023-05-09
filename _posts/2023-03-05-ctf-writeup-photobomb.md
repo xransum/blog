@@ -6,7 +6,9 @@ categories:
    - HackTheBox
 ---
 
-The HackTheBox weekly machine named Photobomb was relatively easy to exploit. The first step involved discovering the login credentials by analyzing a JavaScript file. Once I gained access to an image manipulation panel using the credentials, I identified a command injection vulnerability and leveraged it to obtain execution and a shell. The privilege escalation phase was accomplished by executing a script as root, and there were two ways to achieve this. The first method involved exploiting a find command that was called without the full path, while the second method involved taking advantage of a disabled Bash builtin.
+The HackTheBox weekly machine named Photobomb was relatively easy to exploit. 
+
+The first step involved discovering the login credentials by analyzing a JavaScript file. Once I gained access to an image manipulation panel using the credentials, I identified a command injection vulnerability and leveraged it to obtain execution and a shell. The privilege escalation phase was accomplished by executing a script as root, and there were two ways to achieve this. The first method involved exploiting a find command that was called without the full path, while the second method involved taking advantage of a disabled Bash builtin.
 
 The machine [HTB - Photobomb](https://app.hackthebox.com/machines/500)
 
