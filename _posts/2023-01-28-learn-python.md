@@ -1,7 +1,6 @@
 ---
 title: "Learn Python"
 categories: 
-  - Learning
   - Programming
 ---
 
