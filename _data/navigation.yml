@@ -21,12 +21,12 @@ posts:
 
     - title: 'Hacking'
       children:
-          - title: 'Penetration Testing Workflow'
-            url: https://kevin-haas.com/hacking/penetration-testing-workflow/
+          - title: 'Pentesting Workflow'
+            url: https://kevin-haas.com/hacking/pentesting-workflow/
           - title: 'Intro to Web Exploitation'
             url: https://kevin-haas.com/hacking/intro-to-web-exploitation/
-          - title: 'Penetration Testing Tools & Resources'
-            url: https://kevin-haas.com/hacking/penetration-testing-tools-resources/
+          - title: 'Pentesting Tools'
+            url: https://kevin-haas.com/hacking/pentesting-tools/
 
     - title: 'Programming'
       children:
