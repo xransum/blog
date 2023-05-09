@@ -15,9 +15,9 @@ posts:
     - title: 'CTF Writeups'
       children:
           - title: 'CTF: Lame'
-            url: https://kevin-haas.com/htb/writeups/lame
+            url: https://kevin-haas.com/htb/writeups/ctf-lame
           - title: 'CTF: Photobomb'
-            url: https://kevin-haas.com/htb/writeups/photobomb
+            url: https://kevin-haas.com/htb/writeups/ctf-photobomb
 
     - title: 'Hacking'
       children:
