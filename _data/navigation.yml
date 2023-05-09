@@ -1,34 +1,34 @@
 # main links
 main:
-#   - title: "Quick-Start Guide"
-#     url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
-  - title: "About"
-    url: https://kevin-haas.com/about
-  - title: "Recent Posts"
-    url: https://kevin-haas.com/
-  #- title: "Contact Me"
-  #  url: https://kevin-haas.com/contact
-  - title: "All Articles"
-    url: https://kevin-haas.com/all-articles
+    #   - title: "Quick-Start Guide"
+    #     url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
+    - title: 'Recent Posts'
+      url: https://kevin-haas.com/
+    #- title: "Contact Me"
+    #  url: https://kevin-haas.com/contact
+    - title: 'All Posts'
+      url: https://kevin-haas.com/all-posts
+    - title: 'About'
+      url: https://kevin-haas.com/about
 
 posts:
-  - title: "CTF Writeups"
-    children:
-      - title: "CTF Writeup: HTB - Lame"
-        url: https://kevin-haas.com/ctf-writeup/lame/
-      - title: "CTF Writeup: HTB - Photobomb"
-        url: https://kevin-haas.com/ctf-writeup/photobomb/
+    - title: 'CTF Writeups'
+      children:
+          - title: 'CTF Writeup: HTB - Lame'
+            url: https://kevin-haas.com/ctf-writeup/lame/
+          - title: 'CTF Writeup: HTB - Photobomb'
+            url: https://kevin-haas.com/ctf-writeup/photobomb/
 
-  - title: "Hacking"
-    children:
-      - title: "Penetration Testing Workflow"
-        url: https://kevin-haas.com/penetration-testing-workflow/
-      - title: "Intro to Web Exploitation"
-        url: https://kevin-haas.com/intro-to-web-exploitation/
-      - title: "Penetration Testing Tools & Resources"
-        url: https://kevin-haas.com/penetration-testing-tools-resources/
+    - title: 'Hacking'
+      children:
+          - title: 'Penetration Testing Workflow'
+            url: https://kevin-haas.com/penetration-testing-workflow/
+          - title: 'Intro to Web Exploitation'
+            url: https://kevin-haas.com/intro-to-web-exploitation/
+          - title: 'Penetration Testing Tools & Resources'
+            url: https://kevin-haas.com/penetration-testing-tools-resources/
 
-  - title: "Programming"
-    children:
-      - title: "Learn Python"
-        url: https://kevin-haas.com/learn-python/
+    - title: 'Programming'
+      children:
+          - title: 'Learn Python'
+            url: https://kevin-haas.com/learn-python/
