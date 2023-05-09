@@ -32,3 +32,8 @@ posts:
       children:
           - title: 'Learn Python'
             url: https://kevin-haas.com/programming/learn-python/
+
+    - title: 'Linux'
+      children:
+          - title: 'Personalizing Vim Config'
+            url: https://kevin-haas.com/linux/personalizing-vim-config/
