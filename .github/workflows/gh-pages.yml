@@ -49,10 +49,7 @@ jobs:
           ruby-version: '2.7.5'
           bundler-cache: true
 
-#      - name: "Install Yarn Dependencies"
-#        run: yarn install --frozen-lockfile
-
-      - name: "Building Jekyll Site"
+      - name: "Build Jekyll Site"
         run: yarn run build
 
       - name: "Run Build Tests"
