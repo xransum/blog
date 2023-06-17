@@ -1,9 +1,9 @@
 <!-- begin _includes/scripts.html -->
-<script src="{{ '/assets/js/core.js?' | append: site.github.build_revision | relative_url }}"></script>
+<script src="{{ '/assets/js/core.js?' | append: site.github.build_revision | relative_url }}" type="text/javascript"></script>
 
 {% if site.scripts %}
     {% for script in site.scripts %}
-        <script src="{{ script | relative_url }}"></script>
+        <script src="{{ script | relative_url }}" type="text/javascript"></script>
     {% endfor %}
 {% endif %}
 {% if page.script %}
