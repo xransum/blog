@@ -24,40 +24,44 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: "Notes (Read Me)"
         run: |
           # About this workflow:
           # This workflow generates GitHub pages, but IT IS NOT USED. It is
           # only generated as an emergency fallback in case Netlify goes down
+
       - name: "Checkout"
         uses: actions/checkout@v2
         with:
           persist-credentials: false
+
       - name: "Setup Node.js"
         uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: yarn
+
       - name: "Setup Ruby"
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '2.7.5'
           bundler-cache: true
-      - name: "Setup NodeJS & Ruby Dependencies"
-        run: |
-          yarn install --frozen-lockfile
-          bundle install --jobs 4 --retry 3
-        # run: |
-        #  yarn install --frozen-lockfile
-        #  bundle config set path vendor/bundle
-        #  bundle install --jobs 4 --retry 3
-      - name: "Build gh-pages Site"
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
-        # yarn run build
-        # yarn run test # we don't have tests yet
+
+      # Install Node.js dependencies
+      - run: yarn install --frozen-lockfile
+
+      #- run: bundle config set path vendor/bundle
+
+      # Install Ruby dependencies
+      - run: bundle install --jobs 4 --retry 3
+
+      # Build the site
+      - run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
+
       - name: Upload Artifacts
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v1
