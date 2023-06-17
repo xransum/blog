@@ -4,11 +4,11 @@ remote_theme: pages-themes/modernist@v0.2.0
 # Site settings
 # Site Settings
 locale                   : "en-US"
-title                    : "Kevin's Security Blog"
+title                    : "Kevin's Blog"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Kevin's Security Blog"
-description              : "Kevin's Security Blog."
+name                     : "Kevin's Blog"
+description              : "A blog for security/developmental research, penetration testing, and more."
 url                      : # the base hostname & protocol for your site e.g. "https://xransum.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : xransum/xransum # GitHub username/repo-name
