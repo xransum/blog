@@ -49,18 +49,14 @@ jobs:
           ruby-version: '2.7.5'
           bundler-cache: true
 
-      # Install Node.js dependencies
-      - run: yarn install --frozen-lockfile
+#      - name: "Install Yarn Dependencies"
+#        run: yarn install --frozen-lockfile
 
-      #- run: bundle config set path vendor/bundle
+      - name: "Building Jekyll Site"
+        run: yarn run build
 
-      # Install Ruby dependencies
-      - run: bundle install --jobs 4 --retry 3
-
-      # Build the site
-      - run: bundle exec jekyll build
-        env:
-          JEKYLL_ENV: production
+      - name: "Run Build Tests"
+        run: yarn run test
 
       - name: Upload Artifacts
         # Automatically uploads an artifact from the './_site' directory by default

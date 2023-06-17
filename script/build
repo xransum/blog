@@ -1,0 +1,39 @@
+#!/usr/bin/env sh
+# script/build: Build the application for production.
+
+# Exit immediately if a command exits with a non-zero status.
+set -e
+
+# Set current working directory to the root of the project
+cd "$(dirname "$0")/.."
+
+# Bootstrap the application
+script/bootstrap || {
+    echo "==> Failed to bootstrap application!"
+    exit 1
+}
+
+# Setup the application assets
+script/build-vendor-assets || {
+    echo "==> Failed to setup build-vendor-assets!"
+    exit 1
+}
+
+# Build the application
+echo "==> Building site with Jekyll..."
+
+# Check if bundle is installed, if not, exit
+command -v bundle >/dev/null 2>&1  || {
+    echo "==> Ruby Bundle not installed, must run 'script/boostrap' first!"
+    exit 1
+}
+
+# Build the site using Jekyll
+# bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+bundle exec jekyll build --verbose --trace --config _config.yml --destination _site || {
+    echo "==> Failed to build site with Jekyll!"
+    exit 1
+}
+
+echo "==> Build complete!"
+exit 0

@@ -1,0 +1,46 @@
+#!/usr/bin/env sh
+# script/clean: Clean the application and remove all generated files.
+
+# Exit immediately if a command exits with a non-zero status.
+set -e
+
+# Set current working directory to the root of the project
+cd "$(dirname "$0")/.."
+
+if [ -d "node_modules" ]; then
+    echo "==> Nuking 'node_modules'..."
+    rm -rf node_modules/
+fi
+
+if [ -d "assets/vendor" ]; then
+    echo "==> Nuking 'assets/vendor'..."
+    rm -rf assets/vendor/
+fi
+
+if [ -d "_site" ]; then
+    echo "==> Nuking '_site'..."
+    rm -rf _site/
+fi
+
+if [ -d ".jekyll-cache" ]; then
+    echo "==> Nuking '.jekyll-cache'..."
+    rm -rf .jekyll-cache/
+fi
+
+if [ -d ".sass-cache" ]; then
+    echo "==> Nuking '.sass-cache'..."
+    rm -rf .sass-cache/
+fi
+
+if [ -d ".bundle" ]; then
+    echo "==> Nuking '.bundle'..."
+    rm -rf .bundle/
+fi
+
+if [ -d "vendor" ]; then
+    echo "==> Nuking 'vendor'..."
+    rm -rf vendor/
+fi
+
+echo "==> Cleaning complete!"
+exit 0
