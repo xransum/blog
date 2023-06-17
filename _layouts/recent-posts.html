@@ -1,0 +1,21 @@
+---
+layout: default
+---
+
+{% if paginator %}
+    {% assign posts = paginator.posts %}
+{% else %}
+    {% assign posts = site.posts %}
+{% endif %}
+
+<main class="container" role="main">
+    <h3>Recent Posts</h3>
+    
+    {{ content }}
+    
+    <section>
+        {% for post in posts %}
+            {% include post/post.html type=entries_layout %}
+        {% endfor %}
+    </section>
+</main>

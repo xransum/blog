@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+set -e
+
+gem install bundler
+bundle install
+npm install
+yarn install

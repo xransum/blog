@@ -1,5 +1,6 @@
 ---
 title: "Setting Up an Isolated Python Installation"
+excerpt: "Steps on setting up an isolated Python installation on your server or any other Linux-based machine."
 categories:
   - Programming
 ---

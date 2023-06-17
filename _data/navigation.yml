@@ -1,42 +1,10 @@
 # main links
 main:
-    #   - title: "Quick-Start Guide"
-    #     url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
-    - title: 'Recent Posts'
-      url: https://kevin-haas.com/
-    #- title: "Contact Me"
-    #  url: https://kevin-haas.com/contact
-    - title: 'All Posts'
-      url: https://kevin-haas.com/all-posts
-    - title: 'About'
-      url: https://kevin-haas.com/about
+    - title: "Latest Posts"
+      url: /latest
+    - title: "All Posts"
+      url: /posts
+    - title: "About"
+      url: /about
 
 posts:
-    - title: 'CTF Writeups'
-      children:
-          - title: 'CTF: Lame'
-            url: https://kevin-haas.com/htb/writeups/ctf-lame
-          - title: 'CTF: Photobomb'
-            url: https://kevin-haas.com/htb/writeups/ctf-photobomb
-
-    - title: 'Hacking'
-      children:
-          - title: 'Pentesting Workflow'
-            url: https://kevin-haas.com/hacking/pentesting-workflow/
-          - title: 'Intro to Web Exploitation'
-            url: https://kevin-haas.com/hacking/web-exploitation/
-          - title: 'Pentesting Tools'
-            url: https://kevin-haas.com/hacking/pentesting-tools/
-
-    - title: 'Programming'
-      children:
-          - title: 'Learn Python'
-            url: https://kevin-haas.com/programming/learn-python/
-
-    - title: 'Linux'
-      children:
-          - title: 'Personalizing Vim Config'
-            url: https://kevin-haas.com/linux/personalizing-vim-config/
-          - title: 'Linux Permissions'
-            url: https://kevin-haas.com/linux/linux-permissions/
-

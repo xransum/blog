@@ -1,0 +1,18 @@
+<!-- begin _includes/styles.html -->
+<link rel="stylesheet" href="{{ '/assets/vendor/bootstrap/css/bootstrap.min.css?v=' | append: site.github.build_revision | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/vendor/jquery-ui/jquery-ui.min.css?v=' | append: site.github.build_revision | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/vendor/fontawesome/css/all.min.css?v=' | append: site.github.build_revision | relative_url }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css" integrity="sha512-hasIneQUHlh06VNBe7f6ZcHmeRTLIaQWFd43YriJ0UND19bvYRauxthDg8E4eVNPm9bRUhr5JGeqH7FRFXQu5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{{ '/assets/css/styles.css?v=' | append: site.github.build_revision | relative_url }}">
+
+{% if site.styles %}
+    {% for styles in site.styles %}
+        <link rel="stylesheet" href="{{ script | relative_url }}">
+    {% endfor %}
+{% endif %}
+{% if page.style %}
+    <style>
+        {{ page.style }}
+    </style>
+{% endif %}
+<!-- end _includes/styles.html -->
