@@ -253,6 +253,11 @@ compress_html:
 # Defaults
 defaults:
   - scope:
+      path: "" # Apply to all pages
+    values:
+      content_security_policy: 
+        script_src: "'self'"
+  - scope:
       path: ""
       type: pages
     values:

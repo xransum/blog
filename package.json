@@ -52,8 +52,9 @@
     "private": true,
     "scripts": {
         "build": "script/build",
-        "dev": "run-p -sl 'build' jekyll:watch",
-        "jekyll:watch": "bundle exec jekyll serve --safe --trace --drafts --watch --incremental --host=0.0.0.0 --port=4000",
+        "dev": "run-s -s 'build' jekyll:watch",
+        "dev:nobuild": "run-s -s jekyll:watch",
+        "jekyll:watch": "bundle exec jekyll serve --safe --trace --drafts --watch --incremental",
         "prettier:format": "prettier --write '_parcel/**/*.{js,scss}'",
         "test": "./script/test"
     },
