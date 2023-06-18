@@ -2,7 +2,7 @@
 title: "CTF: Photobomb"
 categories:
   - HTB
-  - Writeups
+  - Writeup
 ---
 
 The HackTheBox weekly machine named Photobomb was relatively easy to exploit. 
