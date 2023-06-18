@@ -1,0 +1,70 @@
+#!/usr/bin/env sh
+# script/new_post: creates a new post in blog/_posts for the current date with the given title,
+#                  accepts one positional arg : the title of the post
+#                  accepts one flag --path : the path to the blog directory
+
+# parse arguments and flags
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --path)
+            shift
+            BLOG_PATH="$1"
+            ;;
+        *)
+            TITLE="$1"
+            ;;
+    esac
+    shift
+done
+
+# check if the blog path is set
+if [ -z "$BLOG_PATH" ]; then
+    echo "==> blog path not set, default current directory"
+    BLOG_PATH="."
+fi
+
+# check if the title is set
+if [ -z "$TITLE" ]; then
+    echo "==> Error: title not set"
+    exit 1
+fi
+
+# check if the blog path exists
+if [ ! -d "$BLOG_PATH" ]; then
+    echo "==> Error: blog path does not exist"
+    exit 1
+fi
+
+# check if the blog path is a directory
+if [ ! -d "$BLOG_PATH" ]; then
+    echo "==> Error: blog path is not a directory"
+    exit 1
+fi
+
+# get the current date
+DATE=$(date +%Y-%m-%d)
+# title is lowercase with delimited dashes, e.g. "My New Post" becomes "my-new-post"
+SLUG=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | tr '[:space:]' '-' | sed 's/-$//')
+# blog file path
+BLOG_FILE="$BLOG_PATH/$DATE-$SLUG.md"
+
+echo "============================================="
+echo "==> Post title: $TITLE"
+echo "==> Post slug: $SLUG"
+echo "============================================="
+
+if [ -f "$BLOG_FILE" ]; then
+    echo "==> Error: post already exists at $BLOG_FILE"
+    exit 1
+fi
+
+# create the post file
+echo """---
+title: $TITLE
+categories:
+  - None
+---
+
+""" > "$BLOG_FILE"
+
+echo "==> Created new post at $BLOG_FILE"
