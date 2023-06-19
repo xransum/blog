@@ -8,14 +8,17 @@ layout: default
     {% assign posts = site.posts %}
 {% endif %}
 
-<main class="container" role="main">
+<main class="container bg-body-tertiary border rounded-3 pt-2" role="main">
     <h3>Recent Posts</h3>
     
     {{ content }}
     
     <section>
+        {% assign posts = site.posts | sort: 'date' | reverse %}
         {% for post in posts %}
             {% include post/post.html type=entries_layout %}
         {% endfor %}
+        
+        {% include components/pagination.html %}
     </section>
 </main>

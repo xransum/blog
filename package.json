@@ -17,7 +17,7 @@
     "homepage": "https://xransum.github.io/blog/",
     "dependencies": {
         "autoprefixer": "^9.8.2",
-        "bootstrap": "^4.1.3",
+        "bootstrap": "5.3",
         "fontawesome-free": "^1.0.4",
         "highlight.js": "^11.8.0",
         "jquery": "^3.7.0",

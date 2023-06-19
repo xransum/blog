@@ -1,6 +1,9 @@
 <!-- begin _includes/scripts.html -->
-
-<script type="application/javascript" src="{{ base.url | prepend: site.url }}/assets/js/core.js?v={{ '' | append: site.github.build_revision }}"></script>
+<script src="/assets/vendor/jquery/jquery.min.js" type="text/javascript"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+<script src="/assets/vendor/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+<script type="application/javascript" src="/assets/js/theme-toggle.js?v={{ '' | append: site.github.build_revision }}"></script>
+<script type="application/javascript" src="/assets/js/core.js?v={{ '' | append: site.github.build_revision }}"></script>
 
 {% if site.scripts %}
     {% for script in site.scripts %}

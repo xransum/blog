@@ -8,7 +8,7 @@ layout: default
     {% assign posts = site.posts %}
 {% endif %}
 
-<main class="container" role="main">
+<main class="container bg-body-tertiary border rounded-3 pt-2" role="main">
     <h3>All Posts</h3>
     
     {{ content }}
@@ -24,10 +24,11 @@ layout: default
         {% for i in (1..categories_max) reversed %}
             {% for category in site.categories %}
                 {% if category[1].size == i %}
-                    <button type="button" class="btn btn-sm btn-secondary mr-1">
-                        {{ category[0] }} <span class="badge badge-light">{{ i }}</span>
-                        <span class="sr-only">posts</span>
-                    </button>
+                <span class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
+                    <a href="javascript:void(0)">{{ category[0] }}</a>
+                    <span class="vr mx-2"></span>
+                    <span class="badge bg-info rounded-pill">{{ category[1].size }}</span>
+                </span>
                 {% endif %}
             {% endfor %}
         {% endfor %}

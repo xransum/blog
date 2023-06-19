@@ -4,14 +4,17 @@ layout:
 
 <!-- _layouts/default.html -->
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="{{ site.lang | default: "en-US" }}">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="{{ site.lang | default: "en-US" }}" data-bs-theme="dark">
 <head>
     {% include head.html %}
 </head>
-<body>
+<body class="">
     {% include header.html %}
-    {{ content }}
+    <div class="container-fluid pb-3">
+        {{ content }}
+    </div>
     {% include footer.html %}
+    {% include components/theme-changer.html %}
     {% include scripts.html %}
 </body>
 </html>
