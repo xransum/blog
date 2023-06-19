@@ -2,7 +2,6 @@
 
 <script type="application/javascript" src="{{ base.url | prepend: site.url }}/assets/js/core.js?v={{ '' | append: site.github.build_revision }}"></script>
 
-<!--
 {% if site.scripts %}
     {% for script in site.scripts %}
         <script src="{{ script | relative_url }}" type="text/javascript"></script>
@@ -13,5 +12,4 @@
         {{ page.script }}
     </script>
 {% endif %}
--->
 <!-- end _includes/scripts.html -->
