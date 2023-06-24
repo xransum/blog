@@ -20,8 +20,8 @@
             <a href="{{ post.url | relative_url }}">Read More</a>
         </div>
         <span class="d-block">
-            {% if post.excerpt %}
-                {{ post.excerpt | markdownify | strip_html | truncate: 160 }}
+            {% if post.subtitle %}
+                {{ post.subtitle | markdownify | strip_html | truncate: 160 }}
             {% endif %}
         </span>
     </div>

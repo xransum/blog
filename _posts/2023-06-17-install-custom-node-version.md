@@ -1,6 +1,6 @@
 ---
 title: "Install Custom Node Version"
-excerpt: "Steps on installing a custom Node version on your server or any other Linux-based machine."
+subtitle: "Steps on installing a custom Node version on your server or any other Linux-based machine."
 categories:
   - Programming
 ---

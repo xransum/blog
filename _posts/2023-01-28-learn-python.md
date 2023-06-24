@@ -1,6 +1,6 @@
 ---
 title: "Learn Python"
-excerpt: "A summary of the book 'Think Python: How to Think Like a Computer Scientist' by Allen B. Downey."
+subtitle: "A summary of the book 'Think Python: How to Think Like a Computer Scientist' by Allen B. Downey."
 categories:
   - Programming
 ---

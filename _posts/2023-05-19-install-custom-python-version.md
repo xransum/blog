@@ -1,6 +1,6 @@
 ---
 title: "Install Custom Python Version"
-excerpt: "Steps on installing a custom Python version on your server or any other Linux-based machine."
+subtitle: "Steps on installing a custom Python version on your server or any other Linux-based machine."
 categories:
   - Programming
 ---

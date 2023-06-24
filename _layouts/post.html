@@ -5,8 +5,8 @@ layout: default
 {% if page.title %}
     <meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">
 {% endif %}
-{% if page.excerpt %}
-    <meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">
+{% if page.subtitle %}
+    <meta itemprop="description" content="{{ page.subtitle | markdownify | strip_html | strip_newlines | escape_once }}">
 {% endif %}
 {% if page.date %}
     <meta itemprop="date-published" content="{{ page.date | date_to_xmlschema }}">
@@ -16,24 +16,24 @@ layout: default
 {% endif %}
 
 <main role="main">
-    <div class="position-relative overflow-hidden px-md-5 m-md-3 text-center">
+    <div class="position-relative overflow-hidden px-md-5 m-md-3 text-center border-bottom">
         <div class="col-7 px-5 mx-auto my-5">
             <h1 class="display-4 font-weight-normal">
                 {{ page.title | markdownify | strip_html | strip_newlines | escape_once }}
             </h1>
             
-            {% if page.excerpt %}
-                <p class="lead font-weight-normal">
-                    {{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}
-                </p>
-            {% endif %}
+            <p class="lead font-weight-normal">
+                {% if page.subtitle %}
+                    {{ page.subtitle | markdownify | strip_html | strip_newlines | escape_once }}
+                {% endif %}
+            </p>
         </div>
     
         <div class="product-device box-shadow d-none d-md-block"></div>
         <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
     </div>
     
-    <article class="container bg-body-tertiary border pt-2">
+    <article class="container pt-2">
         {% if page.url != "/" and site.breadcrumbs %}
             {% unless paginator %}
                 {% include breadcrumbs.html %}

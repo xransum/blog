@@ -1,6 +1,6 @@
 ---
 title: "Setting Up Python Virtual Environment"
-excerpt: "Steps on setting up a Python virtual environment on your server or any other Linux-based machine."
+subtitle: "Steps on setting up a Python virtual environment on your server or any other Linux-based machine."
 categories:
   - Programming
 ---

@@ -1,6 +1,6 @@
 ---
 title: How to Build a Botnet
-excerpt: "Building a botnet from scratch using Python."
+subtitle: "Building a botnet from scratch using Python."
 categories:
   - Hacking
 ---
