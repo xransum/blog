@@ -1,7 +1,13 @@
 ---
 title: "Cross Site Scripting (XSS)"
+excerpt: "A guide on how to exploit XSS vulnerabilities."
 categories:
+  - Web Exploits
+tags:
   - Hacking
+  - Web Security
+  - Web Exploitation
+  - Learning
 ---
 
 
@@ -34,14 +40,18 @@ https://example.com/search?q=[SEARCH_TERM]
 An attacker could craft a URL that includes a script tag, like this:
 
 ```
-`https://example.com/search?q=<script>alert('XSS!');</script>`
+`https://example.com/search?q=<script>
+    alert('XSS!');
+</script>`
 ```
 
 Such an example could be easily implemented given the following command
 involving curl:
 
 ```bash
-$ curl "https://example.com/search?q=<script>alert('XSS!');</script>"
+$ curl "https://example.com/search?q=<script>
+    alert('XSS!');
+</script>"
 ```
 
 If a user clicks on this link, the server will reflect the search term back to
@@ -62,9 +72,10 @@ then stored in a database and displayed on the article page. An attacker could
 post a comment that includes a script tag, like this:
 
 ```html
-<script>alert('XSS!');</script>
+<script>
+    alert('XSS!');
+</script>
 ```
-
 When other users view the article page, the server will serve the stored
 comment to them, including the malicious script tag. When the user's browser
 processes the script, it will execute the alert function and display an alert
@@ -87,17 +98,17 @@ client-side JavaScript code, like this:
 
 <script>
 
-var name = document.getElementById("name").value;
+    var name = document.getElementById("name").value;
 
-document.getElementById("greeting").innerHTML = "Hello, " + name + "!";
-
+    document.getElementById("greeting").innerHTML = "Hello, " + name + "!";
 </script>
 ```
-
 An attacker could submit a name that includes a script tag, like this:
 
 ```html
-<script>alert('XSS!');</script>
+<script>
+    alert('XSS!');
+</script>
 ```
 
 When the user's browser processes the script, it will execute the alert

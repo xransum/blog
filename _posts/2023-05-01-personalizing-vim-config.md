@@ -1,6 +1,11 @@
 ---
 title: "Personalizing Vim Config"
+excerpt: "Personalize your Vim configurations."
 categories:
+  - Linux
+tags:
+  - Configurations
+  - Vim
   - Linux
 ---
 

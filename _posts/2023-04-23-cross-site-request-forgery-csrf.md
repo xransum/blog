@@ -1,7 +1,13 @@
 ---
 title: "Cross Site Request Forgery (CSRF)"
+excerpt: "A guide on how to exploit CSRF vulnerabilities."
 categories:
+  - Web Exploits
+tags:
   - Hacking
+  - Web Security
+  - Web Exploitation
+  - Learning
 ---
 
 

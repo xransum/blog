@@ -1,7 +1,13 @@
 ---
 title: "Command Injection"
+excerpt: "A guide on how to exploit command injection vulnerabilities."
 categories:
+  - Web Exploits
+tags:
   - Hacking
+  - Web Security
+  - Web Exploitation
+  - Learning
 ---
 
 Command Injection is a vulnerability that arises when an application allows a
@@ -50,4 +56,3 @@ Developers can prevent command injection by validating and sanitizing user
 input, as well as using safe programming practices such as input encoding,
 parameterized queries, and avoiding the use of system commands whenever
 possible.
-

@@ -1,0 +1,4 @@
+# --- Global Site Settings ---
+# Site Settings
+url                      : # the base hostname & protocol for your site, e.g. "https://xransum.github.io"
+baseurl                  : "/" # the subpath of your site, e.g. "/blog"

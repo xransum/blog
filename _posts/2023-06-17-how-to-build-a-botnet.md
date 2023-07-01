@@ -1,15 +1,18 @@
 ---
-title: How to Build a Botnet
-subtitle: "Building a botnet from scratch using Python."
+title: "How to Build a Botnet"
+excerpt: "Building a botnet from scratch using Python."
 categories:
+  - Developer
+tags:
   - Hacking
+  - Learning
+  - Programming
+  - Python
 ---
 
 <div class="alert alert-warning">
   <strong>Warning!</strong> This article is for educational purposes only, and should not be used for any illegal activities. If you are interested in learning more, please read the <a href="#disclaimer">Disclaimer</a> below. Otherwise, please leave this page and <a href="javascript:history.back()">Go Back</a>.
 </div>
-
-
 
 ## What is a Botnet?
 

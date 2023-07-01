@@ -2,41 +2,8 @@
 layout: default
 ---
 
-{% if paginator %}
-    {% assign posts = paginator.posts %}
-{% else %}
-    {% assign posts = site.posts %}
-{% endif %}
+<section class="container pt-5">
+    <h2>{{ page.title }}</h2>
 
-<main class="container bg-body-tertiary border rounded-3 pt-2" role="main">
-    <h3>All Posts</h3>
-    
-    {{ content }}
-    
-    {% assign categories_max = 0 %}
-    {% for category in site.categories %}
-        {% if category[1].size > categories_max %}
-            {% assign categories_max = category[1].size %}
-        {% endif %}
-    {% endfor %}
-    
-    <div class="btn-group" role="group" aria-label="Categories List">
-        {% for i in (1..categories_max) reversed %}
-            {% for category in site.categories %}
-                {% if category[1].size == i %}
-                <span class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
-                    <a href="javascript:void(0)">{{ category[0] }}</a>
-                    <span class="vr mx-2"></span>
-                    <span class="badge bg-info rounded-pill">{{ category[1].size }}</span>
-                </span>
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
-    </div>
-    
-    <section>
-        {% for post in posts %}
-            {% include post/post.html type=entries_layout %}
-        {% endfor %}
-    </section>
-</main>
+    {% include posts.html %}
+</section>

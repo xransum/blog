@@ -1,12 +1,8 @@
-<!-- begin _includes/styles.html -->
-<link rel="stylesheet" href="{{ '/assets/vendor/bootstrap/css/bootstrap.min.css?v=' | append: site.github.build_revision | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/vendor/jquery-ui/jquery-ui.min.css?v=' | append: site.github.build_revision | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/vendor/fontawesome/css/all.min.css?v=' | append: site.github.build_revision | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/styles.css?v=' | append: site.github.build_revision | relative_url }}">
-
-{% if site.styles %}
-    {% for styles in site.styles %}
-        <link rel="stylesheet" href="{{ script | relative_url }}">
+<link href="{{ site.baseurl }}assets/css/main.css?v={{ '' | append: site.github.build_revision }}" rel="stylesheet">
+<link href="{{ site.baseurl }}assets/vendor/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+<link href="{{ site.baseurl }}assets/vendor/fontawesome/css/all.min.css" rel="stylesheet">
+{% if page.styles %}
+    {% for style in page.styles %}
+        {{ style }}
     {% endfor %}
 {% endif %}
-<!-- end _includes/styles.html -->

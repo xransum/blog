@@ -1,0 +1,53 @@
+// Global Toggles
+$enable-rounded: 1rem; // Enables predefined border-radius styles on various components.
+$enable-shadows: true; // Enables predefined decorative box-shadow styles on various components. Does not affect box-shadows used for focus states.
+$enable-gradients: true; // Enables predefined gradients via background-image styles on various components.
+$enable-transitions: true; // Enables predefined transitions on various components.
+$enable-prefers-reduced-motion-media-query: true; // Enables the prefers-reduced-motion media query, which suppresses certain animations/transitions based on the users’ browser/operating system preferences.
+$enable-hover-media-query: false; // Deprecated
+$enable-grid-classes: true; // Enables the generation of CSS classes for the grid system (e.g., .container, .row, .col-md-1, etc.).
+$enable-caret: true; // Enables pseudo element caret on .dropdown-toggle.
+$enable-pointer-cursor-for-buttons: true; // Add “hand” cursor to non-disabled button elements.
+$enable-print-styles: true; // Enables styles for optimizing printing.
+$enable-responsive-font-sizes: false; // Enables responsive font sizes.
+$enable-validation-icons: true; // Enables background-image icons within textual inputs and some custom forms for validation states.
+$enable-deprecation-messages: true; // Set to false to hide warnings when using any of the deprecated mixins and functions that are planned to be removed in v5.
+
+// Global Variables
+$border-radius: .4rem;
+
+// Color Scheme
+$blue: #0d6efd;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #d63384;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #198754;
+$teal: #20c997;
+$cyan: #0dcaf0;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$primary: #0d6efd;
+$secondary: #5a6169;
+$success: #22c25e;
+$danger: #ff5252;
+$warning: #ffc107;
+$info: #17a2b8;
+$light: #f8f9fa;
+$dark: #212529;
+
+// Body
+$body-bg: #f8f9fa;
+$body-color: #212529;
+
+//@import "gruvbox";
+@import "bootstrap";

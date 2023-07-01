@@ -41,7 +41,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: yarn
 
       - name: "Setup Ruby"
         uses: ruby/setup-ruby@v1
@@ -49,11 +48,14 @@ jobs:
           ruby-version: '2.7.5'
           bundler-cache: true
 
+      - name: "Build site assets"
+        run: scripts/bootstrap
+
       - name: "Build Jekyll Site"
-        run: yarn run build
+        run: npm run build
 
       - name: "Run Build Tests"
-        run: yarn run test
+        run: npm run test
 
       - name: Upload Artifacts
         # Automatically uploads an artifact from the './_site' directory by default

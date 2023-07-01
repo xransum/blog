@@ -1,0 +1,45 @@
+<section class="comments">
+    <div class="my-5 py-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <div class="row mb-4 pb-2 border-bottom">
+                            <div class="col-auto">
+                                <h4 class="text-left">Comments</h4>
+                            </div>
+                            <div class="col-auto ml-auto">
+                                <div class="text-right">
+                                    <button type="button" class="btn btn-primary btn-sm add-comment" disabled="disabled">Add Comment</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pb-2">
+                            {%- include comments-form.html type="primary" -%}
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {%- assign total_comments = site.data.comments.size -%}
+                                {%- if total_comments == 0 -%}
+                                    <div class="d-flex flex-start mb-2">
+                                        <div class="flex-grow-1 flex-shrink-1 ml-3">
+                                            <div class="mb-2">
+                                                <p class="small mb-0">
+                                                    No comments yet.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {%- else -%}
+                                    {%- for user_comment in site.data.comments -%}
+                                        {%- include comments-single.html -%}
+                                    {%- endfor -%}
+                                {%- endif -%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

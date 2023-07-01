@@ -1,21 +1,30 @@
 ---
-layout:
+layout: null
 ---
 
-<!-- _layouts/default.html -->
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="{{ site.lang | default: "en-US" }}" data-bs-theme="dark">
-<head>
-    {% include head.html %}
-</head>
-<body class="">
-    {% include header.html %}
-    <div class="container-fluid pb-3">
-        {{ content }}
-    </div>
-    {% include footer.html %}
-    {% include components/theme-changer.html %}
-    {% include scripts.html %}
-</body>
+{% assign lang = site.locale | slice: 0,2 | default: "en" %}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ lang }}" lang="{{ lang }}" class="h-100">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';"> -->
+        {% include seo.html %}
+        {% include analytics.html %}
+        {% include styles.html %}
+    </head>
+    <body class="{{ body_class | default: "" }}">
+        {% include_cached header.html %}
+        {% if page.no_main %}
+            {{ content }}
+        {% else %}
+            <main class="{{ main_class | default: "" }}">
+                {{ content }}
+            </main>
+        {% endif %}
+        {% include_cached footer.html %}
+        {% include scripts.html %}
+    </body>
 </html>
-<!-- end _layouts/default.html -->

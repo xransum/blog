@@ -1,7 +1,13 @@
 ---
 title: "Server Side Request Forgery (SSRF)"
+excerpt: "A guide on how to exploit SSRF vulnerabilities."
 categories:
+  - Web Exploits
+tags:
   - Hacking
+  - Web Security
+  - Web Exploitation
+  - Learning
 ---
 
 
@@ -21,10 +27,10 @@ uses the following code to retrieve the user's profile picture:
 
 ```php
 <?php
-$url = 'https://profilepictures.com/' . $_GET['picture_id'];
-$data = file_get_contents($url);
-echo '<img src="' . $url . '">';
-?>
+   $url = 'https://profilepictures.com/' . $_GET['picture_id'];
+   $data = file_get_contents($url);
+   echo '<img src="' . $url . '">';
+   ?>
 ```
 
 An attacker could exploit an SSRF vulnerability by providing a malicious URL

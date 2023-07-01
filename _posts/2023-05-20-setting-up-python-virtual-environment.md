@@ -1,12 +1,17 @@
 ---
 title: "Setting Up Python Virtual Environment"
-subtitle: "Steps on setting up a Python virtual environment on your server or any other Linux-based machine."
+excerpt: "Steps on setting up a Python virtual environment on your server or any other Linux-based machine."
 categories:
+  - Developer
+tags:
+  - Linux
   - Programming
+  - Python
+  - Virtual Environment
 ---
 
-Developing software with Python often involves setting up Python on your local machine, installing required libraries via the terminal, writing code in a single .py file or notebook, and running the program in the terminal. This approach is commonly followed by beginners and those transitioning from Python for data analytics.
 
+Developing software with Python often involves setting up Python on your local machine, installing required libraries via the terminal, writing code in a single .py file or notebook, and running the program in the terminal. This approach is commonly followed by beginners and those transitioning from Python for data analytics.
 While this method works well for simple scripting projects, it may become challenging when dealing with complex software development projects. For instance, when building a Python library, an API, or a software development kit, you often work with multiple files, packages, and dependencies. In such cases, it becomes necessary to isolate your Python development environment specific to that project.
 
 Imagine a scenario where you are working on Application A using your system-installed Python and have installed Package X Version 1.0 globally. Later, you switch to Project B on your machine and install Package X Version 2.0, which introduces significant changes from Version 1.0.

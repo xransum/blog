@@ -2,8 +2,18 @@
 layout: default
 ---
 
-<main class="container" role="main">
-    <section>
-        {{ content }}
-    </section>
-</main>
+<section class="cover-container w-100 h-100 p-3 pt-5 mx-auto flex-column text-center">
+    {% if page.doctype == "error" %}
+        <div role="main" class="inner cover">
+            <h1 class="cover-heading">{{ page.title }}</h1>
+            <p class="lead">
+                {{ page.excerpt }}
+            </p>
+            <p class="lead">
+                <a href="javascript:history.back()" class="btn btn-sm btn-danger">Go back</a>
+                <a href="/" class="btn btn-sm btn-primary">Home</a>
+            </p>
+        </div>
+    {% endif %}
+    {{ content }}
+</section>

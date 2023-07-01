@@ -1,7 +1,13 @@
 ---
 title: "SQL Injection"
+excerpt: "A guide on how to exploit SQL injection vulnerabilities."
 categories:
+  - Web Exploits
+tags:
   - Hacking
+  - Web Security
+  - Web Exploitation
+  - Learning
 ---
 
 SQL Injection is a security vulnerability that occurs when an application
@@ -44,9 +50,9 @@ which could break the SQL query and cause an error. For example:
 
 ```php
 <?php
-$username = $_GET['username']; // if the user enters a single quote here, it could break the SQL query
-$result = mysql_query("SELECT * FROM users WHERE username='$username'");
-?>
+   $username = $_GET['username']; // if the user enters a single quote here, it could break the SQL query
+   $result = mysql_query("SELECT * FROM users WHERE username='$username'");
+   ?>
 ```
 
 A malicious user could enter a single quote in the username field, which would

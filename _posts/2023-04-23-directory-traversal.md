@@ -1,7 +1,13 @@
 ---
 title: "Directory Traversal"
+excerpt: "A guide on how to exploit directory traversal vulnerabilities."
 categories:
+  - Web Exploits
+tags:
   - Hacking
+  - Web Security
+  - Web Exploitation
+  - Learning
 ---
 
 
@@ -16,11 +22,10 @@ Consider this PHP code that allows the user to choose what page to load from a
 
 ```php
 <?php
-$page = $_GET['page']; // index.php
-include("/var/www/html/" . $page);
-?>
+   $page = $_GET['page']; // index.php
+   include("/var/www/html/" . $page);
+   ?>
 ```
-
 Under normal operation, the page would be "`index.php`". However, if a
 malicious user were to submit a different value for the "`page`" parameter,
 such as "`../../../../../../../../etc/passwd`", the code could be manipulated
@@ -28,9 +33,9 @@ to load the "`/etc/passwd`" file instead of the intended file.
 
 ```php
 <?php
-$page = $_GET['page']; // ../../../../../../../../etc/passwd
-include("/var/www/html/" . $page);
-?>
+   $page = $_GET['page']; // ../../../../../../../../etc/passwd
+   include("/var/www/html/" . $page);
+   ?>
 ```
 
 In this example, the user is submitting

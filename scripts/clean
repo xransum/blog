@@ -1,0 +1,84 @@
+#!/usr/bin/env sh
+# scripts/clean: This script cleans up the absolutely everything 
+#                within project directory.
+
+# Exit immediately if a command exits with a non-zero status.
+set -e
+
+# Set current working directory to the root of the project
+cd "$(dirname "$0")/.."
+
+# prompt user with a warning
+echo "==> WARNING: This will delete a lot of files and directories generated within this project directory."
+echo "==> WARNING: After running you will have reinstall your gems and node modules again."
+echo -n "==> Are you sure you want to continue? (y/n) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+    echo "==> There is no return, you have 5 secs to cancel this..."
+    sleep 5 || {
+        echo "==> Aborting..."
+        exit 1
+    }
+    echo "==> Cleaning up project directory..."
+else
+    echo "==> Aborting..."
+    exit 1
+fi
+
+# node_modules
+if [ -d "node_modules" ]; then
+    rm -rf node_modules/ --verbose
+fi
+
+# vendor
+if [ -d "vendor" ]; then
+    rm -rf vendor/ --verbose
+fi
+
+# vendor generated asset files
+if [ -d "assets/vendor" ]; then
+    rm -rf assets/vendor/ --verbose
+fi
+
+# vendor generated sass files
+if [ -d "_sass/bootstrap" ]; then
+    rm -rf _sass/bootstrap/ --verbose
+fi
+if [ -d "_sass/bootstrap-icons" ]; then
+    rm -rf _sass/bootstrap-icons/ --verbose
+fi
+
+# jekyll _site directory
+if [ -d "_site" ]; then
+    rm -rf _site/ --verbose
+fi
+
+# jekyll .jekyll-cache directory
+if [ -d ".jekyll-cache" ]; then
+    rm -rf .jekyll-cache/ --verbose
+fi
+
+# jekyll .sass-cache directory
+if [ -d ".sass-cache" ]; then
+    rm -rf .sass-cache/ --verbose
+fi
+
+# jekyll .jekyll-metadata file
+if [ -f ".jekyll-metadata" ]; then
+    rm -f .jekyll-metadata --verbose
+fi
+
+if [ -f "Gemfile.lock" ]; then
+    rm -f Gemfile.lock --verbose
+fi
+
+if [ -f "yarn.lock" ]; then
+    rm -f yarn.lock --verbose
+fi
+
+if [ -f "package-lock.json" ]; then
+    rm -f package-lock.json --verbose
+fi
+
+echo "==> Clean complete!"
+exit 0

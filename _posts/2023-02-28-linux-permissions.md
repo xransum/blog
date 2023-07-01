@@ -1,7 +1,12 @@
 ---
 title: "Linux Permissions"
+excerpt: "Fundamentals of Linux permissions and how attackers target Linux machines."
 categories:
   - Linux
+tags:
+  - Linux
+  - Permissions
+  - Vulnerabilities
 ---
 
 
@@ -52,4 +57,3 @@ sudo chown john:users filename
 In this example, we're changing the ownership of the file "filename" to the user "john" and the group "users". The `sudo` command is used to elevate our privileges to perform the operation as root, which is necessary since only the root user has permission to change ownership.
 
 In summary, understanding Linux file permissions is critical to managing the security of your system. By using commands like `chmod` and `chown`, you can control who can access and modify files on your system. Always be mindful of the permissions you grant to users and groups, and make sure to keep your system up-to-date with security patches and updates.
-

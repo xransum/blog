@@ -1,9 +1,13 @@
 ---
 title: "Networking: UDP vs TCP"
-subtitle: "Unraveling the Differences Between UDP and TCP for the Aspiring Network Explorer"
+excerpt: "Unraveling the Differences Between UDP and TCP for the Aspiring Network Explorer"
 categories:
   - Networking
-  - Basics
+tags:
+  - Learning
+  - Networking
+  - TCP
+  - UDP
 ---
 
 
@@ -19,24 +23,29 @@ Once the connection is established, data can be exchanged bidirectionally betwee
 
 The reliability and error-checking mechanisms of TCP come at a cost: increased overhead and latency. The extensive handshaking and error recovery processes add extra data to each packet and introduce additional round-trip time. This makes TCP ideal for applications that prioritize data integrity and reliability, such as file transfer, web browsing, and email.
 
-```plantuml!
-@startuml
-
-participant "Client" as client
-participant "Server" as server
-
-client -> server: SYN
-server -> client: SYN, ACK
-client -> server: ACK
-...
-client <-> server: Data Exchange
-...
-client -> server: FIN, ACK
-server -> client: ACK
-server -> client: FIN
-client -> server: ACK
-
-@enduml
+```
+   +--------+         +--------+
+   | Client |         | Server |
+   +--------+         +--------+
+       |                   |
+       | SYN               |
+       |------------------>|
+       |          SYN, ACK |
+       |<------------------|
+       | ACK               |
+       |------------------>|
+       |                   |
+       |   Data Exchange   |
+       |<----------------->|
+       |                   |
+       | FIN, ACK          |
+       |------------------>|
+       |               ACK |
+       |<------------------|
+       | FIN               |
+       |------------------>|
+       |               ACK |
+       |<------------------|
 ```
 
 ## UDP: Speed and Simplicity
@@ -47,20 +56,23 @@ UDP's simplicity results in lower overhead and faster transmission times compare
 
 However, the lack of reliability means that UDP packets can be lost, arrive out of order, or even be duplicated. It is up to the application layer to handle error correction or retransmission if necessary. While this introduces more complexity for developers, it also offers greater flexibility and control over how data is handled.
 
-```plantuml!
-@startuml
-
-participant "Client" as client
-participant "Server" as server
-
-client -> server: Data
-server -> client: Data Acknowledgment
-client -> server: Data
-server -> client: Data Acknowledgment
-client -> server: Data
-server -> client: Data Acknowledgment
-
-@enduml
+```
+   +--------+         +--------+
+   | Client |         | Server |
+   +--------+         +--------+
+       |                   |
+       | Data              |
+       |------------------>|
+       |          Data ACK |
+       |<------------------|
+       | Data              |
+       |------------------>|
+       |          Data ACK |
+       |<------------------|
+       | Data              |
+       |------------------>|
+       |          Data ACK |
+       |<------------------|
 ```
 
 ## Choosing the Right Protocol

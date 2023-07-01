@@ -1,4 +1,7 @@
+---
+layout: null
+permalink: /robots.txt
+sitemap: false
+---
 User-agent: *
-Allow: *
-
-Sitemap: https://kevin-haas.com/sitemap.xml
+Disallow:

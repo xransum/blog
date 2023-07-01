@@ -1,12 +1,16 @@
 ---
 title: "Install Custom Python Version"
-subtitle: "Steps on installing a custom Python version on your server or any other Linux-based machine."
+excerpt: "Steps on installing a custom Python version on your server or any other Linux-based machine."
 categories:
+  - Developer
+tags:
+  - Installation
+  - Linux
   - Programming
+  - Python
 ---
 
 Similarly to [Node.js](https://nodejs.org/en/), Python is a popular programming language that is used for a variety of applications. It is known for its simplicity, versatility, and ease of use. Python is also a great language for beginners to learn, as it is easy to read and understand.
-
 Python is available on most, if not all, Shared, VPS, and Dedicated Servers. However, some of these servers may be installed as the root user, which can cause issues when installing Python packages. To avoid these issues, you can install Python locally under your Shell user.
 
 So this post will walk you through the steps of installing a custom Python version on your server or any other Linux-based machine.
@@ -33,8 +37,8 @@ $ cd tmp/
 ```
 
 <div class="alert alert-primary">
-  <strong>Note</strong>:
-  To make it easier to not have to go through the list of versions trying to find the downloadable files for the version you want, you can use the following commands to list and download the tarball for the version of your choosing.
+    <strong>Note</strong>:
+    To make it easier to not have to go through the list of versions trying to find the downloadable files for the version you want, you can use the following commands to list and download the tarball for the version of your choosing.
 </div>
 
 List all available versions of Python:
@@ -43,8 +47,10 @@ $ curl -sKL "https://www.python.org/ftp/python/" | sed -n 's!.*href="\([0-9]\+\.
 ```
 
 <div class="alert alert-warning">
-  <strong>Warning</strong>:
-  From this point on, I'll be using <strong>Python 3.8.10</strong> as an example. However, you can replace this with the version that you have selected/chosen.
+    <strong>Warning</strong>:
+    From this point on, I'll be using
+    <strong>Python 3.8.10</strong>
+    as an example. However, you can replace this with the version that you have selected/chosen.
 </div>
 
 Once you've determined a version, use the following command to download the tarball:
