@@ -2,19 +2,19 @@
 layout: default
 ---
 
-{% if post.header.teaser %}
+{% if page.header.teaser %}
     {% capture teaser %}
-        {{ post.header.teaser }}
+        {{ page.header.teaser }}
     {% endcapture %}
 {% else %}
     {% assign teaser = site.teaser %}
 {% endif %}
-{% if post.id %}
-    {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% if page.id %}
+    {% assign title = page.title | markdownify | remove: "<p>" | remove: "</p>" %}
 {% else %}
-    {% assign title = post.title %}
+    {% assign title = page.title %}
 {% endif %}
-{% assign excerpt = post.excerpt | markdownify | remove: "<p>" | remove: "</p>" | strip_html | default: "" %}
+{% assign excerpt = page.excerpt | markdownify | remove: "<p>" | remove: "</p>" | strip_html | default: "" %}
 
 {%- if page.title -%}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{%- endif -%}
 {%- if page.excerpt -%}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">{%- endif -%}
