@@ -135,7 +135,7 @@ sass:
 # permalink: pretty
 permalink: /:title/
 paginate: 5
-paginate_path: "/page/:num"
+paginate_path: "/page:num"
 timezone:  # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 # Plugins
