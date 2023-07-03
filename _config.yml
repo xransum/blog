@@ -158,19 +158,19 @@ whitelist:
   - jekyll-include-cache
 
 # Jekyll Archives
-jekyll-archives:
-  layout: archive
-  enabled:
-    - year
-    - month
-    - tags
-    - categories
-  permalinks:
-    year: '/archives/:year/'
-    month: '/archives/:year/:month/'
-    day: '/archives/:year/:month/:day/'
-    tag: '/archives/tag/:name/'
-    category: '/archives/category/:name/'
+#jekyll-archives:
+#  layout: archive
+#  enabled:
+#    - year
+#    - month
+#    - tags
+#    - categories
+#  permalinks:
+#    year: '/archives/:year/'
+#    month: '/archives/:year/:month/'
+#    day: '/archives/:year/:month/:day/'
+#    tag: '/archives/tag/:name/'
+#    category: '/archives/category/:name/'
 
 # HTML Compression
 # - https://jch.penibelst.de/
