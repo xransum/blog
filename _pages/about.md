@@ -5,7 +5,7 @@ permalink: /about
 navbar: true
 ---
 
-# Howdy, I'm Kevin!
+# Hey, I'm Kevin!
 
 <div class="row">
     <div class="col-4 py-3">
@@ -23,6 +23,12 @@ navbar: true
         </p>
         <p>
             If you have any feedback, comments, or questions about my blog, feel free to reach out to me. I would love to hear from you and engage in meaningful discussions.
+        </p>
+        <p>
+            I actively play CTF's focused Web Security and Reverse Engineering challenges, looking to join team [Shellphish](https://shellphish.net/).
+        </p>
+        <p>
+            Add me on Discord: <code>xransum#1337</code>
         </p>
     </div>
 </div>

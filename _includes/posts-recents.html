@@ -1,9 +1,4 @@
-{% if paginator %}
-    {% assign posts = paginator.posts %}
-{% else %}
-    {% assign posts = site.posts %}
-{% endif %}
-{% if paginator %}
+{% if paginator and page.url != '/' %}
     {% assign posts = paginator.posts %}
 {% else %}
     {% assign posts = site.posts %}

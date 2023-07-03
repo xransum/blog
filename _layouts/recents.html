@@ -7,11 +7,7 @@ layout: default
 {% else %}
     {% assign posts = site.posts %}
 {% endif %}
-{% if paginator %}
-    {% assign posts = paginator.posts %}
-{% else %}
-    {% assign posts = site.posts %}
-{% endif %}
+
 {% assign posts = posts | sort: 'date' | reverse %}
 
 <section class="container pt-5">
