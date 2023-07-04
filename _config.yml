@@ -134,8 +134,8 @@ sass:
 # Outputting
 # permalink: pretty
 permalink: /:title/
-paginate: 5
-paginate_path: "/page:num"
+paginate: 10
+paginate_path: "/recents/:num"
 timezone:  # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 # Plugins
@@ -158,19 +158,19 @@ whitelist:
   - jekyll-include-cache
 
 # Jekyll Archives
-#jekyll-archives:
-#  layout: archive
-#  enabled:
-#    - year
-#    - month
-#    - tags
-#    - categories
-#  permalinks:
-#    year: '/archives/:year/'
-#    month: '/archives/:year/:month/'
-#    day: '/archives/:year/:month/:day/'
-#    tag: '/archives/tag/:name/'
-#    category: '/archives/category/:name/'
+jekyll-archives:
+  layout: archive
+  enabled:
+    - year
+    - month
+    - tags
+    - categories
+  permalinks:
+    year: '/:year/'
+    month: '/:year/:month/'
+    day: '/:year/:month/:day/'
+    tag: '/tag/:name/'
+    category: '/category/:name/'
 
 # HTML Compression
 # - https://jch.penibelst.de/

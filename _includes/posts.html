@@ -22,8 +22,9 @@
             {% assign category_size = category[1].size %}
             {% if category_size == i %}
                 {% assign category_name = category | first %}
-                <span class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
-                    <a href="{{ site.baseurl }}/categories/{{ category_name | slugify }}">{{ category_name }}</a>
+                    <span class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
+                    <!-- <a href="{{ site.baseurl }}categories/{{ category_name | slugify | downcase }}">{{ category_name }}</a> -->
+                    <a href="#{{ category_name | slugify | downcase }}">{{ category_name }}</a>
                     <span class="vr mx-2"></span>
                     <span class="badge bg-info rounded-pill">{{ category_size }}</span>
                 </span>
@@ -34,6 +35,18 @@
 
 <hr>
 
-{% for post in posts %}
-    {% include post-partial.html %}
-{% endfor %}
+{% for i in (1..categories_max) reversed %}
+    {% for category in site.categories %}
+        {%- assign name = category | first -%}
+        {%- assign size = category | last | size -%}
+        {%- if size == i -%}
+            <section id="{{ name | slugify | downcase }}">
+                <h2>{{ name }}</h2>
+
+                {%- for post in category.last -%}
+                    {%- include post-partial.html -%}
+                {%- endfor -%}
+            </section>
+        {%- endif -%}
+    {%- endfor -%}
+{%- endfor -%}
