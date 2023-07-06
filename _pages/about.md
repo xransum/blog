@@ -25,10 +25,10 @@ navbar: true
             If you have any feedback, comments, or questions about my blog, feel free to reach out to me. I would love to hear from you and engage in meaningful discussions.
         </p>
         <p>
-            I actively play CTF's focused Web Security and Reverse Engineering challenges, looking to join team [Shellphish](https://shellphish.net/).
+            I actively play CTF's focused Web Security and Reverse Engineering challenges, looking to join team <a href="https://shellphish.net/">Shellphish</a>.
         </p>
         <p>
-            Add me on Discord: <code>xransum#1337</code>
+            Add me on Discord: <code>xransum#1337</code>. <strong>Yeeeee!</strong>
         </p>
     </div>
 </div>
