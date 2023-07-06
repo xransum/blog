@@ -20,7 +20,7 @@ layout: null
         {% if page.no_main %}
             {{ content }}
         {% else %}
-            <main class="{{ main_class | default: "" }}">
+            <main class="{{ main_class | default: "pb-5" }}">
                 {{ content }}
             </main>
         {% endif %}
