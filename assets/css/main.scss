@@ -19,9 +19,15 @@ html {
 }
 
 p {
+    /*
     margin-top: 0.2em;
     margin-bottom: 0.2em;
+    */
 }
 code {
   color: var(--pink);
+}
+
+.highlighter-rouge {
+    margin-bottom: 1em;
 }
