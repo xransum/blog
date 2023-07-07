@@ -29,7 +29,7 @@ Virtualization is a technology that enables the creation of virtual instances or
 
 The hypervisor, also known as a virtual machine monitor (VMM), is a software layer that enables the creation and management of virtual machines. It abstracts the physical hardware, allowing multiple VMs to run independently on a single physical server or virtualization host.
 
-```mermaid
+```mermaid!
 graph LR
     A[Physical Server/Host] --> B[Hypervisor]
     B --> C[Virtual Machine 1]
@@ -54,7 +54,7 @@ Virtual LANs (VLANs) are a fundamental component of network virtualization. VLAN
 
 VLANs divide a physical network into separate logical networks, even if the devices are connected to the same physical switch. This segmentation enhances network management and facilitates the isolation of network traffic.
 
-```mermaid
+```mermaid!
 graph LR
     A[Physical Switch] --> B[VLAN 1]
     A --> C[VLAN 2]
@@ -86,7 +86,7 @@ Within a virtualized environment, instances can be configured to communicate wit
 
 4. **Security Groups**: Security groups or firewall rules can be configured to allow specific instances to access the internet while blocking others. This provides granular control over internet connectivity within the virtualized environment.
 
-```mermaid
+```mermaid!
 graph LR
     A[Internal Instances/VLAN] --> B[Gateway Instance]
     B --> C[External Network/Internet]
@@ -108,7 +108,7 @@ By embracing virtualization, organizations can optimize their digital infrastruc
 
 Let's bring all these components together in a comprehensive diagram:
 
-```mermaid
+```mermaid!
 graph LR
     A[Physical Server/Host] --> B[Hypervisor]
     B --> C[Virtual Machine 1]
