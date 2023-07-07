@@ -31,6 +31,10 @@ code {
 .highlighter-rouge {
     margin-bottom: 1em;
 }
-.mermaid {
+
+p.spaceship {
+    text-align: center;
+}
+p.spaceship > img {
   max-height: 35em;
 }
