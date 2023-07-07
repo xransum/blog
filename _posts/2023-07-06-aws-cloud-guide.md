@@ -35,7 +35,7 @@ When you create an AWS account, a default VPC is automatically provisioned for y
 
 To better understand the architecture of a VPC, let's take a look at the following Mermaid diagram:
 
-```mermaid
+```mermaid!
 graph LR
     A[AWS Account] --> B[Region]
     B --> C[AZ 1]
@@ -89,7 +89,7 @@ control traffic in both inbound and outbound directions.
 
 To visualize the relationship between Security Groups and NACLs within a VPC, let's refer to the following Mermaid diagram:
 
-```mermaid
+```mermaid!
 graph TB
     A[VPC] --> B[Subnet 1]
     A --> C[Subnet 2]
@@ -137,7 +137,7 @@ An Internet Gateway is a horizontally scalable and highly available AWS-managed 
 
 To illustrate the role of an Internet Gateway within a VPC, let's refer to the following Mermaid diagram:
 
-```mermaid
+```mermaid!
 graph LR
     A[VPC] --> B[Internet Gateway]
     C[EC2 Instance]
@@ -152,7 +152,7 @@ A NAT Gateway is a managed service provided by AWS that allows instances within 
 
 To visualize the role of a NAT Gateway within a VPC, let's refer to the following Mermaid diagram:
 
-```mermaid
+```mermaid!
 graph LR
     A[VPC] --> B[NAT Gateway]
     C[Private Subnet]
@@ -167,7 +167,7 @@ A Bastion Host, also known as a jump host, is a server or EC2 instance that is p
 
 To visualize the role of a Bastion Host within a VPC, let's refer to the following Mermaid diagram:
 
-```mermaid
+```mermaid!
 graph LR
     A[Public Subnet] --> B[Bastion Host]
     C[Private Subnet]
@@ -182,7 +182,7 @@ A Site-to-Site VPN (Virtual Private Network) is a secure connection established 
 
 To visualize the Site-to-Site VPN connection between an on-premises network and an AWS VPC, let's refer to the following Mermaid diagram:
 
-```mermaid
+```mermaid!
 graph LR
     A[On-premises Network] --> B[Customer Gateway]
     C[VPC] --> D[Virtual Private Gateway]
@@ -197,7 +197,7 @@ Direct Connect is a network service provided by AWS that establishes a dedicated
 
 To visualize the Direct Connect connection between an on-premises data center and AWS, let's refer to the following Mermaid diagram:
 
-```mermaid
+```mermaid!
 graph LR
     A[On-premises Data Center] --> B[Direct Connect Location]
     C[VPC] --> D[Direct Connect Gateway]
@@ -216,7 +216,7 @@ An Application Load Balancer operates at the application layer (Layer 7) of the 
 
 To visualize the role of an Application Load Balancer within a VPC, let's refer to the following Mermaid diagram:
 
-```mermaid
+```mermaid!
 graph LR
     A[Internet] --> B[ALB]
     C[VPC] --> D[Target Group 1]
@@ -233,7 +233,7 @@ A Gateway Load Balancer is designed to load balance traffic to virtual appliance
 
 To visualize the role of a Gateway Load Balancer within a VPC, let's refer to the following Mermaid diagram:
 
-```mermaid
+```mermaid!
 graph LR
     A[Internet] --> B[GLB]
     C[VPC] --> D[Virtual Appliance 1]
@@ -250,7 +250,7 @@ A Network Load Balancer operates at the transport layer (Layer 4) of the OSI mod
 
 To visualize the role of a Network Load Balancer within a VPC, let's refer to the following Mermaid diagram:
 
-```mermaid
+```mermaid!
 graph LR
     A[Internet] --> B[NLB]
     C[VPC] --> D[Target Group 1]
@@ -269,7 +269,7 @@ You can leverage AWS Accounts and Regions to organize your resources and benefit
 
 To create your own isolated virtual network within AWS, you can leverage Virtual Private Cloud (VPC). With VPC, you have control over IP address ranges, subnets, route tables, and network gateways.
 
-```mermaid
+```mermaid!
 graph LR
   A[AWS Account] -- Owns --> B((Region))
   B -- Contains --> C[AZ1]
@@ -285,7 +285,7 @@ graph LR
 
 To secure your network within the VPC, you can use various components such as Network Address Translation (NAT) for outbound internet connectivity, Security Groups for instance-level firewall rules, and Network ACLs (NACLs) for subnet-level access control.
 
-```mermaid
+```mermaid!
 graph LR
   A[AWS Account] -- Owns --> B((Region))
   B -- Contains --> C[VPC]
@@ -299,7 +299,7 @@ graph LR
 
 To manage access to your AWS services and resources, you can leverage AWS Identity and Access Management (IAM). IAM Users represent individual users or applications, while IAM Groups simplify permissions management for collections of IAM Users. IAM Roles enable secure delegation of access, and IAM Policies define permissions for IAM entities.
 
-```mermaid
+```mermaid!
 graph LR
   A[AWS Account] -- Owns --> B((Region))
   B -- Contains --> C[IAM User]
@@ -313,7 +313,7 @@ graph LR
 
 To establish secure connections between your VPC and AWS services without internet access, you can use VPC Endpoints. And if you need to connect multiple VPCs to share resources and enable private communication, you can utilize VPC Peering.
 
-```mermaid
+```mermaid!
 graph LR
   A[AWS Account] -- Owns --> B((Region))
   B -- Contains --> C[VPC1]
@@ -328,7 +328,7 @@ graph LR
 
 For secure connections between your on-premises networks and AWS VPCs, you can utilize Site-to-Site VPN. It encrypts and encapsulates traffic over the internet, allowing remote users or branch offices to securely access resources within your VPC.
 
-```mermaid
+```mermaid!
 graph LR
   A[AWS Account] -- Owns --> B((Region))
   B -- Contains --> C[VPC1]
@@ -343,7 +343,7 @@ graph LR
 
 If you require dedicated network connections between your on-premises data center and AWS, you can leverage Direct Connect. It establishes a private and high-bandwidth connection, bypassing the public internet for enhanced network performance.
 
-```mermaid
+```mermaid!
 graph LR
   A[On-Premises Data Center] -- Dedicated Connection --> B[Direct Connect Location]
   A -- VPN Connection --> C[Customer Gateway]
@@ -353,7 +353,7 @@ graph LR
 
 To connect your Direct Connect connections to multiple VPCs in different regions, you can use Direct Connect Gateway. It simplifies network architecture and connectivity for multiple VPCs.
 
-```mermaid
+```mermaid!
 graph LR
   A[AWS Account] -- Owns --> B((Region))
   B -- Contains --> C[Direct Connect Gateway]
@@ -369,7 +369,7 @@ For load balancing your applications and distributing traffic, AWS offers Elasti
 #### Application Load Balancer (ALB)
 ALB operates at the application layer (Layer 7) and allows advanced request routing based on URL paths, hostnames, or HTTP headers.
 
-```mermaid
+```mermaid!
 graph LR
   A[AWS Account] -- Owns --> B((Region))
   B -- Contains --> C[ALB]
@@ -382,7 +382,7 @@ graph LR
 #### Network Load Balancer (NLB)
 NLB operates at the transport layer (Layer 4) and is designed for extreme performance and low latency use cases.
 
-```mermaid
+```mermaid!
 graph LR
   A[AWS Account] -- Owns --> B((Region))
   B -- Contains --> C[NLB]
@@ -395,7 +395,7 @@ graph LR
 #### Gateway Load Balancer (GLB)
 GLB is designed to load balance traffic to virtual appliances, centralizing network security and monitoring appliances.
 
-```mermaid
+```mermaid!
 graph LR
   A[AWS Account] -- Owns --> B((Region))
   B -- Contains --> C[GLB]
