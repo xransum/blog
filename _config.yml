@@ -84,13 +84,13 @@ exclude:
   - .envrc
   - .envrc.*
   - .git*
-  - LICENSE
   - README
-  - DEVELOPMENT
-  - CHANGELOG
-  - LICENSE.md
   - README.md
+  - DEVELOPMENT
   - DEVELOPMENT.md
+  - LICENSE
+  - LICENSE.md
+  - CHANGELOG
   - CHANGELOG.md
   - _drafts/
   - vendor
