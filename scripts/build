@@ -17,7 +17,9 @@ node_modules="node_modules"
 # This is a hacky way to remove the unwanted files transfered from node_modules, but it's the 
 # safest way to do it without add every single directory/file to the _config.yml files excludes.
 echo "==> Cleaning up renderable 'node_modules/' files, if any..."
-find node_modules -type f | grep -E '^.*((LICENSE|README|CHANGELOG|CONTRIBUTING|AUTHORS|HISTORY|NOTICE|CHANGES|UPGRADING|UPGRADE|SECURITY|CONDUCT|CONDUCT|PATENTS|VERSION).*|\.(md|txt|htm*|m*down)|package*.json|yarn*.lock)$' | xargs rm -f --verbose 2>&1
+# removed: package*.json
+filepath_includes='^.*((LICENSE|README|CHANGELOG|CONTRIBUTING|AUTHORS|HISTORY|NOTICE|CHANGES|UPGRADING|UPGRADE|SECURITY|CONDUCT|CONDUCT|PATENTS|VERSION).*|\.(md|txt|htm*|m*down)|yarn*.lock)$'
+find node_modules -type f | grep -E "$filepath_includes" | xargs rm -f --verbose 2>&1
 
 # clear vendor assets
 if [ ! -d "$vendor" ]; then

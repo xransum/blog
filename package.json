@@ -25,11 +25,12 @@
     "popper.js": "^1.16.1"
   },
   "scripts": {
+    "init": "sh scripts/bootstrap",
     "serve": "bundle exec jekyll serve --safe",
     "serve:nobuild": "npm-run-all serve --skip-initial-build",
     "serve:watch": "npm run serve -- --watch --livereload --livereload-min-delay 5 --drafts --unpublished --future --strict_front_matter --trace --incremental --config _config.yml,_config-local.yml",
     "build": "bundle exec jekyll build --future --strict_front_matter --trace --config _config.yml,_config-local.yml",
-    "watch": "npm-run-all build serve:watch",
+    "dev": "npm-run-all serve:watch",
     "test": "echo \"No tests yet...\" && exit 0"
   },
   "devDependencies": {
