@@ -2,8 +2,7 @@
 title: "AWS Cloud Guide"
 excerpt: "A comprehensive guide to understanding AWS Cloud and its key components."
 categories:
-  - Technology
-  - Cloud Computing
+  - Cloud
 tags:
   - AWS
   - Cloud

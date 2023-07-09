@@ -2,7 +2,7 @@
 title: "CTF Resources"
 excerpt: "A compiled list of resources usable from beginners to experiences CTF players."
 categories:
-  - Resources
+  - Pentesting
 tags:
   - Capture the Flag
   - Resources

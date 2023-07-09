@@ -2,8 +2,7 @@
 title: "Phishing Attacks: Threats, Techniques, and Protection"
 excerpt: "An overview of phishing attacks, their common targets, strategies for protection, and methods for taking action against potential threats."
 categories:
-  - Security
-  - Linux
+    - Security
 tags:
     - Security
     - Linux

@@ -2,7 +2,7 @@
 title: "Directory Traversal"
 excerpt: "A guide on how to exploit directory traversal vulnerabilities."
 categories:
-  - Web Exploits
+  - Web Security
 tags:
   - Hacking
   - Web Security
@@ -10,85 +10,68 @@ tags:
   - Learning
 ---
 
+## Introduction
 
-Directory Traversal is a security vulnerability that occurs when an
-application accepts user input to construct a directory path but fails to
-properly sanitize or sandbox the input. This vulnerability can allow an
-attacker to traverse up and down the directory structure of the file system
-and access files they shouldn't have access to.
+This article is a part of the **Web Exploitation** series. You can check the other
+articles in the series below.
 
-Consider this PHP code that allows the user to choose what page to load from a
-**GET** parameter:
+- [Web Exploitation]({{ base.url | prepend: site.url }}/web-exploitation)
+
+Now, let's get started!
+
+## What is Directory Traversal?
+
+Directory Traversal is a security vulnerability that occurs when an application accepts user input to construct a directory path but fails to properly sanitize or sandbox the input. This vulnerability allows an attacker to traverse up and down the directory structure of the file system and access files they shouldn't have access to.
+
+## Example of a Directory Traversal Attack
+
+Consider the following PHP code that demonstrates a directory traversal vulnerability:
 
 ```php
 <?php
    $page = $_GET['page']; // index.php
    include("/var/www/html/" . $page);
-   ?>
+?>
 ```
-Under normal operation, the page would be "`index.php`". However, if a
-malicious user were to submit a different value for the "`page`" parameter,
-such as "`../../../../../../../../etc/passwd`", the code could be manipulated
-to load the "`/etc/passwd`" file instead of the intended file.
+
+Under normal operation, the page would be set to "`index.php`". However, if a malicious user submits a different value for the "`page`" parameter, such as "`../../../../../../../../etc/passwd`", the code can be manipulated to load the "`/etc/passwd`" file instead of the intended file.
 
 ```php
 <?php
    $page = $_GET['page']; // ../../../../../../../../etc/passwd
    include("/var/www/html/" . $page);
-   ?>
+?>
 ```
 
-In this example, the user is submitting
-"`../../../../../../../../etc/passwd`". This will cause the PHP interpreter to
-leave the directory that it is coded to look in ("`/var/www/html`") and
-instead be forced up to the root folder. Ultimately, this will become
-"`/etc/passwd`" because the computer will not go a directory above its top
-directory.
+In this example, the user submits "`../../../../../../../../etc/passwd`". This causes the PHP interpreter to leave the directory it is coded to look in (`/var/www/html`) and instead be forced up to the root folder. Ultimately, the file path becomes "`/etc/passwd`" because the computer will not go a directory above its top directory.
 
-The application will then load the "`/etc/passwd`" file and output something
-of the following to the user:
+The application will then load the "`/etc/passwd`" file and output its contents to the user.
+
+## Potential Impact
+
+The contents of the `/etc/passwd` file typically contain user account information, such as usernames, user IDs, home directories, and shell information. By exploiting a directory traversal vulnerability, an attacker can gain unauthorized access to sensitive data.
+
+Here is an example of what the `/etc/passwd` file might contain:
 
 ```
 root:x:0:0:root:/root:/bin/ash
 bin:x:1:1:bin:/bin:/sbin/nologin
 daemon:x:2:2:daemon:/sbin:/sbin/nologin
 adm:x:3:4:adm:/var/adm:/sbin/nologin
-lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
-sync:x:5:0:sync:/sbin:/bin/sync
-shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
-halt:x:7:0:halt:/sbin:/sbin/halt
-mail:x:8:12:mail:/var/mail:/sbin/nologin
-news:x:9:13:news:/usr/lib/news:/sbin/nologin
-uucp:x:10:14:uucp:/var/spool/uucppublic:/sbin/nologin
-operator:x:11:0:operator:/root:/sbin/nologin
-man:x:13:15:man:/usr/man:/sbin/nologin
-postmaster:x:14:12:postmaster:/var/mail:/sbin/nologin
-cron:x:16:16:cron:/var/spool/cron:/sbin/nologin
-ftp:x:21:21::/var/lib/ftp:/sbin/nologin
-sshd:x:22:22:sshd:/dev/null:/sbin/nologin
-at:x:25:25:at:/var/spool/cron/atjobs:/sbin/nologin
-squid:x:31:31:Squid:/var/cache/squid:/sbin/nologin
-xfs:x:33:33:X Font Server:/etc/X11/fs:/sbin/nologin
-games:x:35:35:games:/usr/games:/sbin/nologin
-cyrus:x:85:12::/usr/cyrus:/sbin/nologin
-vpopmail:x:89:89::/var/vpopmail:/sbin/nologin
-ntp:x:123:123:NTP:/var/empty:/sbin/nologin
-smmsp:x:209:209:smmsp:/var/spool/mqueue:/sbin/nologin
-guest:x:405:100:guest:/dev/null:/sbin/nologin
-nobody:x:65534:65534:nobody:/:/sbin/nologin
-nginx:x:100:101:nginx:/var/lib/nginx:/sbin/nologin
-vnstat:x:101:102:vnstat:/var/lib/vnstat:/bin/false
-redis:x:102:103:redis:/var/lib/redis:/bin/false
+...
 ```
 
-The concept of directory traversal can be applied to any application that
-accepts input from a user to construct a file path. This vulnerability can be
-exploited to gain unauthorized access to sensitive data, such as configuration
-files, application source code, or user data, by manipulating the input to
-traverse to directories outside of the intended scope.
+Attackers can use the obtained data to launch further attacks, such as extracting credentials, injecting malicious code, or launching phishing campaigns.
 
-Attackers can use the obtained data to launch further attacks, such as
-extracting credentials, injecting malicious code, or launching phishing
-campaigns. Therefore, it is critical to properly sanitize and validate user
-input to prevent directory traversal attacks and ensure the security of the
-application and the system it runs on.
+## Prevention Measures
+
+To prevent directory traversal attacks, it is crucial to properly sanitize and validate user input. Here are some preventive measures:
+
+1. **Input Validation**: Validate user input to ensure it adheres to the expected format and does not contain any malicious characters or sequences.
+2. **Whitelisting**: Maintain a whitelist of allowed file or directory names and compare user input against the whitelist.
+3. **Canonicalization**: Use canonicalization functions provided by the programming language or framework to convert user input into a normalized and safe file path.
+4. **Access Controls**: Implement strict access controls to restrict the application's ability to access files and directories outside of the intended scope.
+5. **File System Permissions**: Set appropriate file system permissions to prevent unauthorized access to sensitive files and directories.
+6. **Security Updates**: Keep the application and its dependencies up to date with the latest security patches to mitigate known vulnerabilities.
+
+By implementing these preventive measures, you can strengthen the security of your application and protect against directory traversal attacks.

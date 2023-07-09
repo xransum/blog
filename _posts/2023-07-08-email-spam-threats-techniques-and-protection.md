@@ -2,15 +2,14 @@
 title: "Email Spam: Threats, Techniques, and Protection"
 excerpt: "A comprehensive guide to email spam, including what it is, how it works, and how you can protect yourself from it."
 categories:
-  - Security
-  - Linux
+    - Security
 tags:
-- Security
-- Linux
-- "Email Spam"
-- Cybersecurity
-- "Social Engineering"
-- Linux
+    - Security
+    - Linux
+    - "Email Spam"
+    - Cybersecurity
+    - "Social Engineering"
+    - Linux
 ---
 
 ## Introduction

@@ -1,9 +1,8 @@
 ---
 title: "Understanding Physical Servers, Virtualization, and Data Centers"
-excerpt: "Delve into the world of physical servers, virtualization, and data centers to understand their functionalities and the interplay between them."
+excerpt: "Delve into the world of physical servers, virtualization, and data centers."
 categories:
-  - Technology
-  - Infrastructure
+  - Computing
 tags:
   - Physical Servers
   - Virtualization
