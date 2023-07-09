@@ -12,13 +12,16 @@
 {% endif %}
 {% assign excerpt = post.excerpt | markdownify | remove: "<p>" | remove: "</p>" | strip_html | default: "" %}
 
-<div class="pt-3">
+<div class="pt-2 {{ include.class | default: "" }}">
     <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
         <div class="d-flex justify-content-between align-items-center w-100">
             <strong class="text-gray-dark">
                 <a href="{{ post.url | relative_url }}">{{ title }}</a>
             </strong>
-            <a href="{{ post.url | relative_url }}">Read More</a>
+            <!-- <a href="{{ post.url | relative_url }}">Read More</a> -->
+            <small class="modified-date">
+                {{ post.date | date: "%Y-%m-%d" | default: post.last_modified_at | date: "%Y-%m-%d" | default: "No date" }}
+            </small>
         </div>
         <div class="row align-items-end">
             <div class="col-9 text-muted text-truncate text-left">
@@ -26,11 +29,13 @@
                     {{ excerpt | truncate: 160 }}
                 {% endif %}
             </div>
+            <!--
             <div class="col-3 align-bottom text-right">
-                <small class="modified-date">
-                    {{ post.date | date: "%Y-%m-%d" | default: post.last_modified_at | date: "%Y-%m-%d" | default: "No date" }}
-                </small>
+            <small class="modified-date">
+            {{ post.date | date: "%Y-%m-%d" | default: post.last_modified_at | date: "%Y-%m-%d" | default: "No date" }}
+            </small>
             </div>
+            -->
         </div>
     </div>
 </div>

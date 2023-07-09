@@ -6,7 +6,9 @@
 
 {% assign posts = posts | sort: 'date' | reverse %}
 
-{% for post in posts %}
+{% assign post_limit = include.post_limit | default: 25 %}
+
+{% for post in posts limit: post_limit %}
     {% include post-partial.html %}
 {% endfor %}
 

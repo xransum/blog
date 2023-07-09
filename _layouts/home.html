@@ -7,7 +7,7 @@ layout: page
 
     <hr>
 
-    {% include posts-recents.html %}
+    {% include posts-recents.html post_limit=site.paginate %}
 
     <div class="pt-5">
         <a href="{{ site.baseurl | append: 'recent'  }}">View More Posts</a>
