@@ -47,29 +47,29 @@ For an idea of just how prevalent email spam is, consider the following statisti
 
 Spammers employ various methods to collect email addresses for their spam campaigns. Understanding how they obtain these addresses can help us better protect ourselves. Here are some common techniques used by spammers:
 
-- ****Hacking Company Databases****: Spammers may target company databases and exploit vulnerabilities to gain access to a vast amount of data, including email addresses.
-- ****Compromising Mailing Lists****: Attackers might focus on hacking servers hosting mailing lists and extract email addresses from these compromised sources.
-- ****Crawling Websites and Forums****: Spammers search websites and forums for email addresses, especially if they are publicly displayed without proper protection.
-- ****Phishing on Social Media Channels****: Spammers utilize social engineering techniques to trick users into sharing their email addresses through tempting offers or access requirements.
-- ****Man-in-the-Middle Attack****: In insecure network environments, attackers can eavesdrop on data exchanges and intercept email addresses and other information provided by users.
-- ****Ransomware****: Certain ransomware strains collect email contacts from infected machines and send them to cybercriminal-controlled servers for further exploitation.
-- ****Purchasing Email Databases on the Dark Web****: Cybercriminals can acquire bulk email addresses from other attackers who have harvested them and made them available for sale on the dark web.
-- ****Compromising Browsers****: Spammers exploit vulnerabilities in web browsers to intercept and collect email addresses entered on various websites.
-- ****Attacking Website Domain Contact Points****: Email addresses associated with website domain registrations can be obtained using tools like the "whois" command or freely available databases.
-- ****Guessing****: Some attackers resort to guessing email addresses, sending test messages to verify their validity for future attacks.
-- ****Social Engineering****: Spammers may impersonate trusted organizations, contacting potential victims by phone and requesting their email addresses and other personal information.
+- **Hacking Company Databases**: Spammers may target company databases and exploit vulnerabilities to gain access to a vast amount of data, including email addresses.
+- **Compromising Mailing Lists**: Attackers might focus on hacking servers hosting mailing lists and extract email addresses from these compromised sources.
+- **Crawling Websites and Forums**: Spammers search websites and forums for email addresses, especially if they are publicly displayed without proper protection.
+- **Phishing on Social Media Channels**: Spammers utilize social engineering techniques to trick users into sharing their email addresses through tempting offers or access requirements.
+- **Man-in-the-Middle Attack**: In insecure network environments, attackers can eavesdrop on data exchanges and intercept email addresses and other information provided by users.
+- **Ransomware**: Certain ransomware strains collect email contacts from infected machines and send them to cybercriminal-controlled servers for further exploitation.
+- **Purchasing Email Databases on the Dark Web**: Cybercriminals can acquire bulk email addresses from other attackers who have harvested them and made them available for sale on the dark web.
+- **Compromising Browsers**: Spammers exploit vulnerabilities in web browsers to intercept and collect email addresses entered on various websites.
+- **Attacking Website Domain Contact Points**: Email addresses associated with website domain registrations can be obtained using tools like the "whois" command or freely available databases.
+- **Guessing**: Some attackers resort to guessing email addresses, sending test messages to verify their validity for future attacks.
+- **Social Engineering**: Spammers may impersonate trusted organizations, contacting potential victims by phone and requesting their email addresses and other personal information.
 
 ## Types of Email Spam
 
 Email spam comes in various forms, each with its own objectives and tactics. Here are some common types you may encounter:
 
-- ****Product Advertisements****: Spam emails that promote products such as weight loss pills or sexual enhancers.
-- ****Scams****: Emails attempting to deceive recipients into paying money or divulging personal information through techniques like advance fees, current events, or tech support scams.
-- ****Phishing Emails****: Messages that mimic legitimate entities and aim to trick recipients into revealing sensitive information like usernames, passwords, and credit card details.
-- ****Blank Spam****: Empty emails, sometimes without subject lines, used by cybercriminals to validate the existence and validity of email addresses for future spam campaigns.
-- ****Malware Messages****: Emails designed to deceive users into sharing private information, paying money, or taking actions they would not normally take.
-- ****Antivirus Alerts****: Emails posing as antivirus alerts, falsely notifying recipients of virus infections and providing malicious links or attachments.
-- ****"You Won" Emails****: Spammers send emails claiming that the recipient has won a prize or contest, luring them to click on a malicious link designed to steal sensitive data.
+- **Product Advertisements**: Spam emails that promote products such as weight loss pills or sexual enhancers.
+- **Scams**: Emails attempting to deceive recipients into paying money or divulging personal information through techniques like advance fees, current events, or tech support scams.
+- **Phishing Emails**: Messages that mimic legitimate entities and aim to trick recipients into revealing sensitive information like usernames, passwords, and credit card details.
+- **Blank Spam**: Empty emails, sometimes without subject lines, used by cybercriminals to validate the existence and validity of email addresses for future spam campaigns.
+- **Malware Messages**: Emails designed to deceive users into sharing private information, paying money, or taking actions they would not normally take.
+- **Antivirus Alerts**: Emails posing as antivirus alerts, falsely notifying recipients of virus infections and providing malicious links or attachments.
+- **"You Won" Emails**: Spammers send emails claiming that the recipient has won a prize or contest, luring them to click on a malicious link designed to steal sensitive data.
 
 ## Identifying Email Spam
 
