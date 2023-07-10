@@ -123,7 +123,9 @@ fi
 if [ -d "$node_modules/next-ui" ]; then
     echo "==> Copying next-ui to $vendor"
     mkdir -p $vendor/next-ui
-    cp -r $node_modules/next-ui/{css,fonts,js} $vendor/next-ui/
+    cp -r $node_modules/next-ui/css $vendor/next-ui/
+    cp -r $node_modules/next-ui/fonts $vendor/next-ui/
+    cp -r $node_modules/next-ui/js $vendor/next-ui/
 fi
 
 # Cytoscape.js
