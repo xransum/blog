@@ -331,6 +331,7 @@ Content-Transfer-Encoding: base64
 
 Please note that the same Content-Transfer-Encoding (base64) applies to the subsequent image attachment as well.
 
+
 ## How Email Spam Works
 
 Now that we have a better understanding of email spam, let's take a look at how it works. Here is a high-level overview of the spam email process:
@@ -353,6 +354,7 @@ Spam filters are software programs that analyze incoming emails and determine if
 - **URL Analysis**: Spam filters analyze URLs in emails and look for suspicious or malicious links.
 - **Image Analysis**: Spam filters analyze images in emails and look for suspicious or malicious content.
 - **Email Authentication**: Spam filters check if the email has been authenticated using SPF, DKIM, or DMARC. If the email fails authentication, it is flagged as spam.
+
 
 ## Investigation Techniques
 
@@ -491,3 +493,165 @@ To investigate email attachments for potential malware or suspicious content, yo
 Upload the email attachment file to VirusTotal's website (https://www.virustotal.com) for analysis.
 
 Remember to take appropriate precautions when handling suspicious attachments to avoid accidentally executing any malicious code.
+
+## Investigation Examples
+
+Here we will start to analyze a raw email and its headers to gather relevant information:
+
+```
+Return-Path: <sender@example.com>
+Received: from mail.example.com (mail.example.com [192.168.1.100])
+	by mx.example.com (Postfix) with SMTP id ABC123
+	for <recipient@example.com>; Thu, 9 Jul 2023 12:00:00 +0000 (UTC)
+Received: from unknown (HELO [192.168.1.200])
+	by mail.example.com with SMTP; Thu, 9 Jul 2023 12:00:01 +0000 (UTC)
+From: sender@example.com
+To: recipient@example.com
+Subject: Important Announcement
+Date: Thu, 9 Jul 2023 12:00:01 +0000
+Message-ID: <XYZ789@example.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+This is the content of the email.
+```
+
+Now, let's proceed with the verification process using a series of advanced commands and methods:
+
+1. **Use the `whois` command to gather information about the IP addresses involved in the email headers**:
+```bash
+whois 192.168.1.100
+```
+
+Look for any discrepancies or indications that the IP address is associated with spam activities.
+
+Sample output:
+```
+NetRange:       192.0.2.0 - 192.0.2.255
+CIDR:           192.0.2.0/24
+NetName:        EXAMPLE-NET
+NetHandle:      NET-192-0-2-0-1
+Parent:         EXAMPLE-COM-NET
+NetType:        ALLOCATED UNSPECIFIED
+OriginAS:
+Organization:   Example Organization (EXAMPLE)
+RegDate:        1996-12-01
+Updated:        2023-07-01
+...
+```
+
+
+2. **Examine the header to determine if the IP addresses have been tampered with**:
+```bash
+$ dig -x 192.168.1.100
+```
+
+**Sample Output**:
+```
+;; ANSWER SECTION:
+100.1.168.192.in-addr.arpa. 3600 IN	PTR	mail.example.com.
+```
+
+Based on the output, we can see that the reverse DNS lookup for the IP address `192.168.1.100` corresponds to `mail.example.com`, which is the expected hostname for the sending mail server.
+
+
+3. **Check the SPF record of the sender's domain to validate the email source**:
+```bash
+$ dig +short TXT example.com | grep spf
+```
+
+**Sample Output**:
+```
+"v=spf1 mx -all"
+```
+
+The SPF record states that the only permitted sender for the domain `example.com` is the MX (mail exchanger) server. This indicates that the email was sent from an authorized source.
+
+
+4. **Use a tool like SpamAssassin to analyze the email content and determine its spam score**:
+```bash
+spamassassin -t email.txt
+```
+
+Review the output and check for any indications that the email might be spam.
+
+Sample output:
+```
+Content analysis details:   (6.4 points, 5.0 required)
+
+ pts rule name              description
+---- ---------------------- --------------------------------------------------
+ 0.2 BAYES_50               BODY: Bayes spam probability is 40 to 60%
+...
+ 2.5 RCVD_IN_SBL            RBL: Received via a relay in Spamhaus SBL
+                            [192.0.2.3 listed in sbl.example.net]
+...
+```
+
+3. Analyze the email headers for any signs of tampering or spoofing:
+```bash
+$ cat email.txt | formail -x Received
+```
+
+Sample Output:
+```
+from mail.example.com (mail.example.com [192.168.1.100]) by mx.example.com (Postfix) with SMTP id ABC123 for <recipient@example.com>; Thu, 9 Jul 2023 12:00:00 +0000 (UTC)
+from unknown (HELO [192.168.1.200]) by mail.example.com with SMTP; Thu, 9 Jul 2023 12:00:01 +0000 (UTC)
+```
+
+The email headers show the path the email has taken. We can observe that the email was received by `mail.example.com` from `192.168.1.100` and then passed through an unknown host with IP `192.168.1.200`. This information will help identify any suspicious hops.
+
+
+4. Perform a trace route to determine the network path:
+```bash
+$ traceroute -n mail.example.com
+```
+
+Sample Output:
+```
+traceroute to mail.example.com (192.168.1.100), 30 hops max, 60 byte packets
+ 1  203.0.113.1  0.5 ms  AS12345  United States
+ 2  198.51.100.2  1.0 ms  AS12345  United States
+ 3  192.0.2.100  2.0 ms  AS12345  United States
+ 4  192.168.1.100  5.0 ms  Unknown
+```
+
+The trace route shows the network path to `mail.example.com`. The last hop with IP `192.168.1.100` is the destination IP. If this IP matches the previous information, it indicates the absence of spoofing.
+
+
+5. Validate the authenticity of the email by examining the DKIM signature:
+```bash
+$ opendkim-testmsg -vv -f email.txt
+```
+
+Sample Output:
+```
+opendkim-testmsg: DKIM verification successful
+```
+
+The DKIM verification result indicates that the email has a valid DKIM signature, which further strengthens its authenticity.
+
+6. **If the email contains attachments, you can use various command-line tools like file or strings to analyze the file type and extract any embedded information.**
+```bash
+file attachment.doc
+```
+
+Sample Output:
+```
+attachment.doc: Composite Document File V2 Document, Little Endian, Os: Windows, Version 6.1, Code page: 1252, Author: John Doe, Template: Normal.dotm, Last Saved By: John Doe, Revision Number: 1, Name of Creating Application: Microsoft Office Word, Total Editing Time: 01:00, Create Time/Date: Wed Jul 07 12:00:00 2023, Last Saved Time/Date: Wed Jul 07 12:00:00 2023, Number of Pages: 1, Number of Words: 0, Number of Characters: 0, Security: 0
+```
+
+```bash
+strings attachment.doc
+```
+
+Sample Output:
+```
+bjbj
+c]sdc]sd
+nch			Jump X		9	Jumps to Address X
+			Skipcond (C)	8	Skips the next instruction based on C: if (C) = 
+     - 000: Skips if AC < 0
+...
+```
