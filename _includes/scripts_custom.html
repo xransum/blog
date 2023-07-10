@@ -1,0 +1,10 @@
+{% if page.inline_script %}
+    <script>
+        {{ page.inline_script | strip_newlines }}
+    </script>
+{% endif %}
+{% if page.custom_scripts %}
+    {% for script in page.custom_scripts %}
+        <script src="{{ script }}" type="text/javascript"></script>
+    {% endfor %}
+{% endif %}
