@@ -101,5 +101,36 @@ if [ -d "$node_modules/clipboard.js" ]; then
     cp -r $node_modules/clipboard.js/dist/ $vendor/clipboard.js/
 fi
 
+# chart.js
+if [ -d "$node_modules/chart.js" ]; then
+    echo "==> Copying chart.js to $vendor"
+    cp -r $node_modules/chart.js/dist $vendor/chart.js
+fi
+
+# animate.js
+if [ -d "$node_modules/animate.js" ]; then
+    echo "==> Copying animate.js to $vendor"
+    cp -r $node_modules/animate.js/dist $vendor/animate.js
+fi
+
+# animejs
+if [ -d "$node_modules/animejs" ]; then
+    echo "==> Copying animejs to $vendor"
+    cp -r $node_modules/animejs/lib $vendor/animejs
+fi
+
+# nextui
+if [ -d "$node_modules/next-ui" ]; then
+    echo "==> Copying next-ui to $vendor"
+    mkdir -p $vendor/next-ui
+    cp -r $node_modules/next-ui/{css,fonts,js} $vendor/next-ui/
+fi
+
+# Cytoscape.js
+if [ -d "$node_modules/cytoscape" ]; then
+    echo "==> Copying cytoscape to $vendor"
+    cp -r $node_modules/cytoscape/dist $vendor/cytoscape
+fi
+
 echo "==> Build complete!"
 exit 0
