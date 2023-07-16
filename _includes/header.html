@@ -6,14 +6,14 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbar-toggle">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item{% if page.url contains "/recents/" %} active{% endif %}">
-                    <a class="nav-link" href="{{ site.baseurl | append: 'recents/' }}" {% if page.url contains "/recents/" %}aria-current="page"{% endif %}>Recent Posts</a>
+                <li class="nav-item{% if page.url == "/recents" %} active{% endif %}">
+                    <a class="nav-link" href="{{ site.baseurl | append: 'recents' }}" {% if page.url == "/recents" %}aria-current="page"{% endif %}>Recent Posts</a>
                 </li>
-                <li class="nav-item{% if page.url contains "/posts/" %} active{% endif %}">
-                    <a class="nav-link" href="{{ site.baseurl | append: 'posts/' }}" {% if page.url contains "/posts/" %}aria-current="page"{% endif %}>All Posts</a>
+                <li class="nav-item{% if page.url == "/posts" %} active{% endif %}">
+                    <a class="nav-link" href="{{ site.baseurl | append: 'posts' }}" {% if page.url == "/posts" %}aria-current="page"{% endif %}>All Posts</a>
                 </li>
-                <li class="nav-item{% if page.url contains "/about/" %} active{% endif %}">
-                    <a class="nav-link" href="{{ site.baseurl | append: 'about/' }}" {% if page.url contains "/about/" %}aria-current="page"{% endif %}>About</a>
+                <li class="nav-item{% if page.url == "/about" %} active{% endif %}">
+                    <a class="nav-link" href="{{ site.baseurl | append: 'about' }}" {% if page.url == "/about" %}aria-current="page"{% endif %}>About</a>
                 </li>
             </ul>
             {%- include search-form.html -%}
