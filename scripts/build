@@ -134,5 +134,24 @@ if [ -d "$node_modules/cytoscape" ]; then
     cp -r $node_modules/cytoscape/dist $vendor/cytoscape
 fi
 
+# powerglitch
+if [ -d "$node_modules/powerglitch" ]; then
+    echo "==> Copying powerglitch to $vendor"
+    cp -r $node_modules/powerglitch/dist $vendor/powerglitch
+fi
+
+# Deprecating: particlesjs
+if [ -d "$node_modules/particlesjs" ]; then
+    echo "==> Copying particlesjs to $vendor"
+    cp -r $node_modules/particlesjs/dist $vendor/particlesjs
+fi
+# particles.js
+if [ -d "$node_modules/particles.js" ]; then
+    echo "==> Copying particles.js to $vendor"
+    mkdir -p $vendor/particles.js
+    cp -r $node_modules/particles.js/particles.js $vendor/particles.js/particles.js
+fi
+
+
 echo "==> Build complete!"
 exit 0

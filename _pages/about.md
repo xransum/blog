@@ -3,15 +3,15 @@ layout: page
 title: "About Me"
 permalink: /about
 navbar: true
+width: 75
 ---
-
-# Hey, I'm Kevin!
 
 <div class="row">
     <div class="col-4 py-3">
         <img class="rounded-circle img-fluid" alt="{{ site.author.name }}" src="{{ site.author.avatar }}">
     </div>
     <div class="col-8 align-middle my-auto">
+        <h1 class="display-4 border-bottom pb-3 mb-3">Hey, I'm Kevin!</h1>
         <p>
             <strong>{{ site.tagline }}</strong>
         </p>

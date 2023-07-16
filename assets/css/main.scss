@@ -7,6 +7,12 @@
 @import "themes";
 @import "highlight";
 
+/* Import Fonts */
+@font-face {
+    font-family: Orbitron;
+    src: url('{{ site.baseurl }}assets/fonts/orbitron-medium.otf');
+}
+
 html {
     font-size: 85%;
     font-family: Arial, Helvetica, sans-serif;
@@ -18,6 +24,13 @@ html {
     }
 }
 
+/* Set navbar and footer to be ontop */
+nav.navbar,
+footer.footer {
+    z-index: 999;
+}
+
+/* Spaceship & Rogue Theme Adjustments */
 p {
     /*
     margin-top: 0.2em;
@@ -27,14 +40,26 @@ p {
 code {
   color: var(--pink);
 }
-
 .highlighter-rouge {
     margin-bottom: 1em;
 }
-
 p.spaceship {
     text-align: center;
 }
 p.spaceship > img {
-  max-height: 35em;
+    max-height: 35em;
+}
+
+/* Particles.js Themes */
+canvas {
+    display: block;
+    vertical-align: bottom;
+}
+#particles-js[role="home"] {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    width: 100%;
+    height: 100%;
 }

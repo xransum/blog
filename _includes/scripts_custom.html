@@ -1,10 +1,16 @@
-{% if page.inline_script %}
+{% if page.custom_inline_script %}
     <script>
-        {{ page.inline_script | strip_newlines }}
+        {{ page.custom_inline_script | strip_newlines }}
     </script>
 {% endif %}
 {% if page.custom_scripts %}
-    {% for script in page.custom_scripts %}
-        <script src="{{ script }}" type="text/javascript"></script>
+    {% for script_url in page.custom_scripts %}
+        {%- assign leading_char = '?' -%}
+        {%- comment -%}
+            {% if script_url | contains: '?' %}
+                {%- assign leading_char = '&' -%}
+            {% endif %}
+        {%- endcomment -%}
+        <script src="{{ script_url }}{{ leading_char }}v={{ site.github.build_revision }}" type="text/javascript"></script>
     {% endfor %}
 {% endif %}

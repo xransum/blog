@@ -16,7 +16,7 @@ layout: null
         {% include styles.html %}
     </head>
     <body class="{{ body_class | default: "" }}">
-        {% include_cached header.html %}
+        {% include header.html %}
         {% if page.no_main %}
             {{ content }}
         {% else %}
@@ -25,6 +25,6 @@ layout: null
             </main>
         {% endif %}
         {% include_cached footer.html %}
-        {% include scripts.html %}
+        {% include scripts.html custom_inline_script=page.custom_inline_script custom_scripts=page.custom_scripts %}
     </body>
 </html>

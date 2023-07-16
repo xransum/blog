@@ -1,15 +1,27 @@
 ---
-layout: page
+layout: default
 ---
 
-<div class="container">
-    <h1>Welcome to my Blog!</h1>
+<div id="particles-js" role="home" style="background-color: #1A2531;" class=""></div>
 
-    <hr>
+<div class="container cover text-light">
+    <div class="cover-content py-5">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6 text-center">
+                <img class="w-100 img-fluid img-thumbnail rounded-circle border-secondary bg-secondary shadow" alt="{{ site.author.name }}" src="{{ site.author.avatar }}">
+            </div>
+            <div class="col-3"></div>
+        </div>
 
-    {% include posts-recents.html post_limit=site.paginate %}
-
-    <div class="pt-5">
-        <a href="{{ site.baseurl | append: 'recent'  }}">View More Posts</a>
+        <div class="row">
+            <div class="col-12 py-3 text-center">
+                <h3 class="glitch">{{ site.author.name }}</h3>
+                <p class="console-text text-muted">{{ site.tagline }}</p>
+                <p>
+                    <a href="{{ site.baseurl | append: 'recents/' }}" class="btn btn-sm btn-outline-danger border-danger w-25">Recent Posts</a>
+                </p>
+            </div>
+        </div>
     </div>
 </div>

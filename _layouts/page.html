@@ -2,7 +2,9 @@
 layout: default
 ---
 
-<section class="cover-container w-100 h-100 p-3 pt-5 mx-auto flex-column text-center">
+{% assign width = page.width | default: "100" %}
+
+<section class="cover-container w-{{ width }} h-100 p-3 pt-5 mx-auto flex-column text-center">
     {% if page.doctype == "error" %}
         <div role="main" class="inner cover">
             <h1 class="cover-heading">{{ page.title }}</h1>
