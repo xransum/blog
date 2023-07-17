@@ -49,6 +49,9 @@ p.spaceship {
 p.spaceship > img {
     max-height: 35em;
 }
+p > img.plantuml {
+    width: 100%;
+}
 
 /* Particles.js Themes */
 canvas {
