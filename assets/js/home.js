@@ -52,7 +52,7 @@ layout: null
         loop: false,
         loopAfterSeconds: 6,
         cursor: "I",
-        stopCursorAfterBlinks: 2,
+        stopCursorAfterBlinks: 1,
         cursorAnimationSpeedMs: 500,
         typingSpeedMs: 70,
         onStartTyping: () => null,
