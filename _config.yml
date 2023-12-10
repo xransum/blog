@@ -15,6 +15,7 @@ logo: "/assets/img/favicon.png"  # path of logo image to display in the master h
 logo_full: "/assets/img/logo_1200x630.png"  # path of logo image to display in the master page, e.g. "/assets/images/88x88.png"
 icon_iphone: "/assets/img/touch-icon-iphone-114.png"
 icon_ipad: "/assets/img/touch-icon-ipad-144.png"
+repository: "xransum/blog"
 
 # Analytics Settings
 analytics:
