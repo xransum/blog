@@ -1,12 +1,13 @@
 ---
-title: "Understanding URLs"
-excerpt: "Learn about the components of a URL and how they work."
-categories:
-    - Web
-tags:
-    - URL
-    - Web
-    - Internet
+title: Understanding URL Components
+author: xransum
+date: 2023-07-16 01:22:00 -0500
+categories: [Web, Internet]
+tags: [url]
+image:
+  path: /commons/beard-05.jpg
+  lqip: 
+  alt: 
 ---
 
 ## What are URLs?
@@ -61,11 +62,8 @@ URLs are essential for navigating the web and accessing online resources. They p
 
 Remember that URLs are case-sensitive and have specific formatting rules. They may require encoding to handle special characters and spaces properly.
 
-Here's a little tool for parsing URLs:
+Here's a little tool for parsing URLs: [URL Encoder](https://www.urlencoder.org/) and [URL Decoder](https://www.urldecoder.org/).
 
-<div class="w-100">
-    <iframe src="https://www.urlencoder.org/" width="100%" height="500px" frameborder="0"></iframe>
-</div>
 
 ## URL Encoding
 

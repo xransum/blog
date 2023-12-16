@@ -1,11 +1,13 @@
 ---
-title: Create a Python Package
-excerpt: Learn how to create a Python Package for efficient code organization and reusability.
-categories: 
-    - Development
-tags: 
-    - Python
-    - Packages
+title: Creating a Python Package
+author: xransum
+date: 2023-07-17 19:01:23 -0500
+categories: [Development, Python]
+tags: [programming]
+image:
+  path: /commons/beard-01.jpg
+  lqip: 
+  alt: 
 ---
 
 # Create a Python Package

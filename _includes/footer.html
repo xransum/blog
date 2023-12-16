@@ -1,8 +1,36 @@
-<footer class="footer py-2 bg-dark text-light text-center">
-    Made with <span class="icon text-danger"><i class="fas fa-heart"></i></span> by <a href="https://github.com/xransum" target="_blank" class="has-text-primary has-text-weight-semibold">xransum</a> and hosted on <span class="icon has-text-warning"><i class="fab fa-github"></i></span> <a href="https://pages.github.com/" rel="noopener noreferrer" target="_blank">GitPages</a>.
-    &copy; 2019-2023 {{ site.author.name }}.
-    Powered by <a href="https://www.ruby-lang.org/en/" rel="noopener noreferrer" target="_blank">Ruby</a>, <a href="https://nodejs.org/en" rel="noopener noreferrer" target="_blank">Node.js</a>, <a href="https://jekyllrb.com/" rel="noopener noreferrer" target="_blank">Jekyll</a>, <a href="https://getbootstrap.com/docs/4.6/" rel="noopener noreferrer" target="_blank">Bootstrap 4</a>, <a href="https://fontawesome.com/" rel="noopener noreferrer" target="_blank">Font Awesome</a>, <a href="https://vincentgarreau.com/particles.js/" rel="noopener noreferrer" target="_blank">particles.js</a>, <a href="javascript:void(0)" class="more-powered-by">show more</a>
-    <div style="display: none;" class="inline-block">
-        <a href="https://jquery.com/" rel="noopener noreferrer" target="_blank">jquery</a>, <a href="https://popper.js.org/" rel="noopener noreferrer" target="_blank">popper.js</a>, <a href="https://highlightjs.org/" rel="noopener noreferrer" target="_blank">highlight.js</a>, <a href="https://clipboardjs.com/" rel="noopener noreferrer" target="_blank">clipboard.js</a>, <a href="https://www.chartjs.org/" rel="noopener noreferrer" target="_blank">chart.js</a>, <a href="https://animate.style/" rel="noopener noreferrer" target="_blank">animate.css</a>, <a href="https://animejs.com/" rel="noopener noreferrer" target="_blank">anime.js</a>, <a href="https://nextui.org/" rel="noopener noreferrer" target="_blank">next-ui</a>, <a href="https://cytoscape.org/" rel="noopener noreferrer" target="_blank">cytoscape</a>, <a href="https://7ph.github.io/powerglitch/#/" rel="noopener noreferrer" target="_blank">powerglitch</a>
-    </div>
+<!-- The Footer -->
+
+<footer
+  aria-label="Site Info"
+  class="
+    d-flex flex-column justify-content-center text-muted
+    flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3
+  "
+>
+  <p>
+    {{ '©' }}
+    <time>{{ 'now' | date: '%Y' }}</time>
+    <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>.
+    {% if site.data.locales[include.lang].copyright.brief %}
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="{{ site.data.locales[include.lang].copyright.verbose }}"
+      >
+        {{- site.data.locales[include.lang].copyright.brief -}}
+      </span>
+    {% endif %}
+  </p>
+
+  <p>
+    {%- capture _platform -%}
+      <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
+    {%- endcapture -%}
+
+    {%- capture _theme -%}
+      <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a>
+    {%- endcapture -%}
+
+    {{ site.data.locales[include.lang].meta | replace: ':PLATFORM', _platform | replace: ':THEME', _theme }}
+  </p>
 </footer>
