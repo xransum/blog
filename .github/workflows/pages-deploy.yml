@@ -50,6 +50,9 @@ jobs:
           ruby-version: 3
           bundler-cache: true
 
+      - name: Install Node Dependencies
+        run: npm install
+
       - name: Build Jekyll Site Assets
         run: npm run build
 
