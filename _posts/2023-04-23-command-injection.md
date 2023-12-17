@@ -1,13 +1,17 @@
 ---
-title: "Command Injection"
-excerpt: "A guide on how to exploit command injection vulnerabilities."
+title: Command Injection
+author: xransum
+date: 2023-04-23 16:35:04 -0500
 categories:
   - Web Security
 tags:
-  - Hacking
-  - Web Security
-  - Web Exploitation
-  - Learning
+  - hacking
+  - exploits
+  - learning
+image:
+  path: /commons/beard-07.jpg
+  lqip: null
+  alt: null
 ---
 
 ## Introduction

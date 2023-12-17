@@ -2,20 +2,19 @@
 layout: default
 ---
 
-{% assign width = page.width | default: "100" %}
+{% include lang.html %}
 
-<section class="cover-container w-{{ width }} h-100 p-3 pt-5 mx-auto flex-column text-center">
-    {% if page.doctype == "error" %}
-        <div role="main" class="inner cover">
-            <h1 class="cover-heading">{{ page.title }}</h1>
-            <p class="lead">
-                {{ page.excerpt }}
-            </p>
-            <p class="lead">
-                <a href="javascript:history.back()" class="btn btn-sm btn-danger">Go back</a>
-                <a href="/" class="btn btn-sm btn-primary">Home</a>
-            </p>
+<article class="px-1">
+    {% if page.layout == 'page' or page.collection == 'tabs' %}
+        {% assign tab_key = page.title | downcase %}
+        {% assign title = site.data.locales[lang].tabs[tab_key] | default: page.title %}
+        <h1 class="dynamic-title">
+            {{ title }}
+        </h1>
+        <div class="content">
+            {{ content }}
         </div>
+    {% else %}
+        {{ content }}
     {% endif %}
-    {{ content }}
-</section>
+</article>

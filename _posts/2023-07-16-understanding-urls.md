@@ -1,12 +1,18 @@
 ---
-title: "Understanding URLs"
-excerpt: "Learn about the components of a URL and how they work."
+title: Understanding URL Components
+author: xransum
+date: 2023-07-16 08:37:40 -0500
 categories:
-    - Web
+  - Internet
 tags:
-    - URL
-    - Web
-    - Internet
+  - internet
+  - networking
+  - domains
+  - urls
+image:
+  path: /commons/beard-05.jpg
+  lqip: null
+  alt: null
 ---
 
 ## What are URLs?
@@ -21,7 +27,7 @@ A URL consists of several components, each serving a specific purpose and provid
 
 ### URL Components:
 
-1. **Scheme:** The scheme indicates the protocol or protocol scheme used to access the resource. It defines the rules and specifications for communication between the client and server. Common schemes include `http://`, `https://`, `ftp://`, and `file://`. The scheme is followed by a colon and two forward slashes.
+1. **Scheme:** The scheme indicates the protocol or protocol scheme used to access the resource. It defines the rules and specifications for communication between the client and server. Common schemes include `https://`, `https://`, `ftp://`, and `file://`. The scheme is followed by a colon and two forward slashes.
 
 2. **Username** and **Password:** These optional components are used for authentication when accessing protected resources. They allow users to provide credentials to gain access to a specific resource. The username and password are separated from the scheme by a colon and followed by an at sign (@).
 
@@ -61,11 +67,8 @@ URLs are essential for navigating the web and accessing online resources. They p
 
 Remember that URLs are case-sensitive and have specific formatting rules. They may require encoding to handle special characters and spaces properly.
 
-Here's a little tool for parsing URLs:
+Here's a little tool for parsing URLs: [URL Encoder](https://www.urlencoder.org/) and [URL Decoder](https://www.urldecoder.org/).
 
-<div class="w-100">
-    <iframe src="https://www.urlencoder.org/" width="100%" height="500px" frameborder="0"></iframe>
-</div>
 
 ## URL Encoding
 

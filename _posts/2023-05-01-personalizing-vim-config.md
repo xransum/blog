@@ -1,12 +1,15 @@
 ---
-title: "Personalizing Vim Config"
-excerpt: "Personalize your Vim configurations."
+title: Personalizing Vim Config
+author: xransum
+date: 2023-05-01 06:58:47 -0500
 categories:
   - Linux
 tags:
-  - Configurations
-  - Vim
-  - Linux
+  - tools
+image:
+  path: /commons/en-lan-2000-06.jpg
+  lqip: null
+  alt: null
 ---
 
 Personalizing your Vim configurations can be an incredibly helpful and efficient way to optimize your coding experience. As someone who has been hacking for years, I've learned that every developer has their own unique style, preferences, and habits. Customizing your Vim configuration file, `.vimrc`, can help you tailor the editor to your specific needs and workflow.

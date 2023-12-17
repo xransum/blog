@@ -1,11 +1,15 @@
 ---
-title: "How to Prioritize IPv4 over IPv6 on Linux"
-excerpt: "A short and simple guide on how to prioritize IPv4 over IPv6 on Linux."
+title: How to Prioritize IPv4 over IPv6 on Linux
+author: xransum
+date: 2023-06-25 09:26:07 -0500
 categories:
-  - Linux
-tags:
-  - Linux
   - Networking
+tags:
+  - ubuntu
+image:
+  path: /commons/trolley.jpg
+  lqip: null
+  alt: null
 ---
 
 ## Introduction
@@ -45,9 +49,7 @@ precedence ::ffff:0:0/96  100
 
 ### Step 3: Save and exit the file
 
-bash
-
-```
+```bash
 Ctrl + X
 Y
 Enter

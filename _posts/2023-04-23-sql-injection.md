@@ -1,13 +1,17 @@
 ---
-title: "SQL Injection"
-excerpt: "A guide on how to exploit SQL injection vulnerabilities."
+title: SQL Injection
+author: xransum
+date: 2023-04-23 12:45:00 -0500
 categories:
   - Web Security
 tags:
-  - Hacking
-  - Web Security
-  - Web Exploitation
-  - Learning
+  - hacking
+  - exploits
+  - learning
+image:
+  path: /commons/en-lan-2000-07.jpg
+  lqip: null
+  alt: null
 ---
 
 ## Introduction

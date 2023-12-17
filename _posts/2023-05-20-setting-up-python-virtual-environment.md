@@ -1,13 +1,17 @@
 ---
-title: "Setting Up Python Virtual Environment"
-excerpt: "Steps on setting up a Python virtual environment on your server or any other Linux-based machine."
+title: Setting Up Python Virtual Environment
+author: xransum
+date: 2023-05-20 11:09:33 -0500
 categories:
-  - Developer
+  - Development
 tags:
-  - Linux
-  - Programming
-  - Python
-  - Virtual Environment
+  - environments
+  - programming
+  - python
+image:
+  path: /commons/robida-03.jpg
+  lqip: null
+  alt: null
 ---
 
 

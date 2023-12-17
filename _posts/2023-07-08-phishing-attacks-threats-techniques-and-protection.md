@@ -1,15 +1,18 @@
 ---
-title: "Phishing Attacks: Threats, Techniques, and Protection"
-excerpt: "An overview of phishing attacks, their common targets, strategies for protection, and methods for taking action against potential threats."
+title: 'Phishing Attacks: Threats, Techniques, and Protection'
+author: xransum
+date: 2023-07-08 05:45:16 -0500
 categories:
-    - Security
+  - Security
 tags:
-    - Security
-    - Linux
-    - Phishing
-    - Cybersecurity
-    - Social Engineering
-    - Linux
+  - security
+  - phishing
+  - learning
+  - linux
+image:
+  path: /commons/nasa-03.jpg
+  lqip: null
+  alt: null
 ---
 
 ## Introduction

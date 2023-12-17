@@ -1,13 +1,17 @@
 ---
-title: "HTB: Photobomb"
-excerpt: "Weekly CTF Writeup - HTB Photobomb"
+title: HTB - Photobomb
+author: xransum
+date: 2023-03-05 10:57:13 -0500
 categories:
-  - Writeups
+  - Hack The Box
+  - Writeup
 tags:
-  - Hacking
-  - CTF
-  - HackTheBox
-  - Linux
+  - ctf
+  - hacking
+image:
+  path: /commons/nasa-06.jpg
+  lqip: null
+  alt: null
 ---
 
 # Introduction
@@ -36,7 +40,7 @@ PORT   STATE SERVICE VERSION
 |_  256 20e05d8cba71f08c3a1819f24011d29e (ED25519)
 80/tcp open  http    nginx 1.18.0 (Ubuntu)
 |_http-server-header: nginx/1.18.0 (Ubuntu)
-|_http-title: Did not follow redirect to http://photobomb.htb/
+|_http-title: Did not follow redirect to https://photobomb.htb/
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .

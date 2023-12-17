@@ -1,14 +1,19 @@
 ---
-title: "How to Install Ruby"
-excerpt: "A simple guide on how to install Ruby on your machine."
+title: How to Install Ruby
+author: xransum
+date: 2023-06-25 04:10:29 -0500
 categories:
-  - Developer
+  - Development
 tags:
-  - Installation
-  - Linux
-  - macOS
-  - Ruby
-  - Windows
+  - installation
+  - linux
+  - macos
+  - ruby
+  - windows
+image:
+  path: /commons/nasa-06.jpg
+  lqip: null
+  alt: null
 ---
 
 ## Introduction
@@ -25,45 +30,45 @@ Depending on a handful of factors independent to your operating system in questi
 
 *Fedora*:
 
-```
+```bash
 sudo dnf install ruby ruby-devel openssl-devel redhat-rpm-config @development-tools
 ```
 
 *RHEL8/CentOS 8*:
 
-```
+```bash
 sudo dnf install ruby ruby-devel
 sudo dnf group install "Development Tools"
 ```
 
 *Debian*:
 
-```
+```bash
 sudo apt-get install ruby-full build-essential
 ```
 
 *Gentoo*:
 
-```
+```bash
 sudo emerge dev-lang/ruby
 ```
 
 *Arch Linux*:
 
-```
+```bash
 sudo pacman -S ruby base-devel
 ```
 
 *OpenSUSE*:
 
-```
+```bash
 sudo zypper install -t pattern devel_ruby devel_C_C++
 sudo zypper install ruby-devel
 ```
 
 *Clear Linux*:
 
-```
+```bash
 sudo swupd bundle-add ruby-basic
 ```
 
@@ -102,17 +107,17 @@ Quit and relaunch your terminal to continue.
 #### Step 2: Install chruby and the Latest Ruby with ruby-install
 
 1. Install `chruby` and `ruby-install` with Homebrew:
-```
+```bash
 brew install chruby ruby-install xz
 ```
 
 2. Install the latest stable version of Ruby:
-```
+```bash
 ruby-install ruby 3.1.3
 ```
 
 3. This will take a few minutes, and once it’s done, configure your shell to automatically use `chruby`:
-```
+```bash
 echo "source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh" >> ~/.zshrc
 echo "source $(brew --prefix)/opt/chruby/share/chruby/auto.sh" >> ~/.zshrc
 echo "chruby ruby-3.1.3" >> ~/.zshrc # run 'chruby' to see actual version
@@ -123,7 +128,7 @@ echo "chruby ruby-3.1.3" >> ~/.zshrc # run 'chruby' to see actual version
 
 4. Quit and relaunch Terminal, then check that everything is working:
 
-```
+```bash
 ruby -v
 ```
 
@@ -142,18 +147,18 @@ ruby -v
 After installing Ruby, you might encounter an issue where Ruby Gems continually keeps timing out.
 
 ```
-Fetching source index from http://rubygems.org/
+Fetching source index from https://rubygems.org/
 
-Retrying fetcher due to error (2/4): Bundler::HTTPError Could not fetch specs from http://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
-Retrying fetcher due to error (3/4): Bundler::HTTPError Could not fetch specs from http://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
+Retrying fetcher due to error (2/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
+Retrying fetcher due to error (3/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
 ```
 
-This could be caused by a handful of factors, but the most common issue is that you might be trying to fetch the gems from `https://rubygems.org/` instead of `http://rubygems.org/`, or vice versa.
+This could be caused by a handful of factors, but the most common issue is that you might be trying to fetch the gems from `https://rubygems.org/` instead of `https://rubygems.org/`, or vice versa.
 
 To fix this issue, you need to add/edit the `source` line to your `Gemfile` and specify the protocol.
 
 ```ruby
-source 'http://rubygems.org/'
+source 'https://rubygems.org/'
 ```
 
 Try both protocols `http` and `https` to see if your issue is resolved, but it is recommended to use `https://rubygems.org/` if you can.
@@ -166,10 +171,10 @@ If you still have issues, then you might be experiencing the issue [Ruby Gems Ti
 Similarly to the issue [Ruby Gems Timeout Due to Source Protocol](#ruby-gems-timeout-due-to-source-protocol), you might encounter an issue where Ruby Gems continually keeps timing out, however, this solution is primarily for Linux users.
 
 ```
-Fetching source index from http://rubygems.org/
+Fetching source index from https://rubygems.org/
 
-Retrying fetcher due to error (2/4): Bundler::HTTPError Could not fetch specs from http://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
-Retrying fetcher due to error (3/4): Bundler::HTTPError Could not fetch specs from http://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
+Retrying fetcher due to error (2/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
+Retrying fetcher due to error (3/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
 ```
 
 The issue is that your system might be attempting to use IPv6 instead of IPv4, though this can be verified by running a `curl` command specifying either `--ipv4` or `--ipv6` to see if you get a response is from `https://rubygems.org/`.
@@ -194,7 +199,7 @@ $ curl -L https://rubygems.org/ --ipv6 --max-time 5 -o /dev/null
 curl: (28) Failed to connect to rubygems.org port 443 after 4701 ms: Connection timed out
 ```
 
-If this is the case, then go take a quick peak over at my other post on how to prioritize IPv4 over IPv6 on Linux. You can find it [here](/how-to-prioritize-ipv4-over-ipv6-on-linux).
+If this is the case, then go take a quick peak over at my other post on how to prioritize IPv4 over IPv6 on Linux. You can find it [here]({% post_url 2023-06-25-how-to-prioritize-ipv4-over-ipv6-on-linux %}).
 
 ## Conclusion
 

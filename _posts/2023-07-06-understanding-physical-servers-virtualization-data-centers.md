@@ -1,12 +1,18 @@
 ---
-title: "Understanding Physical Servers, Virtualization, and Data Centers"
-excerpt: "Delve into the world of physical servers, virtualization, and data centers."
+title: Understanding Physical Servers, Virtualization, and Data Centers
+author: xransum
+date: 2023-07-06 20:36:38 -0500
 categories:
   - Computing
 tags:
-  - Physical Servers
-  - Virtualization
-  - Data Centers
+  - computer-hardware
+  - virtualization
+  - networking
+mermaid: true
+image:
+  path: /commons/en-lan-2000-07.jpg
+  lqip: null
+  alt: null
 ---
 
 ## Introduction
@@ -41,7 +47,7 @@ Virtualization is a technology that enables the creation of virtual instances or
 
 The hypervisor, also known as a virtual machine monitor (VMM), is software that facilitates the creation and management of virtual machines. It abstracts the physical hardware, allowing multiple VMs to run independently on a single physical server.
 
-```mermaid!
+```mermaid
 graph LR
     A[Physical Server] --> B[Hypervisor]
     B --> C[Virtual Machine 1]
@@ -66,7 +72,7 @@ Data centers serve as the homes for physical servers and virtualized environment
 
 Data centers house physical servers within server racks, which provide physical support, power distribution, and cooling. Racks organize the servers efficiently and enable easier management and maintenance.
 
-```mermaid!
+```mermaid
 graph LR
     A[Server Rack] --> B[Physical Server 1]
     A --> C[Physical Server 2]
@@ -86,7 +92,7 @@ Data centers prioritize uninterrupted power supply to keep servers running consi
 
 Data centers employ a comprehensive network infrastructure to facilitate high-speed data transfer and connectivity. This infrastructure includes routers, switches, and fiber optic cables that interconnect servers within the data center and enable communication with external networks.
 
-```mermaid!
+```mermaid
 graph LR
     A[Router] --> B[Switch 1]
     A --> C[Switch 2]
@@ -130,7 +136,7 @@ A DNS (Domain Name System) server is responsible for translating domain names in
 
 These are just a few examples of how physical servers can be versatile and adapted for different purposes. Each server type serves a specific function, providing essential services to support various applications and network infrastructures.
 
-```mermaid!
+```mermaid
 graph LR
     A[Physical Server] --> B[Web Server]
     A --> C[Mail Server]

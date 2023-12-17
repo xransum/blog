@@ -1,12 +1,18 @@
 ---
-title: "Understanding the Domain Name System"
-excerpt: "A simple rundown of how the Domain Name System works."
+title: Understanding the Domain Name System
+author: xransum
+date: 2023-07-16 00:08:32 -0500
 categories:
-    - Networking
+  - Internet
 tags:
-    - Networking
-    - DNS
-    - Domain Names
+  - internet
+  - networking
+  - domains
+  - urls
+image:
+  path: /commons/train.jpg
+  lqip: null
+  alt: null
 ---
 
 ## **What is the Domain Name System?**

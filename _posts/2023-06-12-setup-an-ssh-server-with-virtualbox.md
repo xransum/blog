@@ -1,12 +1,19 @@
 ---
-title: "Setup an SSH Server with VirtualBox"
-excerpt: "Walkthrough on setting up an isolated SSH server within a local network."
+title: Setup an SSH Server with VirtualBox
+author: xransum
+date: 2023-06-12 11:16:16 -0500
 categories:
   - Linux
+  - Virtual Machines
 tags:
-  - Linux
-  - VirtualBox
-  - Networking
+  - environments
+  - programming
+  - linux
+  - networking
+image:
+  path: /commons/beard-03.jpg
+  lqip: null
+  alt: null
 ---
 
 
