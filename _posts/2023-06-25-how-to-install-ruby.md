@@ -147,18 +147,18 @@ ruby -v
 After installing Ruby, you might encounter an issue where Ruby Gems continually keeps timing out.
 
 ```
-Fetching source index from http://rubygems.org/
+Fetching source index from https://rubygems.org/
 
-Retrying fetcher due to error (2/4): Bundler::HTTPError Could not fetch specs from http://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
-Retrying fetcher due to error (3/4): Bundler::HTTPError Could not fetch specs from http://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
+Retrying fetcher due to error (2/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
+Retrying fetcher due to error (3/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
 ```
 
-This could be caused by a handful of factors, but the most common issue is that you might be trying to fetch the gems from `https://rubygems.org/` instead of `http://rubygems.org/`, or vice versa.
+This could be caused by a handful of factors, but the most common issue is that you might be trying to fetch the gems from `https://rubygems.org/` instead of `https://rubygems.org/`, or vice versa.
 
 To fix this issue, you need to add/edit the `source` line to your `Gemfile` and specify the protocol.
 
 ```ruby
-source 'http://rubygems.org/'
+source 'https://rubygems.org/'
 ```
 
 Try both protocols `http` and `https` to see if your issue is resolved, but it is recommended to use `https://rubygems.org/` if you can.
@@ -171,10 +171,10 @@ If you still have issues, then you might be experiencing the issue [Ruby Gems Ti
 Similarly to the issue [Ruby Gems Timeout Due to Source Protocol](#ruby-gems-timeout-due-to-source-protocol), you might encounter an issue where Ruby Gems continually keeps timing out, however, this solution is primarily for Linux users.
 
 ```
-Fetching source index from http://rubygems.org/
+Fetching source index from https://rubygems.org/
 
-Retrying fetcher due to error (2/4): Bundler::HTTPError Could not fetch specs from http://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
-Retrying fetcher due to error (3/4): Bundler::HTTPError Could not fetch specs from http://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
+Retrying fetcher due to error (2/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
+Retrying fetcher due to error (3/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/ due to underlying error <Net::OpenTimeout: execution expired (https://rubygems.org/specs.4.8.gz)>
 ```
 
 The issue is that your system might be attempting to use IPv6 instead of IPv4, though this can be verified by running a `curl` command specifying either `--ipv4` or `--ipv6` to see if you get a response is from `https://rubygems.org/`.

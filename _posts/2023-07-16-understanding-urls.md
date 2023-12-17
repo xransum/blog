@@ -27,7 +27,7 @@ A URL consists of several components, each serving a specific purpose and provid
 
 ### URL Components:
 
-1. **Scheme:** The scheme indicates the protocol or protocol scheme used to access the resource. It defines the rules and specifications for communication between the client and server. Common schemes include `http://`, `https://`, `ftp://`, and `file://`. The scheme is followed by a colon and two forward slashes.
+1. **Scheme:** The scheme indicates the protocol or protocol scheme used to access the resource. It defines the rules and specifications for communication between the client and server. Common schemes include `https://`, `https://`, `ftp://`, and `file://`. The scheme is followed by a colon and two forward slashes.
 
 2. **Username** and **Password:** These optional components are used for authentication when accessing protected resources. They allow users to provide credentials to gain access to a specific resource. The username and password are separated from the scheme by a colon and followed by an at sign (@).
 

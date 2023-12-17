@@ -104,7 +104,7 @@ Only 3 fields are required:
 You can add additional parameters to the setup script:
 
 - **description**: one-line summary of the project
-- **long_description**: multi-line string in [reStructuredText](http://docutils.sourceforge.net/rst.html) (PyPI converts it to HTML and displays it on the package page)
+- **long_description**: multi-line string in [reStructuredText](https://docutils.sourceforge.net/rst.html) (PyPI converts it to HTML and displays it on the package page)
 - **author**: author name
 - **author_email**: author email
 - **maintainer**: maintainer name
@@ -121,7 +121,7 @@ Differentiate the source code from other files using:
 
 Additional metadata can be found in the [Python documentation](https://docs.python.org/3/distutils/setupscript.html#additional-meta-data).
 
-To classify the package, use the `classifiers` parameter of the `setup()` function. This contains a list of strings. All classifier strings must match the [PyPI classifiers list](http://pypi.python.org/pypi?:action=list_classifiers).
+To classify the package, use the `classifiers` parameter of the `setup()` function. This contains a list of strings. All classifier strings must match the [PyPI classifiers list](https://pypi.python.org/pypi?:action=list_classifiers).
 
 ### Manifest
 
@@ -197,7 +197,7 @@ In this tutorial, we learned how to create a Python package. We also learned how
 
 ## References
 
-- [Dive into Python 3](http://www.diveintopython3.net/packaging.html)
+- [Dive into Python 3](https://www.diveintopython3.net/packaging.html)
 - [Distutils documentation](https://docs.python.org/3/distutils/index.html)
 - [Python Package Index (PyPI)](https://pypi.python.org/pypi)
-- [The Hitchhiker's Guide to Packaging](http://the-hitchhikers-guide-to-packaging.readthedocs.io/en/latest/quickstart.html)
+- [The Hitchhiker's Guide to Packaging](https://the-hitchhikers-guide-to-packaging.readthedocs.io/en/latest/quickstart.html)

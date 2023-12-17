@@ -193,7 +193,7 @@ image:
         <div class="card-body">
             <div class="logos fab fa-apple fa-lg"></div>
             <p class="card-text">
-                <a target="_blank" href="http://damnvulnerableiosapp.com/">Check Out</a>
+                <a target="_blank" href="https://damnvulnerableiosapp.com/">Check Out</a>
             </p>
         </div>
     </div>
@@ -202,7 +202,7 @@ image:
         <div class="card-body">
             <div class="logos fa fa-window-maximize fa-lg"></div>
             <p class="card-text">
-                <a target="_blank" href="http://7hxz233.github.io/ctftime-info/">Check Out</a>
+                <a target="_blank" href="https://7hxz233.github.io/ctftime-info/">Check Out</a>
             </p>
         </div>
     </div>
@@ -556,7 +556,7 @@ image:
         <div class="card-body">
             <div class="logos fa fa-window-maximize fa-lg"></div>
             <p class="card-text">
-                <a target="_blank" href="http://www.itsecgames.com/">Check Out</a>
+                <a target="_blank" href="https://www.itsecgames.com/">Check Out</a>
             </p>
         </div>
     </div>
@@ -574,7 +574,7 @@ image:
         <div class="card-body">
             <div class="logos fa fa-window-maximize fa-lg"></div>
             <p class="card-text">
-                <a target="_blank" href="http://websec.fr/">Check Out</a>
+                <a target="_blank" href="https://websec.fr/">Check Out</a>
             </p>
         </div>
     </div>
@@ -722,7 +722,7 @@ image:
         <div class="card-body">
             <div class="logos fa fa-window-maximize fa-lg"></div>
             <p class="card-text">
-                <a target="_blank" href="http://security.cs.rpi.edu/courses/binexp-spring2015/">Check Out</a>
+                <a target="_blank" href="https://security.cs.rpi.edu/courses/binexp-spring2015/">Check Out</a>
             </p>
         </div>
     </div>
@@ -740,7 +740,7 @@ image:
         <div class="card-body">
             <div class="logos fa fa-window-maximize fa-lg"></div>
             <p class="card-text">
-                <a target="_blank" href="http://www.cs.virginia.edu/~evans/cs216/guides/x86.html">Check Out</a>
+                <a target="_blank" href="https://www.cs.virginia.edu/~evans/cs216/guides/x86.html">Check Out</a>
             </p>
         </div>
     </div>
@@ -785,7 +785,7 @@ image:
         <div class="card-body">
             <div class="logos fa fa-window-maximize fa-lg"></div>
             <p class="card-text">
-                <a target="_blank" href="http://reversing.kr/">Check Out</a>
+                <a target="_blank" href="https://reversing.kr/">Check Out</a>
             </p>
         </div>
     </div>

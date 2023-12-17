@@ -23,7 +23,7 @@ As most of the shared hosting platforms are strictly user premitted and don't al
 
 ## Creating the Application
 
-For example purposes, you can use the following ["Hello World"](https://github.com/phusion/passenger-python-flask-demo) demo that uses [Flask](http://flask.pocoo.org/).
+For example purposes, you can use the following ["Hello World"](https://github.com/phusion/passenger-python-flask-demo) demo that uses [Flask](https://flask.pocoo.org/).
 
 ```bash
 git clone https://github.com/phusion/passenger-python-flask-demo.git
@@ -47,7 +47,7 @@ python3 -m pip install Flask
 pip3 install Flask
 ```
 
-Now once you are running the sample Flask web application, you should be able to view it from your browser at `http://SERVER_PUBLIC_IP:5000/` with no issue.
+Now once you are running the sample Flask web application, you should be able to view it from your browser at `https://SERVER_PUBLIC_IP:5000/` with no issue.
 
 There's a chance you may run into the following issues when trying to connect...
 
@@ -184,7 +184,7 @@ sudo service nginx restart
 Your web application should now be running and reachable from your servers hostname. You can quickly verify by running this following command, replacing yourserver.com with your server's hostname, exactly as it appears in the Nginx config file's server_name directive
 
 ```bash
-curl "http://yourserver.com:5000/"
+curl "https://yourserver.com:5000/"
 ```
 
 ### Configuring Passenger with Flask Applications
@@ -234,10 +234,10 @@ passenger start
 # => PID file: /Users/phusion/myapp/passenger.3000.pid
 # => Log file: /Users/phusion/myapp/passenger.3000.log
 # => Environment: development
-# => Accessible via: http://0.0.0.0:3000/
+# => Accessible via: https://0.0.0.0:3000/
 # =>
 # => You can stop Phusion Passenger Standalone by pressing Ctrl-C.
 # => ===============================================================
 ```
 
-As you can see in the output, Passenger is now serving your app on http://0.0.0.0:3000/. You can now visit that URL in your browser to see your app in action.
+As you can see in the output, Passenger is now serving your app on https://0.0.0.0:3000/. You can now visit that URL in your browser to see your app in action.
