@@ -29,6 +29,11 @@ bundle install
 ```bash
 git add .
 git commit -m "Commit message"
+```
+
+### Pushing Changes
+
+```bash
 git switch --create my-changes master
 git push -u origin my-changes
 ```
@@ -38,7 +43,7 @@ git push -u origin my-changes
 ```bash
 gh pr create --base master --head my-changes --fill
 gh pr status
-gh pr merge 5 --merge --delete-branch
+gh pr merge 6 --merge --delete-branch
 ```
 
 ### Deleting a Branch
