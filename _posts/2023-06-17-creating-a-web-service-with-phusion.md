@@ -41,7 +41,7 @@ If you run into issues running that, you may need to install the python Flask pa
 python3 -m pip install Flask
 ```
 
-**- or -**
+or
 
 ```bash
 pip3 install Flask
@@ -49,12 +49,26 @@ pip3 install Flask
 
 Now once you are running the sample Flask web application, you should be able to view it from your browser at `https://SERVER_PUBLIC_IP:5000/` with no issue.
 
-There's a chance you may run into the following issues when trying to connect...
+There's a chance you may run into one of the following issues when trying to connection:
+> **Issue 1:**
+> ```
+> The connection has timed out
+> ```
+> This is usually means your firewall rules or security groups are improperly configured to allow
+> for inbound traffic on port `5000`
+{: .prompt-danger }
 
-> `The connection has timed out` <br/>
-> This is usually means your firewall rules or security groups are improperly configured to  allow for inbound traffic on port `5000`
-> `Unable to connect` <br/>
-> Usually happen when trying to connect from another device not on the same IP address. As `127.0.0.1` means localhost/loopback and means you can only be connected to it through itself, so you will need to change the last line in the `app.py` from `MyApp.run()` to `MyApp.run(host='0.0.0.0')` and then you should be able to connect from another computer.
+> **Issue 2:**
+> ```
+> Unable to connect
+> ```
+> Usually happen when trying to connect from another device not on the same IP address. As `127.0.0.1`
+> means localhost/loopback and means you can only be connected to it through itself, so you will need
+> to change the last line in the `app.py` from `MyApp.run()` to `MyApp.run(host='0.0.0.0')` and then
+> you should be able to connect from another computer.
+{: .prompt-danger }
+
+
 ## Phusion Passenger Setup
 
 #### What is Passenger?
@@ -116,9 +130,8 @@ sudo yum install -y --enablerepo=epel passenger
 ```
 
 
-<div class="alert alert-warning">
-    <strong>Warning</strong>: If the above fails, saying that the package is missing or does not exist, you can use the following to add the el7 repository to your yum source lists.
-</div>
+> If the above fails, saying that the package is missing or does not exist, you can use the following to add the el7 repository to your yum source lists.
+{: .prompt-warning }
 
 Thusly, paste the following and then rerun the above `yum install` again.
 ```bash
@@ -189,10 +202,9 @@ curl "https://yourserver.com:5000/"
 
 ### Configuring Passenger with Flask Applications
 
-<div class="alert alert-primary">
-    <b>Note</b>: The following example is a continuation from the above
-    <a href="#creating-a-flask-example-application">Creating a Flask Example Application</a>.
-</div>
+> The following example is a continuation from the above [Creating the Application](#creating-the-application).
+{: .prompt-info }
+
 
 So to be able to use Passenger with Flask, it doesn't have the ability to run it like one typically would by just calling from the command line `python3 app.py` and it just run.
 Instead Passenger does it a little differently by using something called [Python WSGI](https://wsgi.readthedocs.io/en/latest/), which defines a standard interface for web applications allowing any application that implements WSGI to work with any server that supports it.
@@ -216,9 +228,8 @@ So your example project files will look something like the below.
 
 Paste the below contents to the `passenger_wsgi.py`.
 
-<div class="alert alert-primary">
-    <b>Note</b>: The contents of your `passenger_wsgi.py` file will change depending on your application and the projects web framework, but for this example we're using a simple Flask app.
-</div>
+> The contents of your `passenger_wsgi.py` file will change depending on your application and the projects web framework, but for this example we're using a simple Flask app.
+{: .prompt-info }
 
 
 ```python

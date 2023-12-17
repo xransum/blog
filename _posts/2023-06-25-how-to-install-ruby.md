@@ -30,45 +30,45 @@ Depending on a handful of factors independent to your operating system in questi
 
 *Fedora*:
 
-```
+```bash
 sudo dnf install ruby ruby-devel openssl-devel redhat-rpm-config @development-tools
 ```
 
 *RHEL8/CentOS 8*:
 
-```
+```bash
 sudo dnf install ruby ruby-devel
 sudo dnf group install "Development Tools"
 ```
 
 *Debian*:
 
-```
+```bash
 sudo apt-get install ruby-full build-essential
 ```
 
 *Gentoo*:
 
-```
+```bash
 sudo emerge dev-lang/ruby
 ```
 
 *Arch Linux*:
 
-```
+```bash
 sudo pacman -S ruby base-devel
 ```
 
 *OpenSUSE*:
 
-```
+```bash
 sudo zypper install -t pattern devel_ruby devel_C_C++
 sudo zypper install ruby-devel
 ```
 
 *Clear Linux*:
 
-```
+```bash
 sudo swupd bundle-add ruby-basic
 ```
 
@@ -107,17 +107,17 @@ Quit and relaunch your terminal to continue.
 #### Step 2: Install chruby and the Latest Ruby with ruby-install
 
 1. Install `chruby` and `ruby-install` with Homebrew:
-```
+```bash
 brew install chruby ruby-install xz
 ```
 
 2. Install the latest stable version of Ruby:
-```
+```bash
 ruby-install ruby 3.1.3
 ```
 
 3. This will take a few minutes, and once it’s done, configure your shell to automatically use `chruby`:
-```
+```bash
 echo "source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh" >> ~/.zshrc
 echo "source $(brew --prefix)/opt/chruby/share/chruby/auto.sh" >> ~/.zshrc
 echo "chruby ruby-3.1.3" >> ~/.zshrc # run 'chruby' to see actual version
@@ -128,7 +128,7 @@ echo "chruby ruby-3.1.3" >> ~/.zshrc # run 'chruby' to see actual version
 
 4. Quit and relaunch Terminal, then check that everything is working:
 
-```
+```bash
 ruby -v
 ```
 
@@ -199,7 +199,7 @@ $ curl -L https://rubygems.org/ --ipv6 --max-time 5 -o /dev/null
 curl: (28) Failed to connect to rubygems.org port 443 after 4701 ms: Connection timed out
 ```
 
-If this is the case, then go take a quick peak over at my other post on how to prioritize IPv4 over IPv6 on Linux. You can find it [here](/how-to-prioritize-ipv4-over-ipv6-on-linux).
+If this is the case, then go take a quick peak over at my other post on how to prioritize IPv4 over IPv6 on Linux. You can find it [here]({% post_url 2023-06-25-how-to-prioritize-ipv4-over-ipv6-on-linux %}).
 
 ## Conclusion
 

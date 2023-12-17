@@ -1,5 +1,5 @@
 ---
-title: 'Networking: UDP vs TCP'
+title: Networking - UDP vs TCP
 author: xransum
 date: 2023-06-21 12:11:04 -0500
 categories:

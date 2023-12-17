@@ -1,5 +1,5 @@
 ---
-title: Install Custom Node Version
+title: Install Node with Node Version Manager (nvm)
 author: xransum
 date: 2023-06-17 02:38:24 -0500
 categories:

@@ -1,5 +1,5 @@
 ---
-title: CTF Resources
+title: Capture the Flag Resources
 author: xransum
 date: 2023-07-05 04:01:06 -0500
 categories:

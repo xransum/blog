@@ -49,9 +49,7 @@ precedence ::ffff:0:0/96  100
 
 ### Step 3: Save and exit the file
 
-bash
-
-```
+```bash
 Ctrl + X
 Y
 Enter
