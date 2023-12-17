@@ -36,7 +36,14 @@ git push -u origin my-changes
 ### Creating a Pull Request
 
 ```bash
-gh pr create --base master --head my-changes
+gh pr create --base master --head my-changes --fill
 gh pr status
 gh pr merge 5 --merge --delete-branch
+```
+
+### Deleting a Branch
+
+```bash
+git switch master
+git branch -d my-changes
 ```
