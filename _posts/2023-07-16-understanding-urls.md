@@ -1,13 +1,18 @@
 ---
 title: Understanding URL Components
 author: xransum
-date: 2023-07-16 01:22:00 -0500
-categories: [Web, Internet]
-tags: [url]
+date: 2023-07-16 08:37:40 -0500
+categories:
+  - Internet
+tags:
+  - internet
+  - networking
+  - domains
+  - urls
 image:
   path: /commons/beard-05.jpg
-  lqip: 
-  alt: 
+  lqip: null
+  alt: null
 ---
 
 ## What are URLs?

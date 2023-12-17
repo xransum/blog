@@ -1,13 +1,18 @@
 ---
-title: "Install Custom Python Version"
-excerpt: "Steps on installing a custom Python version on your server or any other Linux-based machine."
+title: Install Custom Python Version
+author: xransum
+date: 2023-05-19 02:19:01 -0500
 categories:
-  - Developer
+  - Development
+  - Version Management
 tags:
-  - Installation
-  - Linux
-  - Programming
-  - Python
+  - environments
+  - programming
+  - python
+image:
+  path: /commons/beard-02.jpg
+  lqip: null
+  alt: null
 ---
 
 Similarly to [Node.js](https://nodejs.org/en/), Python is a popular programming language that is used for a variety of applications. It is known for its simplicity, versatility, and ease of use. Python is also a great language for beginners to learn, as it is easy to read and understand.

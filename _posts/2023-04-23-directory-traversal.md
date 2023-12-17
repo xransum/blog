@@ -1,13 +1,17 @@
 ---
-title: "Directory Traversal"
-excerpt: "A guide on how to exploit directory traversal vulnerabilities."
+title: Directory Traversal
+author: xransum
+date: 2023-04-23 17:52:31 -0500
 categories:
   - Web Security
 tags:
-  - Hacking
-  - Web Security
-  - Web Exploitation
-  - Learning
+  - hacking
+  - exploits
+  - learning
+image:
+  path: /commons/en-lan-2000-03.jpg
+  lqip: null
+  alt: null
 ---
 
 ## Introduction

@@ -1,12 +1,16 @@
 ---
-title: "Linux Permissions"
-excerpt: "Fundamentals of Linux permissions and how attackers target Linux machines."
+title: Linux Permissions
+author: xransum
+date: 2023-02-28 00:33:19 -0500
 categories:
   - Linux
 tags:
-  - Linux
-  - Permissions
-  - Vulnerabilities
+  - permissions
+  - exploits
+image:
+  path: /commons/robida-03.jpg
+  lqip: null
+  alt: null
 ---
 
 

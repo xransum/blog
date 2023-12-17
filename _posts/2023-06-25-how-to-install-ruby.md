@@ -1,14 +1,19 @@
 ---
-title: "How to Install Ruby"
-excerpt: "A simple guide on how to install Ruby on your machine."
+title: How to Install Ruby
+author: xransum
+date: 2023-06-25 04:10:29 -0500
 categories:
-  - Developer
+  - Development
 tags:
-  - Installation
-  - Linux
-  - macOS
-  - Ruby
-  - Windows
+  - installation
+  - linux
+  - macos
+  - ruby
+  - windows
+image:
+  path: /commons/nasa-06.jpg
+  lqip: null
+  alt: null
 ---
 
 ## Introduction

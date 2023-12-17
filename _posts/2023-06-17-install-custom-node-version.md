@@ -1,12 +1,18 @@
 ---
-title: "Install Custom Node Version"
-excerpt: "Steps on installing a custom Node version on your server or any other Linux-based machine."
+title: Install Custom Node Version
+author: xransum
+date: 2023-06-17 02:38:24 -0500
 categories:
-  - Developer
+  - Development
+  - Version Management
 tags:
-  - Installation
-  - Linux
-  - Node.js
+  - installation
+  - linux
+  - nodejs
+image:
+  path: /commons/beard-05.jpg
+  lqip: null
+  alt: null
 ---
 
 If you've run into issues trying to install Node.js or npm on your server, you may want to consider installing a custom Node version. This post will walk you through the steps of installing a custom Node version on your server or any other Linux-based machine.

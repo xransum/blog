@@ -1,13 +1,18 @@
 ---
-title: "How to Build a Botnet"
-excerpt: "Building a botnet from scratch using Python."
+title: How to Build a Botnet
+author: xransum
+date: 2023-06-17 03:04:09 -0500
 categories:
-  - Developer
+  - Development
 tags:
-  - Hacking
-  - Learning
-  - Programming
-  - Python
+  - hacking
+  - educational
+  - programming
+  - python
+image:
+  path: /commons/beard-02.jpg
+  lqip: null
+  alt: null
 ---
 
 <div class="alert alert-warning">

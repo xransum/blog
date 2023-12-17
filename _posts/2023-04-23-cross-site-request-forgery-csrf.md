@@ -1,13 +1,17 @@
 ---
-title: "Cross Site Request Forgery (CSRF)"
-excerpt: "A guide on how to exploit CSRF vulnerabilities."
+title: Cross Site Request Forgery (CSRF)
+author: xransum
+date: 2023-04-23 21:04:40 -0500
 categories:
   - Web Security
 tags:
-  - Hacking
-  - Web Security
-  - Web Exploitation
-  - Learning
+  - hacking
+  - exploits
+  - learning
+image:
+  path: /commons/en-lan-2000-05.jpg
+  lqip: null
+  alt: null
 ---
 
 ## Introduction

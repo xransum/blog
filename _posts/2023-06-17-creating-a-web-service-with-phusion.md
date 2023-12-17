@@ -1,16 +1,19 @@
 ---
-title: "Creating a Web Service with Phusion"
-excerpt: "A guide on how to create a web service using Phusion Passenger and Python"
+title: Creating a Webservice with Phusion
+author: xransum
+date: 2023-06-17 00:07:15 -0500
 categories:
-  - Developer
+  - Development
+  - Webservices
 tags:
-  - Linux
-  - Passenger Phusion
-  - Programming
-  - Python
-  - Virtual Environment
-  - Web Development
-  - Web Services
+  - environments
+  - programming
+  - linux
+  - passenger-phusion
+image:
+  path: /commons/en-lan-2000-08.jpg
+  lqip: null
+  alt: null
 ---
 
 

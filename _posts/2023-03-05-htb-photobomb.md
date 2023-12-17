@@ -1,13 +1,17 @@
 ---
-title: "HTB: Photobomb"
-excerpt: "Weekly CTF Writeup - HTB Photobomb"
+title: HTB - Photobomb
+author: xransum
+date: 2023-03-05 10:57:13 -0500
 categories:
-  - Writeups
+  - Hack The Box
+  - Writeup
 tags:
-  - Hacking
-  - CTF
-  - HackTheBox
-  - Linux
+  - ctf
+  - hacking
+image:
+  path: /commons/nasa-06.jpg
+  lqip: null
+  alt: null
 ---
 
 # Introduction

@@ -1,13 +1,18 @@
 ---
 title: Creating a Python Package
 author: xransum
-date: 2023-07-17 19:01:23 -0500
-categories: [Development, Python]
-tags: [programming]
+date: 2023-07-17 15:13:32 -0500
+categories:
+  - Development
+  - Programming
+tags:
+  - python
+  - programming
+  - development
 image:
   path: /commons/beard-01.jpg
-  lqip: 
-  alt: 
+  lqip: null
+  alt: null
 ---
 
 # Create a Python Package

@@ -1,13 +1,17 @@
 ---
-title: "Cross Site Scripting (XSS)"
-excerpt: "A guide on how to exploit XSS vulnerabilities."
+title: Cross Site Scripting (XSS)
+author: xransum
+date: 2023-04-23 04:38:18 -0500
 categories:
   - Web Security
 tags:
-  - Hacking
-  - Web Security
-  - Web Exploitation
-  - Learning
+  - hacking
+  - exploits
+  - learning
+image:
+  path: /commons/beard-06.jpg
+  lqip: null
+  alt: null
 ---
 
 ## Introduction

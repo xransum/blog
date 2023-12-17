@@ -1,11 +1,17 @@
 ---
-title: "CTF Resources"
-excerpt: "A compiled list of resources usable from beginners to experiences CTF players."
+title: CTF Resources
+author: xransum
+date: 2023-07-05 04:01:06 -0500
 categories:
   - Pentesting
 tags:
-  - Capture the Flag
-  - Resources
+  - ctf
+  - hacking
+  - resources
+image:
+  path: /commons/en-lan-2000-01.jpg
+  lqip: null
+  alt: null
 ---
 
 <h3 class="cat" id="general">General</h3>

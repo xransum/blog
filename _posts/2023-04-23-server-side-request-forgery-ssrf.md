@@ -1,13 +1,17 @@
 ---
-title: "Server Side Request Forgery (SSRF)"
-excerpt: "A guide on how to exploit SSRF vulnerabilities."
+title: Server Side Request Forgery (SSRF)
+author: xransum
+date: 2023-04-23 13:34:00 -0500
 categories:
   - Web Security
 tags:
-  - Hacking
-  - Web Security
-  - Web Exploitation
-  - Learning
+  - hacking
+  - exploits
+  - learning
+image:
+  path: /commons/beard-10.jpg
+  lqip: null
+  alt: null
 ---
 
 ## Introduction
