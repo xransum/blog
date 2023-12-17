@@ -22,3 +22,21 @@ bundle install
 ./tools/run
 ```
 
+## Pushing Changes
+
+### Committing Changes
+
+```bash
+git add .
+git commit -m "Commit message"
+git switch --create my-changes master
+git push -u origin my-changes
+```
+
+### Creating a Pull Request
+
+```bash
+gh pr create --base master --head my-changes
+gh pr status
+gh pr merge 5 --merge --delete-branch
+```
