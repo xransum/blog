@@ -5,9 +5,10 @@ on:
       - main
       - master
     paths-ignore:
-      - .gitignore
-      - README.md
-      - LICENSE
+      - ".gitignore"
+      - "README.md"
+      - "LICENSE"
+      - "scripts/**"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
