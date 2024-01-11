@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# Run jekyll serve and then launch the site
+
+HOST="0.0.0.0"
+PORT=4000
+
+echo "Test Page: http://$(hostname -I | tr -d ' '):${PORT}"
+
+# bundle exec jekyll serve --host "0.0.0.0" --livereload --future --drafts
+bundle exec jekyll s -H "${HOST}" -P "${PORT}" -l --drafts "$@"

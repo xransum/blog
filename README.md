@@ -19,7 +19,7 @@ bundle install
 ## Run the Jekyll Server
 
 ```bash
-./tools/run
+./scripts/run
 ```
 
 ## Pushing Changes
