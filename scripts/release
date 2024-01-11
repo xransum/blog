@@ -46,7 +46,7 @@ help() {
     echo
     echo "Usage:"
     echo
-    echo "   bash ./tools/release [options]"
+    echo "   bash ./scripts/release [options]"
     echo
     echo "Options:"
     echo "     -p, --preview            Enable preview mode, only package, and will not modify the branches"
