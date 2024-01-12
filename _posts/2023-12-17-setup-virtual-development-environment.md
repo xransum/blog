@@ -9,7 +9,7 @@ tags:
   - environments
   - programming
   - linux
-pin: true
+pin: false
 image:
   path: /commons/virtual-iris.png
   lqip: null

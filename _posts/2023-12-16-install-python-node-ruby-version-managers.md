@@ -12,7 +12,7 @@ tags:
   - ruby
   - nodejs
   - npm
-pin: true
+pin: false
 image:
   path: /commons/random-html-code-01.jpg
   lqip: null
