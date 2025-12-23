@@ -116,7 +116,3 @@ sudo dnf install python3
 ## Conclusion
 
 You should have a very basic understanding about Python and how to install it on your machine. The next will be a rundown of all the basics of Python programming language.
-
-<a href="{% post_url 2025-12-23-python-basics %}" class="w-100 center">
-    Go to Python Basics &raquo;
-</a>
