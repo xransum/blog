@@ -27,7 +27,23 @@ $code-dot-size: 0.75rem !default;
 $code-dot-gap: 0.5rem !default;
 $code-icon-width: 1.75rem !default;
 
-/* fonts */
+/* font-face mixin */
+@mixin font-face($name, $path) {
+  @font-face {
+    font-family: $name;
+    src: url($path) format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+}
 
-$font-family-base: 'Source Sans Pro', 'Microsoft Yahei', sans-serif !default;
-$font-family-heading: Lato, 'Microsoft Yahei', sans-serif !default;
+/* font faces */
+@include font-face('Monaspace Neon', '/assets/fonts/Monaspace Neon Var.woff');
+@include font-face('Monaspace Argon', '/assets/fonts/Monaspace Argon Var.woff');
+@include font-face('Monaspace Xenon', '/assets/fonts/Monaspace Xenon Var.woff');
+@include font-face('Monaspace Radon', '/assets/fonts/Monaspace Radon Var.woff');
+@include font-face('Monaspace Krypton', '/assets/fonts/Monaspace Krypton Var.woff');
+
+/* fonts */
+$font-family-base: 'Monaspace Argon', 'Source Sans Pro', 'Microsoft Yahei', sans-serif !default;
+$font-family-heading: 'Monaspace Krypton', Lato, 'Microsoft Yahei', sans-serif !default;
