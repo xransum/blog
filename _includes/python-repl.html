@@ -1,0 +1,41 @@
+<script type="py" terminal worker>
+import codeop
+import traceback
+
+banner = "PyScript REPL (worker). Use exit()/quit to leave."
+print(banner)
+
+compiler = codeop.CommandCompiler()
+buf = []
+g = {}
+
+while True:
+    try:
+        prompt = "... " if buf else ">>> "
+        line = (await input(prompt))
+    except EOFError:
+        break
+
+    if not buf and line.strip() in ("exit()", "quit()", "exit", "quit"):
+        print("bye")
+        break
+
+    buf.append(line)
+    src = "\n".join(buf)
+
+    try:
+        codeobj = compiler(src)  # None => needs more input
+    except SyntaxError:
+        traceback.print_exc()
+        buf.clear()
+        continue
+
+    if codeobj is None:
+        continue
+
+    buf.clear()
+    try:
+        exec(codeobj, g, g)
+    except Exception:
+        traceback.print_exc()
+</script>
