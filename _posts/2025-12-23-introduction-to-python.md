@@ -32,7 +32,7 @@ There is a long tradition in programming tutorials to start with the simplest of
 
 The `print()` function in Python is used to display output to the console. Anything you put between the parentheses gets printed to the screen.
 
-Go ahead and try it — type the following into the playground below and hit the **Play Button**:
+Go ahead and try it -- type the following into the playground below and hit **Run** (or press `Ctrl+Enter`):
 
 ```python
 print("Hello, World!")
@@ -40,10 +40,10 @@ print("Hello, World!")
 
 For the start of these tutorials, we're just going to run the code from the browser. Later down the line, we will learn how to download and setup Python locally on your machine.
 
-> Anytime you want to write or test Python code, you can use the [Python Playground](https://crumb.sh/F65R4QZRHmo) provided below. Whenever you type code into the field and press the **Play Button**, the code will be executed and the output will be displayed right within the editor.
+> The playground below runs Python directly in your browser using PyScript. Type any Python code into the editor and press **Run** (or `Ctrl+Enter`) to execute it. No installation needed.
 {: .prompt-info }
 
-{% include embed/python-training/crumbs/python-playground.html id='python-playground' %}
+{% include embed/python-training/python-playground.html id='python-playground' %}
 
 If you are ever interested, you can check out the [Hello World Collection](https://helloworldcollection.de/) which showcases how to write this simple program in over 1,000 different programming languages.
 

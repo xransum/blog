@@ -1,0 +1,158 @@
+{% assign terminal_id = include.id | default: 'python-terminal' %}
+
+<div id="{{ terminal_id }}-wrapper" class="py-terminal-wrapper">
+  <div class="py-terminal-window" id="{{ terminal_id }}-window">
+    <div class="py-terminal-menu">
+      <div class="py-terminal-btn py-terminal-close"></div>
+      <div class="py-terminal-btn py-terminal-minimize"></div>
+      <div class="py-terminal-btn py-terminal-zoom"></div>
+    </div>
+    <div class="py-terminal-screen">
+      <div class="py-terminal-code">
+        <pre id="{{ terminal_id }}-typewriter">Wouldn't it be cool...
+to run Python...
+in your browser?</pre>
+        <p class="py-line1">&lt;html&gt;<span class="py-cursor">|</span></p>
+        <p class="py-line2">&nbsp;&nbsp;...<span class="py-cursor">|</span></p>
+        <p class="py-line3">&nbsp;&nbsp;&lt;script type="py"&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#aaa;"><span style="color:#FFD580;">print</span>(<span style="color:#BAE67E;">'You can!'</span>)</span><br/>&nbsp;&nbsp;&lt;/script&gt;<span class="py-cursor">|</span></p>
+        <p class="py-line4">&lt;/html&gt;<span class="py-cursor">|</span></p>
+        <p class="py-line5"><span class="py-cursor">|</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="{{ terminal_id }}-live" style="display:none;">
+    <!-- PyScript mpy terminal injected here on scroll -->
+  </div>
+</div>
+
+<script>
+(function () {
+  var wrapperId   = '{{ terminal_id }}-wrapper';
+  var typewriterId = '{{ terminal_id }}-typewriter';
+  var liveId      = '{{ terminal_id }}-live';
+  var windowId    = '{{ terminal_id }}-window';
+  var loaded      = false;
+
+  function injectPyScript() {
+    if (document.querySelector('script[src*="pyscript.net/releases/2026.3.1/core.js"]')) {
+      return;
+    }
+    var link = document.createElement('link');
+    link.rel  = 'stylesheet';
+    link.href = 'https://pyscript.net/releases/2026.3.1/core.css';
+    document.head.appendChild(link);
+
+    var s = document.createElement('script');
+    s.type = 'module';
+    s.src  = 'https://pyscript.net/releases/2026.3.1/core.js';
+    document.head.appendChild(s);
+  }
+
+  function injectTerminal() {
+    var live = document.getElementById(liveId);
+    if (!live) return;
+    live.style.display = '';
+    var tag = document.createElement('script');
+    tag.type = 'mpy';
+    tag.setAttribute('terminal', '');
+    tag.setAttribute('worker', '');
+    tag.textContent = 'import code\ncode.interact()';
+    live.appendChild(tag);
+  }
+
+  function setupTypewriter(t) {
+    var HTML = t.innerHTML;
+    t.innerHTML = '';
+    var cursorPosition = 0,
+        tag = '',
+        writingTag = false,
+        tagOpen = false,
+        typeSpeed = 100,
+        tempTypeSpeed = 0;
+
+    var type = function () {
+      if (writingTag === true) {
+        tag += HTML[cursorPosition];
+      }
+      if (HTML[cursorPosition] === '<') {
+        tempTypeSpeed = 0;
+        if (tagOpen) {
+          tagOpen = false;
+          writingTag = true;
+        } else {
+          tag = '';
+          tagOpen = true;
+          writingTag = true;
+          tag += HTML[cursorPosition];
+        }
+      }
+      if (!writingTag && tagOpen) {
+        tag.innerHTML += HTML[cursorPosition];
+      }
+      if (!writingTag && !tagOpen) {
+        if (HTML[cursorPosition] === ' ') {
+          tempTypeSpeed = 0;
+        } else {
+          tempTypeSpeed = (Math.random() * typeSpeed) + 50;
+        }
+        t.innerHTML += HTML[cursorPosition];
+      }
+      if (writingTag === true && HTML[cursorPosition] === '>') {
+        tempTypeSpeed = (Math.random() * typeSpeed) + 50;
+        writingTag = false;
+        if (tagOpen) {
+          var newSpan = document.createElement('span');
+          t.appendChild(newSpan);
+          newSpan.innerHTML = tag;
+          tag = newSpan.firstChild;
+        }
+      }
+      cursorPosition += 1;
+      if (cursorPosition < HTML.length - 1) {
+        setTimeout(type, tempTypeSpeed);
+      } else {
+        // Typewriter done -- swap to live terminal
+        var win = document.getElementById(windowId);
+        if (win) {
+          win.style.display = 'none';
+        }
+        injectTerminal();
+      }
+    };
+
+    return { type: type };
+  }
+
+  function activate() {
+    if (loaded) return;
+    loaded = true;
+
+    injectPyScript();
+
+    var t = document.getElementById(typewriterId);
+    if (t) {
+      var tw = setupTypewriter(t);
+      tw.type();
+    }
+  }
+
+  var wrapper = document.getElementById(wrapperId);
+  if (!wrapper) return;
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          obs.disconnect();
+          activate();
+        }
+      });
+    }, { threshold: 0.1 });
+    observer.observe(wrapper);
+  } else {
+    // Fallback for browsers without IntersectionObserver
+    activate();
+  }
+}());
+</script>
