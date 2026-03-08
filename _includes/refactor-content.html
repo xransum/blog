@@ -262,42 +262,5 @@
 
 {% assign _content = _heading_content %}
 
-<!--
-  Preserve newlines inside PyScript blocks before HTML compression runs.
-  compress_html collapses all whitespace outside <pre> tags, which would
-  flatten multi-line Python code inside <script type="py-editor"> and
-  <script type="mpy"> down to a single line in production.
-
-  We encode newlines as the sentinel __PYNL__ here so they survive the
-  compressor as ordinary non-whitespace text. A small synchronous JS
-  snippet in pyscript-loader.html decodes them back at runtime before
-  PyScript reads the tag contents.
--->
-
-{% capture _NL %}
-{% endcapture %}
-
-{% assign _pyscript_types = "py-editor,mpy" | split: "," %}
-
-{% for _pytype in _pyscript_types %}
-  {% assign _open_tag = '<script type="' | append: _pytype | append: '"' %}
-  {% if _content contains _open_tag %}
-    {% assign _py_chunks = _content | split: _open_tag %}
-    {% assign _content = _py_chunks | first %}
-    {% for _py_chunk in _py_chunks %}
-      {% if forloop.first %}{% continue %}{% endif %}
-      {% assign _script_parts = _py_chunk | split: '</script>' %}
-      {% assign _encoded_code = _script_parts | first | split: _NL | join: '__PYNL__' %}
-      {% assign _after_script = _script_parts | slice: 1, _script_parts.size | join: '</script>' %}
-      {% assign _content = _content
-        | append: _open_tag
-        | append: _encoded_code
-        | append: '</script>'
-        | append: _after_script
-      %}
-    {% endfor %}
-  {% endif %}
-{% endfor %}
-
 <!-- return -->
 {{ _content }}
