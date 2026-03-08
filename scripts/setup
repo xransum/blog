@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+#
+# scripts/setup: Install all dependencies and build assets.
+# Run this once after cloning, or any time deps change.
+
+set -e
+
+# Change working directory to the project root
+cd "$(dirname "$0")/.."
+
+# ANSI color helpers
+FMT_RED=$(printf '\033[31m')
+FMT_GREEN=$(printf '\033[32m')
+FMT_YELLOW=$(printf '\033[33m')
+FMT_BLUE=$(printf '\033[34m')
+FMT_RESET=$(printf '\033[0m')
+
+info()    { printf "${FMT_BLUE}[*]${FMT_RESET} %s\n" "$*"; }
+success() { printf "${FMT_GREEN}[+]${FMT_RESET} %s\n" "$*"; }
+warn()    { printf "${FMT_YELLOW}[!]${FMT_RESET} %s\n" "$*"; }
+error()   { printf "${FMT_RED}[!]${FMT_RESET} %s\n" "$*" >&2; }
+
+# Check required tools are present
+check_deps() {
+    local missing=0
+
+    for cmd in ruby bundle node npm; do
+        if ! command -v "$cmd" >/dev/null 2>&1; then
+            error "Required command '$cmd' not found. Please install it and try again."
+            missing=1
+        fi
+    done
+
+    if [[ $missing -eq 1 ]]; then
+        exit 1
+    fi
+}
+
+# Install Ruby gem dependencies
+install_ruby_deps() {
+    info "Installing Ruby dependencies via Bundler..."
+    if bundle install; then
+        success "Ruby dependencies installed."
+    else
+        error "bundle install failed."
+        exit 1
+    fi
+}
+
+# Install Node dependencies
+install_node_deps() {
+    info "Installing Node dependencies via npm..."
+    if npm install; then
+        success "Node dependencies installed."
+    else
+        error "npm install failed."
+        exit 1
+    fi
+}
+
+# Build JS assets
+build_assets() {
+    info "Building JS assets..."
+    if npm run build; then
+        success "JS assets built."
+    else
+        error "npm run build failed."
+        exit 1
+    fi
+}
+
+main() {
+    check_deps
+    install_ruby_deps
+    install_node_deps
+    build_assets
+
+    echo
+    success "Setup complete. Start the dev server with: ./scripts/run"
+}
+
+main
