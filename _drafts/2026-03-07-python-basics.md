@@ -58,18 +58,9 @@ print(type(is_student))
 
 ### Arithmetic
 
-These work pretty much how you'd expect:
+These work pretty much how you'd expect -- they do math and give you a number back.
 
-### Comparison
-
-Comparison operators return `True` or `False`.
-
-### Logical
-
-Use `and`, `or`, and `not` to combine or invert conditions.
-
-<script type="py-editor" env="basics-operators">
-# arithmetic
+<script type="py-editor" env="basics-operators-arith">
 print(10 + 3)    # addition
 print(10 - 3)    # subtraction
 print(10 * 3)    # multiplication
@@ -77,19 +68,36 @@ print(10 / 3)    # division (always returns a float)
 print(10 // 3)   # floor division (drops the remainder)
 print(10 % 3)    # modulo (remainder only)
 print(10 ** 3)   # exponentiation
+</script>
 
-# comparison
+### Comparison
+
+Comparison operators evaluate two values and return `True` or `False`. You'll use these constantly inside conditionals.
+
+<script type="py-editor" env="basics-operators-comparison">
 print(5 == 5)    # equal to
 print(5 != 3)    # not equal to
 print(5 > 3)     # greater than
 print(5 < 3)     # less than
 print(5 >= 5)    # greater than or equal to
 print(5 <= 4)    # less than or equal to
+</script>
 
-# logical
+### Logical
+
+Logical operators let you combine or invert conditions. You'll use these constantly once you start writing conditionals.
+
+<script type="py-editor" env="basics-operators-logical">
 print(True and False)   # both must be True
 print(True or False)    # at least one must be True
 print(not True)         # flips the value
+
+# combining conditions
+age = 25
+has_id = True
+print(age >= 18 and has_id)   # True
+print(age < 18 or has_id)     # True
+print(not has_id)             # False
 </script>
 
 ## Strings
@@ -103,13 +111,9 @@ name = 'Python'
 
 ### Concatenation & f-strings
 
-You can join strings together with `+`, but f-strings are usually cleaner.
+You can join strings together with `+`, but f-strings are usually cleaner. An f-string lets you drop any variable directly into the text by wrapping it in `{}`.
 
-### Useful String Methods
-
-Python gives you a bunch of built-in methods for working with strings. Here are the ones you'll actually reach for on a regular basis:
-
-<script type="py-editor" env="basics-strings">
+<script type="py-editor" env="basics-strings-concat">
 name = "Alice"
 
 # concatenation
@@ -118,15 +122,40 @@ print("Hello, " + name + "!")
 # f-string (recommended)
 print(f"Hello, {name}!")
 
-# string methods
+# f-strings can hold any expression
+age = 30
+print(f"{name} is {age} years old.")
+print(f"In 10 years, {name} will be {age + 10}.")
+</script>
+
+### Reshaping Strings
+
+These methods change the shape, case, or structure of a string -- useful for cleaning up user input or formatting output.
+
+<script type="py-editor" env="basics-strings-reshape">
 text = "  hello, world  "
-print(text.strip())
-print(text.upper())
-print(text.lower())
-print(text.strip().split(","))
-print("hello".replace("l", "r"))
-print("hello".startswith("he"))
-print(len("hello"))
+
+print(text.strip())              # remove leading/trailing whitespace
+print(text.upper())              # uppercase
+print(text.lower())              # lowercase
+print(text.strip().split(","))   # split into a list on a delimiter
+</script>
+
+### Searching & Inspecting Strings
+
+These methods let you look inside a string -- check what's in it, find something, or measure it -- without changing it.
+
+<script type="py-editor" env="basics-strings-search">
+print("hello".replace("l", "r"))   # replace all occurrences
+print("hello".startswith("he"))    # check prefix
+print("hello".endswith("lo"))      # check suffix
+print(len("hello"))                # length
+
+# practical example
+email = "alice@example.com"
+print(email.endswith(".com"))
+print("@" in email)
+print(len(email))
 </script>
 
 ## Lists
@@ -141,27 +170,46 @@ mixed = [42, "hello", True, 3.14]
 
 ### Indexing & Slicing
 
-Lists are zero-indexed, meaning the first item is at position `0`.
+Lists are zero-indexed, meaning the first item is at position `0`. Negative indexes count from the end. Slicing lets you grab a chunk of the list at once.
 
-### Common List Operations
+<script type="py-editor" env="basics-lists-index">
+fruits = ["apple", "banana", "cherry", "mango", "grape"]
 
-<script type="py-editor" env="basics-lists">
+print(fruits[0])     # first item
+print(fruits[-1])    # last item
+print(fruits[1:3])   # slice: index 1 up to (not including) 3
+print(fruits[:2])    # everything before index 2
+print(fruits[2:])    # everything from index 2 onward
+</script>
+
+### Modifying Lists
+
+These methods change the list in place -- adding, removing, or inserting items.
+
+<script type="py-editor" env="basics-lists-mutate">
 fruits = ["apple", "banana", "cherry"]
 
-# indexing and slicing
-print(fruits[0])     # first item
-print(fruits[-1])    # last item (negative index counts from the end)
-print(fruits[1:3])   # slice from index 1 up to (not including) 3
-
-# common operations
-fruits.append("mango")
+fruits.append("mango")       # add to the end
 print(fruits)
 
-fruits.remove("banana")
+fruits.remove("banana")      # remove by value
 print(fruits)
 
-print(len(fruits))
-print("apple" in fruits)
+fruits.insert(1, "kiwi")     # insert at a specific position
+print(fruits)
+</script>
+
+### Querying Lists
+
+These let you read information about a list without changing it.
+
+<script type="py-editor" env="basics-lists-query">
+fruits = ["apple", "kiwi", "cherry", "mango"]
+
+print(len(fruits))            # number of items
+print("apple" in fruits)      # membership check
+print("grape" in fruits)      # False
+print(fruits.index("kiwi"))   # position of a value
 </script>
 
 ## Conditionals
@@ -188,7 +236,34 @@ else:
 
 ### for Loops
 
-A `for` loop iterates over a sequence -- a list, a string, a range of numbers, etc. Use `range()` when you want to loop a specific number of times. `range(start, stop, step)` gives you more control.
+A `for` loop iterates over a sequence -- a list, a string, anything you can step through one item at a time.
+
+<script type="py-editor" env="basics-loops-for-seq">
+fruits = ["apple", "banana", "cherry"]
+
+for fruit in fruits:
+    print(fruit)
+
+# strings are sequences too
+for char in "hello":
+    print(char)
+</script>
+
+Use `range()` when you want to loop a specific number of times. `range(start, stop, step)` gives you finer control.
+
+<script type="py-editor" env="basics-loops-for-range">
+# loop n times
+for i in range(5):
+    print(i)
+
+# range with start and stop
+for i in range(2, 6):
+    print(i)
+
+# range with step
+for i in range(0, 10, 2):
+    print(i)
+</script>
 
 ### while Loops
 
@@ -197,45 +272,55 @@ Use a `while` loop when you don't know ahead of time how many times you need to 
 > Make sure your `while` loop has a way to eventually become `False`, otherwise it'll run forever and you'll have to force-kill your program.
 {: .prompt-danger }
 
-<script type="py-editor" env="basics-loops">
-# for loop over a list
-fruits = ["apple", "banana", "cherry"]
-for fruit in fruits:
-    print(fruit)
-
-# range
-for i in range(5):
-    print(i)
-
-# range with step
-for i in range(0, 10, 2):
-    print(i)
-
-# while loop
+<script type="py-editor" env="basics-loops-while">
 count = 0
+
 while count < 5:
     print(count)
-    count += 1
+    count += 1   # same as: count = count + 1
 </script>
 
 ## Functions
 
 Once you start writing more than a handful of lines, you'll notice yourself repeating the same logic in different places. Functions fix that -- write it once, use it anywhere. They also make your code a lot easier to read and reason about.
 
-Use `return` to send a value back to the caller. Functions can also have **default parameter values** so callers don't always have to pass every argument.
+Define a function with `def`, give it a name, and list any inputs it needs in parentheses.
 
-<script type="py-editor" env="basics-functions">
-def greet(name, greeting="Hello"):
-    print(f"{greeting}, {name}!")
+<script type="py-editor" env="basics-functions-def">
+def greet(name):
+    print(f"Hello, {name}!")
 
 greet("Alice")
-greet("Bob", "Hey")
+greet("Bob")
+</script>
 
+Use `return` to send a value back to whoever called the function. Without `return`, a function just does something -- with it, a function produces something you can use.
+
+<script type="py-editor" env="basics-functions-return">
 def add(a, b):
     return a + b
 
-print(add(3, 4))
+result = add(3, 4)
+print(result)
 print(add(10, 20))
+</script>
+
+### Default Parameters
+
+Functions can have default parameter values so callers don't always have to pass every argument. If the caller skips a parameter that has a default, Python just uses the default.
+
+<script type="py-editor" env="basics-functions-defaults">
+def greet(name, greeting="Hello"):
+    print(f"{greeting}, {name}!")
+
+greet("Alice")              # uses the default greeting
+greet("Bob", "Hey")         # overrides the default
+
+def power(base, exponent=2):
+    return base ** exponent
+
+print(power(3))     # 3 squared = 9
+print(power(3, 3))  # 3 cubed = 27
 </script>
 
 ## Comments

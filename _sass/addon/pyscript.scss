@@ -1,0 +1,209 @@
+/*
+ * Styles for PyScript embeds (py-editor playground and py-terminal).
+ * Follows Chirpy design tokens so both components match the code block style
+ * in light and dark mode.
+ */
+
+/* -----------------------------------------------------------------------
+ * py-editor playground
+ * ----------------------------------------------------------------------- */
+
+.py-editor-box {
+  position: relative;
+  border-radius: $base-radius;
+  background-color: var(--highlight-bg-color);
+  box-shadow: var(--language-border-color) 0 0 0 1px;
+  margin-top: 0.5rem;
+  margin-bottom: 1.2em;
+  padding: 0;
+  overflow: hidden;
+
+  /* hide the env= label -- it adds noise and the section heading already
+     makes it clear what each editor is for */
+  &::before {
+    display: none;
+  }
+}
+
+
+.py-editor-run-button {
+  /* base state -- bottom-right, hidden until hover */
+  bottom: 0.4rem;
+  right: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.8rem;
+  font-family: $font-family-base;
+  border-radius: $base-radius;
+  border: 1px solid var(--btn-border-color);
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  line-height: 1.4;
+
+  &:hover,
+  &:focus {
+    background-color: var(--card-hovor-bg);
+    outline: none;
+  }
+
+  &.running {
+    opacity: 1;
+    border-color: var(--toc-highlight);
+    color: var(--toc-highlight);
+  }
+}
+
+/* show run button on hover or when running */
+.py-editor-box:hover .py-editor-run-button,
+.py-editor-run-button:focus {
+  opacity: 1;
+}
+
+.py-editor-output {
+  /* output below the editor */
+  display: block;
+  white-space: pre;
+  font-family: $font-family-base;
+  font-size: $code-font-size;
+  color: var(--text-color);
+  background-color: var(--highlight-bg-color);
+  margin: 0;
+  line-height: 1.4rem;
+  min-height: 0;
+
+  /* add padding and border-top only when there is content -- avoids the
+     display:none trap where errors written as children arrive while the
+     element is hidden and the browser never re-evaluates :empty */
+  &:not(:empty) {
+    border-top: 1px solid var(--language-border-color);
+    padding: 0.5rem 1rem;
+  }
+
+  /* PyScript's notify() error banners, relocated here by pyscript-loader.html */
+  .py-editor-error {
+    display: block;
+    font-family: $font-family-base;
+    font-size: $code-font-size;
+    color: var(--prompt-danger-icon-color);
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+  }
+}
+
+/* fallback: if a .py-error ends up on document.body (setup editor, config
+ * error, etc.) at least make it readable in both light and dark mode instead
+ * of the hardcoded red-on-white PyScript default */
+body > div.py-error {
+  font-family: $font-family-base;
+  font-size: $code-font-size;
+  color: var(--prompt-danger-icon-color);
+  background-color: var(--prompt-danger-bg);
+  border: 1px solid var(--prompt-danger-icon-color);
+  border-radius: $base-radius;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* -----------------------------------------------------------------------
+ * py-terminal (macOS-style animated window + live MicroPython REPL)
+ * ----------------------------------------------------------------------- */
+
+.py-terminal-wrapper {
+  margin-top: 0.5rem;
+  margin-bottom: 1.2em;
+}
+
+.py-terminal-window {
+  border-radius: $base-radius;
+  overflow: hidden;
+  box-shadow: var(--language-border-color) 0 0 0 1px;
+  background-color: #1b1b1e; /* always dark -- it is a terminal */
+}
+
+.py-terminal-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.75rem;
+  background-color: #232323;
+  border-bottom: 1px solid #2d2d2d;
+}
+
+.py-terminal-btn {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  display: inline-block;
+
+  &.py-terminal-close    { background-color: #ff5f57; }
+  &.py-terminal-minimize { background-color: #ffbd2e; }
+  &.py-terminal-zoom     { background-color: #28c940; }
+}
+
+.py-terminal-screen {
+  padding: 0.75rem 1rem;
+  min-height: 8rem;
+}
+
+.py-terminal-code {
+  font-family: $font-family-base;
+  font-size: $code-font-size;
+  line-height: 1.6;
+  color: #d0d0d0;
+
+  pre {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    white-space: pre-wrap;
+  }
+
+  /* typewriter animation lines */
+  .py-line1,
+  .py-line2,
+  .py-line3,
+  .py-line4,
+  .py-line5 {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+  }
+}
+
+.py-cursor {
+  animation: py-blink 1s step-start infinite;
+  color: #d0d0d0;
+}
+
+@keyframes py-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* the live py-terminal element injected by PyScript */
+#python-terminal-live,
+[id$="-live"] py-terminal,
+[id$="-live"] .py-terminal {
+  font-family: $font-family-base;
+  font-size: $code-font-size;
+  background-color: #1b1b1e;
+  color: #d0d0d0;
+  border-radius: $base-radius;
+  box-shadow: var(--language-border-color) 0 0 0 1px;
+  padding: 0.75rem 1rem;
+  min-height: 10rem;
+  display: block;
+}

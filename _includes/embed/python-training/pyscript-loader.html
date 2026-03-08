@@ -2,4 +2,59 @@
   {% assign pyscript_loaded = true %}
   <link rel="stylesheet" href="https://pyscript.net/releases/2026.3.1/core.css">
   <script type="module" src="https://pyscript.net/releases/2026.3.1/core.js"></script>
+  <script>
+  // Intercept PyScript's notify() errors (div.py-error appended to body) and
+  // move them into the output div of the editor that was running at the time.
+  // PyScript's notify() has no context about which editor triggered it, so we
+  // track the last active editor ourselves and relocate the banner on arrival.
+  (function () {
+    var lastActiveOutput = null;
+
+    // Track which output div belongs to the editor whose run button was clicked
+    document.addEventListener('click', function (e) {
+      var btn = e.target && e.target.closest
+        ? e.target.closest('.py-editor-run-button, .mpy-editor-run-button')
+        : null;
+      if (!btn) return;
+      var box = btn.closest('.py-editor-box, .mpy-editor-box');
+      if (!box) return;
+      var out = box.querySelector('.py-editor-output, .mpy-editor-output');
+      if (out) lastActiveOutput = out;
+    }, true); // capture phase so we see it before PyScript does
+
+    // Also track Ctrl/Cmd+Enter keyboard runs
+    document.addEventListener('keydown', function (e) {
+      if (!((e.ctrlKey || e.metaKey || e.shiftKey) && e.key === 'Enter')) return;
+      var cm = e.target && e.target.closest ? e.target.closest('.cm-editor') : null;
+      if (!cm) return;
+      // walk up through the shadow DOM host to the editor box
+      var host = cm.getRootNode && cm.getRootNode();
+      if (host && host.host) {
+        var inputDiv = host.host.closest('.py-editor-input, .mpy-editor-input');
+        var box = inputDiv && inputDiv.closest('.py-editor-box, .mpy-editor-box');
+        var out = box && box.querySelector('.py-editor-output, .mpy-editor-output');
+        if (out) lastActiveOutput = out;
+      }
+    }, true);
+
+    // Watch body for .py-error divs that PyScript appends
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (!node.classList || !node.classList.contains('py-error')) return;
+          // remove the hardcoded inline styles PyScript sets
+          node.removeAttribute('style');
+          node.classList.add('py-editor-error');
+          if (lastActiveOutput) {
+            // clear previous content (PyScript cleared it on run start anyway)
+            lastActiveOutput.appendChild(node);
+          }
+          // if no output is known, leave it in place -- at least our CSS will style it
+        });
+      });
+    });
+
+    observer.observe(document.body, { childList: true });
+  }());
+  </script>
 {% endunless %}
