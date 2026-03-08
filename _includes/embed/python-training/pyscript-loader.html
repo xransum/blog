@@ -1,22 +1,6 @@
 {% unless pyscript_loaded %}
   {% assign pyscript_loaded = true %}
   <link rel="stylesheet" href="https://pyscript.net/releases/2026.3.1/core.css">
-  <script type="module">
-  // Decode newlines in PyScript source blocks that were encoded during Jekyll's
-  // HTML compression pass. compress_html collapses all whitespace outside <pre>
-  // tags, so refactor-content.html replaces newlines with __PYNL__ before the
-  // compressor runs. We restore them here before PyScript reads the tag contents.
-  // Using type="module" (no src) places this ahead of core.js in module execution
-  // order, guaranteeing we decode before PyScript scans the DOM for py-editor tags.
-  var sel = 'script[type="py-editor"], script[type="mpy"]';
-  document.querySelectorAll(sel).forEach(function (el) {
-    if (el.textContent.indexOf('__PYNL__') !== -1) {
-      var decoded = el.cloneNode(false);
-      decoded.textContent = el.textContent.split('__PYNL__').join('\n');
-      el.parentNode.replaceChild(decoded, el);
-    }
-  });
-  </script>
   <script type="module" src="https://pyscript.net/releases/2026.3.1/core.js"></script>
   <script>
   // Intercept PyScript's notify() errors (div.py-error appended to body) and
