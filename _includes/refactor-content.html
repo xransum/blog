@@ -17,11 +17,18 @@
 {% endif %}
 
 <!--
-  Note: The outer <pre class="highlight"> wrapper is intentionally preserved here.
-  jekyll-compress-html splits on <pre> to protect inner content from whitespace
-  collapsing. Removing this wrapper causes code block newlines to be stripped in
-  production builds.
+  Strip the outer <pre class="highlight"> wrapper added by kramdown/Rouge.
+  This tag gets mangled by jekyll-compress-html's <pre>-splitting logic.
+  With blanklines: true in compress_html config, the inner <pre> blocks
+  (lineno + rouge-code) are protected correctly without needing this outer wrapper.
 -->
+
+{% if _content contains '<pre class="highlight">' %}
+  {% assign _content = _content
+    | replace: '<div class="highlight"><pre class="highlight"><code', '<div class="highlight"><code'
+    | replace: '</code></pre></div>', '</code></div>'
+  %}
+{% endif %}
 
 <!-- Change the icon of checkbox -->
 
@@ -179,8 +186,8 @@
 
 <!-- Add header for code snippets -->
 
-{% if _content contains '<div class="highlight"><pre class="highlight"><code' %}
-  {% assign _code_spippets = _content | split: '<div class="highlight"><pre class="highlight"><code' %}
+{% if _content contains '<div class="highlight"><code>' %}
+  {% assign _code_spippets = _content | split: '<div class="highlight"><code>' %}
   {% assign _new_content = '' %}
 
   {% for _snippet in _code_spippets %}
@@ -210,7 +217,7 @@
         | append: '<button aria-label="copy" data-title-succeed="'
         | append: site.data.locales[include.lang].post.button.copy_code.succeed
         | append: '"><i class="far fa-clipboard"></i></button></div>'
-        | append: '<div class="highlight"><pre class="highlight"><code'
+        | append: '<div class="highlight"><code>'
       %}
     {% endif %}
   {% endfor %}
