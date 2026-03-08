@@ -47,6 +47,10 @@ print(type(3.14))      # <class 'float'>
 print(type(True))      # <class 'bool'>
 ```
 
+Try it yourself:
+
+{% include embed/python-training/python-playground.html id='basics-variables' %}
+
 ## Basic Operators
 
 ### Arithmetic
@@ -85,6 +89,10 @@ print(True and False)   # False — both must be True
 print(True or False)    # True  — at least one must be True
 print(not True)         # False — flips the value
 ```
+
+Try it yourself:
+
+{% include embed/python-training/python-playground.html id='basics-operators' %}
 
 ## Strings
 
@@ -125,6 +133,10 @@ print("hello".startswith("he"))   # True
 print(len("hello"))               # 5 — length of the string
 ```
 
+Try it yourself:
+
+{% include embed/python-training/python-playground.html id='basics-strings' %}
+
 ## Lists
 
 Lists are exactly what they sound like — a way to keep track of multiple things at once. You can throw anything in a list: numbers, strings, even other lists.
@@ -162,6 +174,10 @@ print(len(fruits))          # 2 — number of items
 print("apple" in fruits)    # True — check membership
 ```
 
+Try it yourself:
+
+{% include embed/python-training/python-playground.html id='basics-lists' %}
+
 ## Conditionals
 
 Most programs need to behave differently depending on the situation — and that's what conditionals are for. The basic structure is `if`, optionally followed by `elif` (else if) and `else`.
@@ -179,8 +195,12 @@ else:
     print("F")
 ```
 
-> Indentation matters in Python. Everything inside a block must be indented consistently — the standard is 4 spaces. Python will throw an error if the indentation is off.
+> Indentation matters in Python. Everything inside a block must be indented consistently -- the standard is 4 spaces. Python will throw an error if the indentation is off.
 {: .prompt-warning }
+
+Try it yourself:
+
+{% include embed/python-training/python-playground.html id='basics-conditionals' %}
 
 ## Loops
 
@@ -226,6 +246,10 @@ while count < 5:
 > Make sure your `while` loop has a way to eventually become `False`, otherwise it'll run forever and you'll have to force-kill your program.
 {: .prompt-danger }
 
+Try it yourself:
+
+{% include embed/python-training/python-playground.html id='basics-loops' %}
+
 ## Functions
 
 Once you start writing more than a handful of lines, you'll notice yourself repeating the same logic in different places. Functions fix that — write it once, use it anywhere. They also make your code a lot easier to read and reason about.
@@ -257,6 +281,10 @@ def greet(name, greeting="Hello"):
 greet("Alice")              # Hello, Alice!
 greet("Alice", "Hey")       # Hey, Alice!
 ```
+
+Try it yourself:
+
+{% include embed/python-training/python-playground.html id='basics-functions' %}
 
 ## Comments
 
