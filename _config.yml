@@ -175,6 +175,11 @@ compress_html:
   blanklines: false
   ignore:
     envs: [development]
+    blocks:
+      - script
+      - pre
+      - code
+      - textarea
 
 exclude:
   - "*.gem"
