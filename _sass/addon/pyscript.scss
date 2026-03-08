@@ -144,7 +144,9 @@ body > div.py-error {
   display: inline-block;
 
   &.py-terminal-close    { background-color: #ff5f57; }
+
   &.py-terminal-minimize { background-color: #ffbd2e; }
+
   &.py-terminal-zoom     { background-color: #28c940; }
 }
 
@@ -190,6 +192,7 @@ body > div.py-error {
 
 @keyframes py-blink {
   0%, 100% { opacity: 1; }
+
   50%       { opacity: 0; }
 }
 
