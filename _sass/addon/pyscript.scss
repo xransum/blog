@@ -23,6 +23,12 @@
   &::before {
     display: none;
   }
+
+  .py-editor-input,
+  .mpy-editor-input {
+    background-color: var(--highlight-bg-color);
+    border-bottom: 1px solid var(--language-border-color);
+  }
 }
 
 
@@ -31,7 +37,7 @@
   bottom: 0.4rem;
   right: 0.5rem;
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, background-color 0.2s, border-color 0.2s, color 0.2s;
   padding: 0.2rem 0.55rem;
   font-size: 0.8rem;
   font-family: $font-family-base;
@@ -65,9 +71,9 @@
   /* output below the editor */
   display: block;
   white-space: pre;
-  font-family: $font-family-base;
+  font-family: 'Monaspace Neon', 'Monaspace Xenon', SFMono-Regular, Menlo, Consolas, monospace;
   font-size: $code-font-size;
-  color: var(--text-color);
+  color: var(--highlighter-rouge-color);
   background-color: var(--highlight-bg-color);
   margin: 0;
   line-height: 1.4rem;
@@ -79,6 +85,18 @@
   &:not(:empty) {
     border-top: 1px solid var(--language-border-color);
     padding: 0.5rem 1rem;
+  }
+
+  &:not(:empty)::before {
+    content: 'Output';
+    display: block;
+    margin-bottom: 0.45rem;
+    font-family: $font-family-base;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--code-header-text-color);
   }
 
   /* PyScript's notify() error banners, relocated here by pyscript-loader.html */

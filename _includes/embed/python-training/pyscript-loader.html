@@ -3,10 +3,159 @@
   <link rel="stylesheet" href="https://pyscript.net/releases/2026.3.1/core.css">
   <script type="module" src="https://pyscript.net/releases/2026.3.1/core.js"></script>
   <script>
-  // Intercept PyScript's notify() errors (div.py-error appended to body) and
-  // move them into the output div of the editor that was running at the time.
-  // PyScript's notify() has no context about which editor triggered it, so we
-  // track the last active editor ourselves and relocate the banner on arrival.
+  // ---------------------------------------------------------------------------
+  // CodeMirror shadow-DOM theming
+  //
+  // PyScript mounts each py-editor's CodeMirror instance inside an *open*
+  // shadow root (`:host { all: initial }`), so regular page CSS cannot reach
+  // its token classes.  We work around this by:
+  //
+  //   1. Building a CSSStyleSheet with light + dark token rules whose selectors
+  //      use :host([data-cm-dark]) so we can flip them from JS.
+  //   2. Adopting that sheet into every shadow root PyScript creates.
+  //   3. Watching html[data-mode] (the Chirpy mode-toggle attribute) and the
+  //      system prefers-color-scheme media query, then setting / removing the
+  //      data-cm-dark attribute on each :host element to switch palettes.
+  // ---------------------------------------------------------------------------
+  (function () {
+    // --- colour palettes (kept in sync with syntax-light/dark.scss) ----------
+    var LIGHT = {
+      bg:         '#f6f8fa',
+      fg:         '#24292f',
+      lineno:     '#9e9e9e',
+      keyword:    '#cf222e',
+      string:     '#0a3069',
+      number:     '#0550ae',
+      comment:    '#68717a',
+      operator:   '#0550ae',
+      builtin:    '#953800',
+      definition: '#8250df',
+      meta:       '#8250df',
+      escape:     '#24292f',
+      invalid_fg: '#f6f8fa',
+      invalid_bg: '#82071e',
+      sel:        'rgba(120,138,156,0.22)',
+      focus_ring: 'rgba(120,138,156,0.18)'
+    };
+    var DARK = {
+      bg:         '#151515',
+      fg:         '#d0d0d0',
+      lineno:     '#808080',
+      keyword:    '#aa759f',
+      string:     '#90a959',
+      number:     '#90a959',
+      comment:    '#848484',
+      operator:   '#d0d0d0',
+      builtin:    '#f4bf75',
+      definition: '#6a9fb5',
+      meta:       '#aa759f',
+      escape:     '#b76d45',
+      invalid_fg: '#151515',
+      invalid_bg: '#ac4142',
+      sel:        'rgba(144,169,89,0.22)',
+      focus_ring: 'rgba(144,169,89,0.14)'
+    };
+
+    // Build the CSS text for a given palette
+    function buildCSS(p) {
+      return [
+        ':host { color-scheme: ' + (p === DARK ? 'dark' : 'light') + '; }',
+        '.cm-editor { background:' + p.bg + '; color:' + p.fg + ';',
+        '  font-family: "Monaspace Neon","Monaspace Xenon",SFMono-Regular,Menlo,Consolas,monospace;',
+        '  font-size: 0.85rem; min-height: 10.5rem; }',
+        '.cm-scroller { font-family:inherit; line-height:1.55; padding:0.25rem 0 0.5rem; }',
+        '.cm-gutters { background:transparent; color:' + p.lineno + ';',
+        '  border-right:1px solid rgba(128,128,128,0.12); }',
+        '.cm-activeLine,.cm-activeLineGutter { background:rgba(128,128,128,0.08); }',
+        '.cm-content,.cm-line,.cm-gutterElement { font-family:inherit; }',
+        '.cm-content { caret-color:' + p.fg + '; }',
+        '.cm-cursor,.cm-dropCursor { border-left-color:' + p.fg + '; }',
+        '.cm-selectionBackground,',
+        '.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground,',
+        '.cm-selectionLayer .cm-selectionBackground { background:' + p.sel + ' !important; }',
+        '.cm-focused { outline:none; }',
+        '.cm-focused > .cm-scroller { box-shadow:inset 0 0 0 1px ' + p.focus_ring + '; }',
+        /* token colours */
+        '.cm-keyword { color:' + p.keyword + '; }',
+        '.cm-string,.cm-string2 { color:' + p.string + '; }',
+        '.cm-number { color:' + p.number + '; }',
+        '.cm-comment { color:' + p.comment + '; }',
+        '.cm-operator { color:' + p.operator + '; }',
+        '.cm-builtin { color:' + p.builtin + '; }',
+        '.cm-definition { color:' + p.definition + '; }',
+        '.cm-meta { color:' + p.meta + '; }',
+        '.cm-typeName { color:' + p.builtin + '; }',
+        '.cm-propertyName { color:' + p.fg + '; }',
+        '.cm-variableName { color:' + p.fg + '; }',
+        '.cm-escape { color:' + p.escape + '; }',
+        '.cm-punctuation { color:' + p.fg + '; }',
+        '.cm-invalid { color:' + p.invalid_fg + '; background:' + p.invalid_bg + '; }'
+      ].join('\n');
+    }
+
+    // Shared adopted stylesheet – one instance, adopted into every shadow root
+    var sheet = new CSSStyleSheet();
+    var roots = [];   // all shadow roots we've adopted into
+    var isDark = false;
+
+    function applyTheme(dark) {
+      isDark = dark;
+      sheet.replaceSync(buildCSS(dark ? DARK : LIGHT));
+    }
+
+    function adoptInto(shadowRoot) {
+      if (roots.indexOf(shadowRoot) === -1) {
+        shadowRoot.adoptedStyleSheets = (shadowRoot.adoptedStyleSheets || []).concat([sheet]);
+        roots.push(shadowRoot);
+      }
+    }
+
+    // Detect current mode (mirrors ModeToggle.modeStatus logic)
+    function currentlyDark() {
+      var mode = document.documentElement.getAttribute('data-mode');
+      var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (mode === 'dark') return true;
+      if (mode === 'light') return false;
+      return sysDark;  // no explicit mode → follow system
+    }
+
+    // Initial theme
+    applyTheme(currentlyDark());
+
+    // React to Chirpy's mode-toggle postMessage
+    window.addEventListener('message', function (e) {
+      if (e.data && e.data.direction === 'mode-toggle') {
+        applyTheme(e.data.message === 'dark');
+      }
+    });
+
+    // Also react to system preference change (when no manual override is set)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+      if (!document.documentElement.hasAttribute('data-mode')) {
+        applyTheme(currentlyDark());
+      }
+    });
+
+    // Intercept attachShadow so we can adopt our stylesheet into every shadow
+    // root PyScript creates for its editors
+    var _origAttachShadow = Element.prototype.attachShadow;
+    Element.prototype.attachShadow = function (init) {
+      var root = _origAttachShadow.call(this, init);
+      // Only adopt into py/mpy editor input shadow roots
+      var el = this;
+      if (el.classList &&
+          (el.classList.contains('py-editor-input') ||
+           el.classList.contains('mpy-editor-input'))) {
+        adoptInto(root);
+      }
+      return root;
+    };
+  }());
+
+  // ---------------------------------------------------------------------------
+  // Error relocation: intercept PyScript's notify() errors and move them into
+  // the output div of the editor that was active at the time.
+  // ---------------------------------------------------------------------------
   (function () {
     var lastActiveOutput = null;
 
