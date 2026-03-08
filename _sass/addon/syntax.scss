@@ -84,6 +84,7 @@ html {
   }
 
   .lineno {
+    display: inline-block;
     text-align: right;
     color: var(--highlight-lineno-color);
     -webkit-user-select: none;
