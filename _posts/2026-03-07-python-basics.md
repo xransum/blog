@@ -42,17 +42,7 @@ Python has four basic data types you'll use constantly:
 
 If you're ever unsure what type something is, use the built-in `type()` function:
 
-<script type="py-editor" env="basics-variables">
-name = "Alice"
-age = 30
-height = 5.7
-is_student = True
-
-print(type(name))
-print(type(age))
-print(type(height))
-print(type(is_student))
-</script>
+{% include embed/python-training/python-editor.html id='basics-variables' source='basics-variables' %}
 
 ## Comments
 
@@ -82,45 +72,19 @@ The nice thing about docstrings is that Python can actually read them at runtime
 
 These work pretty much how you'd expect -- they do math and give you a number back.
 
-<script type="py-editor" env="basics-operators-arith">
-print(10 + 3)    # addition
-print(10 - 3)    # subtraction
-print(10 * 3)    # multiplication
-print(10 / 3)    # division (always returns a float)
-print(10 // 3)   # floor division (drops the remainder)
-print(10 % 3)    # modulo (remainder only)
-print(10 ** 3)   # exponentiation
-</script>
+{% include embed/python-training/python-editor.html id='basics-operators-arith' source='basics-operators-arith' %}
 
 ### Comparison
 
 Comparison operators evaluate two values and return `True` or `False`. You'll use these constantly inside conditionals.
 
-<script type="py-editor" env="basics-operators-comparison">
-print(5 == 5)    # equal to
-print(5 != 3)    # not equal to
-print(5 > 3)     # greater than
-print(5 < 3)     # less than
-print(5 >= 5)    # greater than or equal to
-print(5 <= 4)    # less than or equal to
-</script>
+{% include embed/python-training/python-editor.html id='basics-operators-comparison' source='basics-operators-comparison' %}
 
 ### Logical
 
 Logical operators let you combine or invert conditions. You'll use these constantly once you start writing conditionals.
 
-<script type="py-editor" env="basics-operators-logical">
-print(True and False)   # both must be True
-print(True or False)    # at least one must be True
-print(not True)         # flips the value
-
-# combining conditions
-age = 25
-has_id = True
-print(age >= 18 and has_id)   # True
-print(age < 18 or has_id)     # True
-print(not has_id)             # False
-</script>
+{% include embed/python-training/python-editor.html id='basics-operators-logical' source='basics-operators-logical' %}
 
 ## Strings
 
@@ -135,50 +99,19 @@ name = 'Python'
 
 You can join strings together with `+`, but f-strings are usually cleaner. An f-string lets you drop any variable directly into the text by wrapping it in `{}`.
 
-<script type="py-editor" env="basics-strings-concat">
-name = "Alice"
-
-# concatenation
-print("Hello, " + name + "!")
-
-# f-string (recommended)
-print(f"Hello, {name}!")
-
-# f-strings can hold any expression
-age = 30
-print(f"{name} is {age} years old.")
-print(f"In 10 years, {name} will be {age + 10}.")
-</script>
+{% include embed/python-training/python-editor.html id='basics-strings-concat' source='basics-strings-concat' %}
 
 ### Reshaping Strings
 
 These methods change the shape, case, or structure of a string -- useful for cleaning up user input or formatting output.
 
-<script type="py-editor" env="basics-strings-reshape">
-text = "  hello, world  "
-
-print(text.strip())              # remove leading/trailing whitespace
-print(text.upper())              # uppercase
-print(text.lower())              # lowercase
-print(text.strip().split(","))   # split into a list on a delimiter
-</script>
+{% include embed/python-training/python-editor.html id='basics-strings-reshape' source='basics-strings-reshape' %}
 
 ### Searching & Inspecting Strings
 
 These methods let you look inside a string -- check what's in it, find something, or measure it -- without changing it.
 
-<script type="py-editor" env="basics-strings-search">
-print("hello".replace("l", "r"))   # replace all occurrences
-print("hello".startswith("he"))    # check prefix
-print("hello".endswith("lo"))      # check suffix
-print(len("hello"))                # length
-
-# practical example
-email = "alice@example.com"
-print(email.endswith(".com"))
-print("@" in email)
-print(len(email))
-</script>
+{% include embed/python-training/python-editor.html id='basics-strings-search' source='basics-strings-search' %}
 
 ## Lists
 
@@ -194,45 +127,19 @@ mixed = [42, "hello", True, 3.14]
 
 Lists are zero-indexed, meaning the first item is at position `0`. Negative indexes count from the end. Slicing lets you grab a chunk of the list at once.
 
-<script type="py-editor" env="basics-lists-index">
-fruits = ["apple", "banana", "cherry", "mango", "grape"]
-
-print(fruits[0])     # first item
-print(fruits[-1])    # last item
-print(fruits[1:3])   # slice: index 1 up to (not including) 3
-print(fruits[:2])    # everything before index 2
-print(fruits[2:])    # everything from index 2 onward
-</script>
+{% include embed/python-training/python-editor.html id='basics-lists-index' source='basics-lists-index' %}
 
 ### Modifying Lists
 
 These methods change the list in place -- adding, removing, or inserting items.
 
-<script type="py-editor" env="basics-lists-mutate">
-fruits = ["apple", "banana", "cherry"]
-
-fruits.append("mango")       # add to the end
-print(fruits)
-
-fruits.remove("banana")      # remove by value
-print(fruits)
-
-fruits.insert(1, "kiwi")     # insert at a specific position
-print(fruits)
-</script>
+{% include embed/python-training/python-editor.html id='basics-lists-mutate' source='basics-lists-mutate' %}
 
 ### Querying Lists
 
 These let you read information about a list without changing it.
 
-<script type="py-editor" env="basics-lists-query">
-fruits = ["apple", "kiwi", "cherry", "mango"]
-
-print(len(fruits))            # number of items
-print("apple" in fruits)      # membership check
-print("grape" in fruits)      # False
-print(fruits.index("kiwi"))   # position of a value
-</script>
+{% include embed/python-training/python-editor.html id='basics-lists-query' source='basics-lists-query' %}
 
 ## Conditionals
 
@@ -241,18 +148,7 @@ Most programs need to behave differently depending on the situation -- and that'
 > Indentation matters in Python. Everything inside a block must be indented consistently -- the standard is 4 spaces. Python will throw an error if the indentation is off.
 {: .prompt-warning }
 
-<script type="py-editor" env="basics-conditionals">
-score = 85
-
-if score >= 90:
-    print("A")
-elif score >= 80:
-    print("B")
-elif score >= 70:
-    print("C")
-else:
-    print("F")
-</script>
+{% include embed/python-training/python-editor.html id='basics-conditionals' source='basics-conditionals' %}
 
 ## Loops
 
@@ -260,32 +156,11 @@ else:
 
 A `for` loop iterates over a sequence -- a list, a string, anything you can step through one item at a time.
 
-<script type="py-editor" env="basics-loops-for-seq">
-fruits = ["apple", "banana", "cherry"]
-
-for fruit in fruits:
-    print(fruit)
-
-# strings are sequences too
-for char in "hello":
-    print(char)
-</script>
+{% include embed/python-training/python-editor.html id='basics-loops-for-seq' source='basics-loops-for-seq' %}
 
 Use `range()` when you want to loop a specific number of times. `range(start, stop, step)` gives you finer control.
 
-<script type="py-editor" env="basics-loops-for-range">
-# loop n times
-for i in range(5):
-    print(i)
-
-# range with start and stop
-for i in range(2, 6):
-    print(i)
-
-# range with step
-for i in range(0, 10, 2):
-    print(i)
-</script>
+{% include embed/python-training/python-editor.html id='basics-loops-for-range' source='basics-loops-for-range' %}
 
 ### while Loops
 
@@ -294,13 +169,7 @@ Use a `while` loop when you don't know ahead of time how many times you need to 
 > Make sure your `while` loop has a way to eventually become `False`, otherwise it'll run forever and you'll have to force-kill your program.
 {: .prompt-danger }
 
-<script type="py-editor" env="basics-loops-while">
-count = 0
-
-while count < 5:
-    print(count)
-    count += 1   # same as: count = count + 1
-</script>
+{% include embed/python-training/python-editor.html id='basics-loops-while' source='basics-loops-while' %}
 
 ## Functions
 
@@ -308,42 +177,17 @@ Once you start writing more than a handful of lines, you'll notice yourself repe
 
 Define a function with `def`, give it a name, and list any inputs it needs in parentheses.
 
-<script type="py-editor" env="basics-functions-def">
-def greet(name):
-    print(f"Hello, {name}!")
-
-greet("Alice")
-greet("Bob")
-</script>
+{% include embed/python-training/python-editor.html id='basics-functions-def' source='basics-functions-def' %}
 
 Use `return` to send a value back to whoever called the function. Without `return`, a function just does something -- with it, a function produces something you can use.
 
-<script type="py-editor" env="basics-functions-return">
-def add(a, b):
-    return a + b
-
-result = add(3, 4)
-print(result)
-print(add(10, 20))
-</script>
+{% include embed/python-training/python-editor.html id='basics-functions-return' source='basics-functions-return' %}
 
 ### Default Parameters
 
 Functions can have default parameter values so callers don't always have to pass every argument. If the caller skips a parameter that has a default, Python just uses the default.
 
-<script type="py-editor" env="basics-functions-defaults">
-def greet(name, greeting="Hello"):
-    print(f"{greeting}, {name}!")
-
-greet("Alice")              # uses the default greeting
-greet("Bob", "Hey")         # overrides the default
-
-def power(base, exponent=2):
-    return base ** exponent
-
-print(power(3))     # 3 squared = 9
-print(power(3, 3))  # 3 cubed = 27
-</script>
+{% include embed/python-training/python-editor.html id='basics-functions-defaults' source='basics-functions-defaults' %}
 
 ## Conclusion
 

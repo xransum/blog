@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Run Jekyll in development mode
+# Run Jekyll in production-parity mode
 
 set -e
 
@@ -31,8 +31,8 @@ if ! bundle check >/dev/null 2>&1; then
     exit 1
 fi
 
-echo "[*] Development server: http://$(hostname -I | tr -d ' ' | awk '{print $1}'):${PORT}"
-echo "[*] Environment: development"
-echo "[*] Drafts: enabled"
+echo "[*] Production-parity server: http://$(hostname -I | tr -d ' ' | awk '{print $1}'):${PORT}"
+echo "[*] Environment: production"
+echo "[*] Drafts: disabled"
 
-JEKYLL_ENV=development bundle exec jekyll s -H "${HOST}" -P "${PORT}" -l --drafts "$@"
+JEKYLL_ENV=production bundle exec jekyll s -H "${HOST}" -P "${PORT}" "$@"
