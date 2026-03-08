@@ -54,6 +54,28 @@ print(type(height))
 print(type(is_student))
 </script>
 
+## Comments
+
+Comments are lines Python ignores -- they're just there for you (and anyone else reading your code).
+
+```python
+# This is a single-line comment
+
+x = 10  # you can also put them at the end of a line
+```
+
+For longer explanations, especially at the top of a function, use a **docstring**:
+
+```python
+def multiply(a, b):
+    """
+    Multiplies two numbers together and returns the result.
+    """
+    return a * b
+```
+
+The nice thing about docstrings is that Python can actually read them at runtime. Try calling `help(multiply)` after defining that function -- you'll see the docstring show up right there in the output. Way more useful than a plain comment when you're writing code other people (or future you) will need to understand.
+
 ## Basic Operators
 
 ### Arithmetic
@@ -322,28 +344,6 @@ def power(base, exponent=2):
 print(power(3))     # 3 squared = 9
 print(power(3, 3))  # 3 cubed = 27
 </script>
-
-## Comments
-
-Comments are lines Python ignores -- they're just there for you (and anyone else reading your code).
-
-```python
-# This is a single-line comment
-
-x = 10  # you can also put them at the end of a line
-```
-
-For longer explanations, especially at the top of a function, use a **docstring**:
-
-```python
-def multiply(a, b):
-    """
-    Multiplies two numbers together and returns the result.
-    """
-    return a * b
-```
-
-The nice thing about docstrings is that Python can actually read them at runtime. Try calling `help(multiply)` after defining that function -- you'll see the docstring show up right there in the output. Way more useful than a plain comment when you're writing code other people (or future you) will need to understand.
 
 ## Conclusion
 
