@@ -1,0 +1,21 @@
+{% include embed/python-training/pyscript-loader.html %}
+
+{% assign editor_id = include.id | default: 'python-playground' %}
+{% assign editor_type = include.type | default: 'py-editor' %}
+{% assign editor_env = include.env | default: editor_id %}
+{% assign editor_code = site.data.python_training_editors[include.source] | default: include.code | default: '' %}
+
+<div id="{{ editor_id }}-mount"></div>
+<script>
+(function () {
+  var mount = document.getElementById('{{ editor_id }}-mount');
+  if (!mount) return;
+
+  var editor = document.createElement('script');
+  editor.type = '{{ editor_type }}';
+  editor.setAttribute('env', '{{ editor_env }}');
+  editor.textContent = {{ editor_code | jsonify }};
+
+  mount.replaceWith(editor);
+}());
+</script>

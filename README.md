@@ -18,6 +18,16 @@ This installs Ruby gems via Bundler, installs Node packages via npm, and compile
 
 Starts Jekyll at `http://localhost:4000` with LiveReload and draft posts enabled. Checks that deps are installed and assets are built before starting — if anything is missing it will point you back to `./scripts/setup`.
 
+This now runs with `JEKYLL_ENV=development` explicitly so local authoring mode is unambiguous.
+
+## Run a Production-Parity Server
+
+```bash
+./scripts/run-prod
+```
+
+Starts Jekyll locally with `JEKYLL_ENV=production` and drafts disabled so rendered output matches the production environment much more closely.
+
 ## Test (HTML validation)
 
 ```bash
@@ -25,6 +35,14 @@ Starts Jekyll at `http://localhost:4000` with LiveReload and draft posts enabled
 ```
 
 Does a production Jekyll build and runs `htmlproofer` to validate links and HTML.
+
+Use this when you want the closest match to the GitHub Pages build pipeline.
+
+## Python Training Editors
+
+Interactive PyScript editor snippets are stored in `_data/python_training_editors.yml` and rendered through `_includes/embed/python-training/python-editor.html`.
+
+This keeps starter code out of raw inline `<script type="py-editor">` tags so production HTML processing does not accidentally rewrite editor whitespace.
 
 ## Build Assets Only
 
