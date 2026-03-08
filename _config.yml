@@ -127,7 +127,6 @@ kramdown:
     block:
       line_numbers: true
       start_line: 1
-      line_format: inline
   smart_quotes: ["apos", "apos", "quot", "quot"]
 
 collections:
@@ -173,7 +172,7 @@ compress_html:
   comments: all
   endings: all
   profile: false
-  blanklines: false
+  blanklines: true
   ignore:
     envs: [development]
     blocks:
