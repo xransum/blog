@@ -11,7 +11,9 @@
   var sel = 'script[type="py-editor"], script[type="mpy"]';
   document.querySelectorAll(sel).forEach(function (el) {
     if (el.textContent.indexOf('__PYNL__') !== -1) {
-      el.textContent = el.textContent.split('__PYNL__').join('\n');
+      var decoded = el.cloneNode(false);
+      decoded.textContent = el.textContent.split('__PYNL__').join('\n');
+      el.parentNode.replaceChild(decoded, el);
     }
   });
   </script>
