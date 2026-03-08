@@ -13,6 +13,7 @@ image:
   path: /commons/train.jpg
   lqip: null
   alt: null
+mermaid: true
 ---
 
 ## **What is the Domain Name System?**
@@ -149,46 +150,43 @@ To help visualize the DNS resolution process, let's walk through an example of v
 
 If you are still a bit confused, don't worry. I've created a diagram that should best illustrate the process in a more digestible format:
 
-```plantuml!
-@startuml
-title "DNS Resolution Process"
+```mermaid
+sequenceDiagram
+    actor User
+    participant dns_resolver as DNS Resolver
+    participant root_nameserver as Root Nameserver
+    participant tld_nameserver as Top-level Domain (TLD) Nameserver
+    participant authoritative_nameserver as Authoritative Nameserver
 
-actor user
-participant "DNS Resolver" as dns_resolver
-participant "Root Nameserver" as root_nameserver
-participant "Top-level Domain (TLD) Nameserver" as tld_nameserver
-participant "Authoritative Nameserver" as authoritative_nameserver
+    User->>dns_resolver: 1. Send DNS Query for example.com
+    activate dns_resolver
 
-user -> dns_resolver: 1. Send <b>DNS Query</b> for example.com
-activate dns_resolver
+    dns_resolver->>root_nameserver: 2. Requests Root Nameserver for example.com
+    activate root_nameserver
+    Note left of root_nameserver: Hey, do you have the IP for example.com?
 
-dns_resolver -> root_nameserver: 2. Requests <b>Root Nameserver</b> for <i>example.com</i>
-activate root_nameserver
-note left: "<color:grey><i>Hey, do you have the IP for example.com?</i></color>"
+    root_nameserver->>dns_resolver: 3. Returns IP address for TLD Nameserver
+    deactivate root_nameserver
+    Note right of dns_resolver: Nope, but I know who does!<br/>Here's the IP for the TLD Nameserver for .com
 
-root_nameserver -> dns_resolver: 3. Returns IP address for <b>TLD Nameserver</b>
-deactivate root_nameserver
-note right: "<color:red>Nope, but I know who does!</color>"\n"<color:red>Here's the IP for the <b>TLD Nameserver</b> for '.com'</color>"
+    dns_resolver->>tld_nameserver: 4. Requests TLD Nameserver for example.com
+    activate tld_nameserver
+    Note left of tld_nameserver: Hey, do you have the IP for example.com?
 
-dns_resolver -> tld_nameserver: 4. Requests <b>TLD Nameserver</b> for <i>example.com</i>
-activate tld_nameserver
-note left: "<color:grey><i>Hey, do you have the IP for example.com?</i></color>"
+    tld_nameserver->>dns_resolver: 5. Returns IP address for Authoritative Nameserver
+    deactivate tld_nameserver
+    Note right of dns_resolver: Nope, but I know who does!<br/>Here's the IP for the Authoritative Nameserver for example.com
 
-tld_nameserver -> dns_resolver: 5. Returns IP address for <b>Authoritative Nameserver</b>
-deactivate tld_nameserver
-note right: "<color:red>Nope, but I know who does!</color>"\n"<color:red>Here's the IP for the <b>Authoritative Nameserver</b> for <i>example.com</i></color>"
+    dns_resolver->>authoritative_nameserver: 6. Requests Authoritative Nameserver for example.com
+    activate authoritative_nameserver
+    Note left of authoritative_nameserver: Hey, do you have the IP for example.com?
 
-dns_resolver -> authoritative_nameserver: 6. Requests <b>Authoritative Nameserver</b> for <i>example.com</i>
-activate authoritative_nameserver
-note left: "<color:grey><i>Hey, do you have the IP for example.com?</i></color>"
+    authoritative_nameserver->>dns_resolver: 7. Returns DNS Record for example.com
+    deactivate authoritative_nameserver
+    Note right of dns_resolver: Yup! The IP for example.com is 22.34.132.49
 
-authoritative_nameserver -> dns_resolver: 7. Returns <b>DNS Record</b> for <i>example.com</i>
-deactivate authoritative_nameserver
-note right: "<color:green>Yup! The IP for <i>example.com</i> is "<b>22.34.132.49</b>".</color>"
-
-dns_resolver -> user: 10. Returns <b>IP address</b> for example.com
-deactivate dns_resolver
-@enduml
+    dns_resolver->>User: 10. Returns IP address for example.com
+    deactivate dns_resolver
 ```
 
 ## **What is a DNS Record?**
