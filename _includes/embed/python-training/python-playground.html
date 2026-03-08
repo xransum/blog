@@ -1,0 +1,7 @@
+{% include embed/python-training/pyscript-loader.html %}
+
+{% assign playground_id = include.id | default: 'python-playground' %}
+
+<script type="py-editor" env="{{ playground_id }}">
+print("Hello, World!")
+</script>

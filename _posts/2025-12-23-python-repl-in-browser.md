@@ -14,12 +14,9 @@ image:
   alt: null
 ---
 
-<link rel="stylesheet" href="https://pyscript.net/releases/2025.11.2/core.css">
-<script type="module" src="https://pyscript.net/releases/2025.11.2/core.js"></script>
-
 ## Python REPL (in-browser)
 
-This is a simplified integration of a Python REPL (Read-Eval-Print Loop) using PyScript. You can type Python code into the input area, and it will be executed in the browser. The output or any errors will be displayed below the input area.
+This is a simplified integration of a Python REPL (Read-Eval-Print Loop) using PyScript. You can type Python code into the terminal below and it will run directly in your browser -- no installation needed.
 
-<script type="py" terminal worker src="/assets/python/repl.py"></script>
+{% include embed/python-training/python-terminal.html id='python-repl' %}
 
