@@ -1,25 +1,37 @@
 # Blog
 
-## Compiling JS Files
+## Setup
 
-From scratch, the project will not have any JS files provided under `assets/js/dist/`, so they will need to be compiled from the source files under `_javascript/`.
-
-```bash
-npm i && npm run build
-```
-
-## Build the Jekyll Dependencies
-
-Once you've compiled the JS files, you can build the Jekyll dependencies.
+Run this once after cloning, or any time dependencies change. Requires `ruby`, `bundle`, `node`, and `npm` to be installed.
 
 ```bash
-bundle install
+./scripts/setup
 ```
 
-## Run the Jekyll Server
+This installs Ruby gems via Bundler, installs Node packages via npm, and compiles the JS assets under `assets/js/dist/`.
+
+## Run the Dev Server
 
 ```bash
 ./scripts/run
+```
+
+Starts Jekyll at `http://localhost:4000` with LiveReload and draft posts enabled. Checks that deps are installed and assets are built before starting — if anything is missing it will point you back to `./scripts/setup`.
+
+## Test (HTML validation)
+
+```bash
+./scripts/test
+```
+
+Does a production Jekyll build and runs `htmlproofer` to validate links and HTML.
+
+## Build Assets Only
+
+If you only need to rebuild JS assets (e.g. after pulling changes):
+
+```bash
+./scripts/build
 ```
 
 ## Pushing Changes

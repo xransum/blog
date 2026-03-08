@@ -16,7 +16,7 @@ image:
 
 ## What's the Purpose of This?
 
-I frequently encounter individuals interested in programming but uncertain about where to begin. Python is my default recommendation due to its simplicity and versatility.
+A lot of people I talk to want to get into programming but don't know where to start. Python is always my first recommendation — it's simple enough to pick up quickly, but powerful enough to take you a long way.
 
 ## Why Python?
 
@@ -30,7 +30,13 @@ Python is currently one of the most widely adopted languages in production envir
 
 There is a long tradition in programming tutorials to start with the simplest of programs that outputs "Hello, World!" to the screen. This program serves as a gentle introduction to the syntax and structure of a programming language.
 
-The `print()` function in Python is used to display output to the console. For simplicity, anything you put between the parentheses and prints it to the screen.
+The `print()` function in Python is used to display output to the console. Anything you put between the parentheses gets printed to the screen.
+
+Go ahead and try it — type the following into the playground below and hit the **Play Button**:
+
+```python
+print("Hello, World!")
+```
 
 For the start of these tutorials, we're just going to run the code from the browser. Later down the line, we will learn how to download and setup Python locally on your machine.
 
@@ -60,6 +66,14 @@ After you've clicked the link it will download the installer for your system. La
 
 Follow the prompts in the installer to complete the installation. You can generally keep the default settings unless you have specific requirements.
 
+Once the installer finishes, open **Command Prompt** or **PowerShell** and run the following to confirm it worked:
+
+```bash
+python --version
+```
+
+You should see something like `Python 3.x.x` printed back at you.
+
 #### Video Tutorial
 
 {% include embed/python-training/how-to-install-python-3-on-windows.html id='how-to-install-python-3-on-windows' %}
@@ -69,7 +83,7 @@ Follow the prompts in the installer to complete the installation. You can genera
 
 #### Using Homebrew
 
-On macOS, Python 2.x is pre-installed, but it's recommended to install the latest version of Python 3.x.
+On macOS, Python may or may not be pre-installed depending on your system version, and even when it is, it's often outdated. It's recommended to install the latest version of Python 3.x directly.
 
 If you don't know or have Homebrew installed, you can install it by following the installation instructions on the [Homebrew website](https://brew.sh/). Once you have Homebrew installed, you can install Python by opening the Terminal application and running the following command:
 
@@ -89,6 +103,12 @@ brew install python
 #### Using the Official Installer
 
 You can also download the official Python installer for macOS from the [Python downloads page](https://www.python.org/downloads/). Look for the macOS installer and download the latest version.
+
+Once installed, open **Terminal** and verify it worked:
+
+```bash
+python3 --version
+```
 
 #### Video Tutorial
 
@@ -113,6 +133,12 @@ For Red Hat-based distributions (like Fedora), you can use:
 sudo dnf install python3
 ```
 
+After installation, verify it's working with:
+
+```bash
+python3 --version
+```
+
 ## Conclusion
 
-You should have a very basic understanding about Python and how to install it on your machine. The next will be a rundown of all the basics of Python programming language.
+You should have a basic feel for what Python is and how to get it installed on your machine. The next post will be a rundown of the fundamentals of the Python programming language.

@@ -127,6 +127,7 @@ kramdown:
     block:
       line_numbers: true
       start_line: 1
+  smart_quotes: ["apos", "apos", "quot", "quot"]
 
 collections:
   tabs:
@@ -193,6 +194,3 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
-
-kramdown:
-  smart_quotes: ["apos", "apos", "quot", "quot"]

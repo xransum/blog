@@ -4,10 +4,12 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
-
-eval "$(curl -skL 'https://raw.githubusercontent.com/xransum/script-junkyard/main/bash/commons.sh')"
-
-setup_color
+# ANSI color helpers
+FMT_RED=$(printf '\033[31m')
+FMT_GREEN=$(printf '\033[32m')
+FMT_YELLOW=$(printf '\033[33m')
+FMT_BLUE=$(printf '\033[34m')
+FMT_RESET=$(printf '\033[0m')
 
 # Set current working directory to the root of the project
 cd "$(dirname "$0")/.."
