@@ -131,7 +131,7 @@ body > div.py-error {
 }
 
 /* -----------------------------------------------------------------------
- * py-terminal (macOS-style animated window + live MicroPython REPL)
+ * py-terminal (live MicroPython REPL)
  * ----------------------------------------------------------------------- */
 
 .py-terminal-wrapper {
@@ -139,83 +139,7 @@ body > div.py-error {
   margin-bottom: 1.2em;
 }
 
-.py-terminal-window {
-  border-radius: $base-radius;
-  overflow: hidden;
-  box-shadow: var(--language-border-color) 0 0 0 1px;
-  background-color: #1b1b1e; /* always dark -- it is a terminal */
-}
-
-.py-terminal-menu {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.55rem 0.75rem;
-  background-color: #232323;
-  border-bottom: 1px solid #2d2d2d;
-}
-
-.py-terminal-btn {
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 50%;
-  display: inline-block;
-
-  &.py-terminal-close    { background-color: #ff5f57; }
-
-  &.py-terminal-minimize { background-color: #ffbd2e; }
-
-  &.py-terminal-zoom     { background-color: #28c940; }
-}
-
-.py-terminal-screen {
-  padding: 0.75rem 1rem;
-  min-height: 8rem;
-}
-
-.py-terminal-code {
-  font-family: $font-family-base;
-  font-size: $code-font-size;
-  line-height: 1.6;
-  color: #d0d0d0;
-
-  pre {
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    background: transparent;
-    border: none;
-    padding: 0;
-    margin: 0;
-    white-space: pre-wrap;
-  }
-
-  /* typewriter animation lines */
-  .py-line1,
-  .py-line2,
-  .py-line3,
-  .py-line4,
-  .py-line5 {
-    margin: 0;
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-  }
-}
-
-.py-cursor {
-  animation: py-blink 1s step-start infinite;
-  color: #d0d0d0;
-}
-
-@keyframes py-blink {
-  0%, 100% { opacity: 1; }
-
-  50%       { opacity: 0; }
-}
-
 /* the live py-terminal element injected by PyScript */
-#python-terminal-live,
 [id$="-live"] py-terminal,
 [id$="-live"] .py-terminal {
   font-family: $font-family-base;
