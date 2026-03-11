@@ -1,0 +1,59 @@
+---
+layout: page
+---
+
+{% include lang.html %}
+
+<div id="projects">
+  {% for project in site.data.projects %}
+  <div class="project-card">
+    <div class="project-card-header">
+      <h5 class="project-name">
+        <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github me-1"></i>{{ project.name }}
+        </a>
+      </h5>
+
+      <div class="project-stats">
+        {% if project.pypi_package %}
+        <span class="project-downloads" title="Total PyPI downloads">
+          <i class="fas fa-download me-1"></i>{{ project.pypi_downloads | default: "—" }}
+        </span>
+        {% endif %}
+
+        <span class="project-stars" title="Stars">
+          <i class="fas fa-star me-1"></i>{{ project.stars | default: 0 }}
+        </span>
+        <span class="project-forks" title="Forks">
+          <i class="fas fa-code-branch me-1"></i>{{ project.forks | default: 0 }}
+        </span>
+      </div>
+    </div>
+
+    {% if project.description and project.description != "" %}
+    <p class="project-description">{{ project.description }}</p>
+    {% endif %}
+
+    <div class="project-footer">
+      {% if project.language %}
+      <span class="project-language">
+        <i class="fas fa-circle language-dot me-1"></i>{{ project.language }}
+      </span>
+      {% endif %}
+
+      {% for topic in project.topics %}
+      <span class="project-topic post-tag">{{ topic }}</span>
+      {% endfor %}
+
+      {% if project.pypi_package %}
+      <a class="project-pypi ms-auto"
+         href="https://pypi.org/project/{{ project.pypi_package }}/"
+         target="_blank" rel="noopener noreferrer"
+         title="View on PyPI">
+        <i class="fab fa-python me-1"></i>PyPI
+      </a>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
