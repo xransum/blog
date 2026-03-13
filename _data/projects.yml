@@ -118,8 +118,21 @@
   stars: 0
   forks: 0
 
+- name: "phantex"
+  description: "Local OSINT recon terminal -- Bluetooth, WiFi, and more."
+  url: "https://github.com/xransum/phantex"
+  language: "Python"
+  topics:
+    - python
+    - osint
+    - security
+    - bluetooth
+    - wifi
+  stars: 0
+  forks: 0
+
 - name: "script-junkyard"
-  description: "Repository name says it all — a collection of miscellaneous scripts."
+  description: "Repository name says it all -- a collection of miscellaneous scripts."
   url: "https://github.com/xransum/script-junkyard"
   language: "Python"
   topics:
