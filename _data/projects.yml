@@ -47,6 +47,30 @@
   forks: 0
   pypi_package: "rfc-lookup"
 
+- name: "panopticon"
+  description: "GPU-accelerated AI window observer -- captures any window and detects people and objects in real-time using YOLOv8."
+  url: "https://github.com/xransum/panopticon"
+  language: "Python"
+  topics:
+    - python
+    - yolov8
+    - computer-vision
+    - automation
+  stars: 0
+  forks: 0
+
+- name: "abuse-reporter"
+  description: "Analyses web server logs, identifies suspicious traffic, and automatically sends reports to responsible parties via email and logs activity to Discord via webhooks."
+  url: "https://github.com/xransum/abuse-reporter"
+  language: "Python"
+  topics:
+    - python
+    - security
+    - automation
+    - discord
+  stars: 0
+  forks: 0
+
 - name: "gdorking"
   description: "A Google dorking utility for security researchers and pen-testers."
   url: "https://github.com/xransum/gdorking"
