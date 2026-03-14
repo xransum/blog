@@ -7,15 +7,19 @@
   // CodeMirror shadow-DOM theming
   //
   // PyScript mounts each py-editor's CodeMirror instance inside an *open*
-  // shadow root (`:host { all: initial }`), so regular page CSS cannot reach
-  // its token classes.  We work around this by:
+  // shadow root attached to an anonymous <div> inside .py-editor-input.
+  // Regular page CSS cannot pierce shadow DOM boundaries, so we use
+  // adoptedStyleSheets to inject a shared CSSStyleSheet into every such root.
   //
-  //   1. Building a CSSStyleSheet with light + dark token rules whose selectors
-  //      use :host([data-cm-dark]) so we can flip them from JS.
-  //   2. Adopting that sheet into every shadow root PyScript creates.
-  //   3. Watching html[data-mode] (the Chirpy mode-toggle attribute) and the
-  //      system prefers-color-scheme media query, then setting / removing the
-  //      data-cm-dark attribute on each :host element to switch palettes.
+  // We cannot reliably monkey-patch Element.prototype.attachShadow because
+  // PyScript's own core.js also patches it via queueMicrotask (running after
+  // our synchronous script) and overwrites our patch.  Instead we use a
+  // MutationObserver that watches for .cm-editor being inserted into any
+  // open shadow root under a .py-editor-input element, then adopts the sheet
+  // from that root directly.
+  //
+  // Theme switching: a single shared CSSStyleSheet is updated via replaceSync
+  // on every mode change, propagating to all adopted roots at once.
   // ---------------------------------------------------------------------------
   (function () {
     // --- colour palettes (kept in sync with syntax-light/dark.scss) ----------
@@ -56,7 +60,10 @@
       focus_ring: 'rgba(144,169,89,0.14)'
     };
 
-    // Build the CSS text for a given palette
+    // Build the CSS text for a given palette.
+    // CodeMirror 6 uses @lezer/highlight's classHighlighter, which emits
+    // tok-* prefixed class names on token <span> elements -- NOT the legacy
+    // cm-keyword / cm-string / etc. names from CodeMirror 5.
     function buildCSS(p) {
       return [
         ':host { color-scheme: ' + (p === DARK ? 'dark' : 'light') + '; }',
@@ -75,27 +82,28 @@
         '.cm-selectionLayer .cm-selectionBackground { background:' + p.sel + ' !important; }',
         '.cm-focused { outline:none; }',
         '.cm-focused > .cm-scroller { box-shadow:inset 0 0 0 1px ' + p.focus_ring + '; }',
-        /* token colours */
-        '.cm-keyword { color:' + p.keyword + '; }',
-        '.cm-string,.cm-string2 { color:' + p.string + '; }',
-        '.cm-number { color:' + p.number + '; }',
-        '.cm-comment { color:' + p.comment + '; }',
-        '.cm-operator { color:' + p.operator + '; }',
-        '.cm-builtin { color:' + p.builtin + '; }',
-        '.cm-definition { color:' + p.definition + '; }',
-        '.cm-meta { color:' + p.meta + '; }',
-        '.cm-typeName { color:' + p.builtin + '; }',
-        '.cm-propertyName { color:' + p.fg + '; }',
-        '.cm-variableName { color:' + p.fg + '; }',
-        '.cm-escape { color:' + p.escape + '; }',
-        '.cm-punctuation { color:' + p.fg + '; }',
-        '.cm-invalid { color:' + p.invalid_fg + '; background:' + p.invalid_bg + '; }'
+        /* token colours -- CM6 tok-* class names from @lezer/highlight classHighlighter */
+        '.tok-keyword { color:' + p.keyword + '; }',
+        '.tok-string { color:' + p.string + '; }',
+        '.tok-string2 { color:' + p.escape + '; }',
+        '.tok-number,.tok-integer,.tok-float { color:' + p.number + '; }',
+        '.tok-comment { color:' + p.comment + '; font-style:italic; }',
+        '.tok-operator { color:' + p.operator + '; }',
+        '.tok-typeName,.tok-className,.tok-namespace { color:' + p.builtin + '; }',
+        '.tok-variableName { color:' + p.fg + '; }',
+        '.tok-variableName.tok-definition { color:' + p.definition + '; }',
+        '.tok-propertyName { color:' + p.fg + '; }',
+        '.tok-propertyName.tok-definition { color:' + p.definition + '; }',
+        '.tok-meta { color:' + p.meta + '; }',
+        '.tok-punctuation { color:' + p.fg + '; }',
+        '.tok-invalid { color:' + p.invalid_fg + '; background:' + p.invalid_bg + '; }'
       ].join('\n');
     }
 
-    // Shared adopted stylesheet – one instance, adopted into every shadow root
+    // Shared adopted stylesheet -- one instance, adopted into every shadow root.
+    // replaceSync updates all adopted roots simultaneously.
     var sheet = new CSSStyleSheet();
-    var roots = [];   // all shadow roots we've adopted into
+    var roots = [];
     var isDark = false;
 
     function applyTheme(dark) {
@@ -116,7 +124,7 @@
       var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (mode === 'dark') return true;
       if (mode === 'light') return false;
-      return sysDark;  // no explicit mode → follow system
+      return sysDark;  // no explicit mode -- follow system
     }
 
     // Initial theme
@@ -136,20 +144,52 @@
       }
     });
 
-    // Intercept attachShadow so we can adopt our stylesheet into every shadow
-    // root PyScript creates for its editors
-    var _origAttachShadow = Element.prototype.attachShadow;
-    Element.prototype.attachShadow = function (init) {
-      var root = _origAttachShadow.call(this, init);
-      // Only adopt into py/mpy editor input shadow roots
-      var el = this;
-      if (el.classList &&
-          (el.classList.contains('py-editor-input') ||
-           el.classList.contains('mpy-editor-input'))) {
-        adoptInto(root);
-      }
-      return root;
-    };
+    // Watch the document for .cm-editor nodes being added to open shadow roots
+    // that live inside a .py-editor-input or .mpy-editor-input host element.
+    //
+    // DOM structure PyScript builds:
+    //   .py-editor-input
+    //     <div>                    <-- shadow host (no classes)
+    //       #shadow-root (open)
+    //         .cm-editor           <-- this is what we wait for
+    //
+    // MutationObserver only fires for nodes in the main document tree, not
+    // inside shadow roots.  PyScript's own core.js observer already watches
+    // inside shadow roots (via its own attachShadow patch).  We only need to
+    // watch the main document for .py-editor-input host wrappers appearing,
+    // then check whether their child already has a shadow root (it will, since
+    // PyScript calls attachShadow synchronously before appending to the DOM),
+    // and adopt into that root.
+    var domObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (node.nodeType !== 1) return;
+          // Check the added node itself and all its descendants for editor
+          // input wrappers whose inner div already has a shadow root.
+          var candidates = [];
+          if (node.classList &&
+              (node.classList.contains('py-editor-input') ||
+               node.classList.contains('mpy-editor-input'))) {
+            candidates.push(node);
+          }
+          // querySelectorAll won't throw even if node has no children
+          try {
+            var found = node.querySelectorAll('.py-editor-input, .mpy-editor-input');
+            for (var i = 0; i < found.length; i++) candidates.push(found[i]);
+          } catch (ex) { /* ignore */ }
+
+          candidates.forEach(function (inputDiv) {
+            // The shadow host is the direct <div> child of the input wrapper
+            var host = inputDiv.querySelector('div');
+            if (host && host.shadowRoot) {
+              adoptInto(host.shadowRoot);
+            }
+          });
+        });
+      });
+    });
+
+    domObserver.observe(document.body, { childList: true, subtree: true });
   }());
 
   // ---------------------------------------------------------------------------
