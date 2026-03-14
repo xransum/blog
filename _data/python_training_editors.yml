@@ -1,6 +1,53 @@
 introduction-hello-world: |-
   print("Hello, World!")
 
+dicts-tuples-dict-vs-list: |-
+  # Say you want to track the scores of three players.
+  # With a list, you have to remember which index belongs to which player.
+  scores_list = [92, 78, 85]
+  print(scores_list[0])   # whose score is this? you have to remember: alice
+
+  # With a dict, the name is right there in the data.
+  scores_dict = {
+      "alice": 92,
+      "bob":   78,
+      "carol": 85,
+  }
+  print(scores_dict["alice"])   # no guessing required
+
+  # Adding a fourth player with a list means remembering the new index.
+  scores_list.append(91)   # index 3 -- is that dave? who knows
+
+  # With a dict the key tells you everything.
+  scores_dict["dave"] = 91
+  print(scores_dict)
+
+dicts-tuples-dict-phonebook: |-
+  # A phone book is a classic dict use case:
+  # you know the name, you want the number.
+  phonebook = {
+      "Alice":   "555-1234",
+      "Bob":     "555-5678",
+      "Carol":   "555-9999",
+  }
+
+  # Look up a number by name
+  print(phonebook["Alice"])
+
+  # Add a new contact
+  phonebook["Dave"] = "555-0001"
+
+  # Check if someone is in the book before looking them up
+  name = "Eve"
+  if name in phonebook:
+      print(phonebook[name])
+  else:
+      print(f"{name} is not in the phonebook")
+
+  # Remove a contact
+  phonebook.pop("Bob")
+  print(phonebook)
+
 basics-variables: |-
   name = "Alice"
   age = 30
@@ -173,3 +220,282 @@ basics-functions-defaults: |-
 
   print(power(3))     # 3 squared = 9
   print(power(3, 3))  # 3 cubed = 27
+
+dicts-tuples-tuple-basics: |-
+  # Tuples use parentheses instead of square brackets
+  point = (10, 20)
+  rgb = (255, 128, 0)
+  single = (42,)   # trailing comma makes it a tuple, not just (42)
+
+  print(point)
+  print(type(point))
+  print(type(single))
+
+  # Indexing works the same as lists
+  print(point[0])   # 10
+  print(point[1])   # 20
+  print(rgb[-1])    # last item: 0
+
+dicts-tuples-tuple-unpack: |-
+  # Unpacking assigns each item to a variable in one step
+  point = (10, 20)
+  x, y = point
+  print(x)   # 10
+  print(y)   # 20
+
+  # Works with any iterable -- functions often return tuples this way
+  def min_max(numbers):
+      return (min(numbers), max(numbers))
+
+  low, high = min_max([3, 1, 7, 2, 9])
+  print(low)    # 1
+  print(high)   # 9
+
+  # Classic swap -- no temp variable needed
+  a = "hello"
+  b = "world"
+  a, b = b, a
+  print(a)   # world
+  print(b)   # hello
+
+dicts-tuples-tuple-vs-list: |-
+  # Lists are for collections that change
+  cart = ["apple", "banana"]
+  cart.append("cherry")
+  cart.remove("banana")
+  print(cart)
+
+  # Tuples are for records that should not change
+  location = (51.5074, -0.1278)   # latitude, longitude of London
+  # location[0] = 0  # this would raise a TypeError -- tuples are immutable
+
+  # Tuples can be used as dictionary keys because they're immutable
+  distances = {
+      (0, 0): 0,
+      (3, 4): 5,
+  }
+  print(distances[(3, 4)])
+
+dicts-tuples-dict-create: |-
+  # Curly braces, key: value pairs
+  person = {
+      "name": "Alice",
+      "age": 30,
+      "city": "London",
+  }
+  print(person)
+
+  # Add a new key by assigning to it
+  person["email"] = "alice@example.com"
+  print(person)
+
+  # Keys can be any immutable type -- strings are most common
+  config = {}
+  config["debug"] = True
+  config["max_retries"] = 3
+  print(config)
+
+dicts-tuples-dict-access: |-
+  person = {"name": "Alice", "age": 30}
+
+  # Direct access -- raises KeyError if the key doesn't exist
+  print(person["name"])
+
+  # .get() returns None if the key doesn't exist -- no crash
+  print(person.get("age"))
+  print(person.get("email"))          # None
+  print(person.get("email", "n/a"))   # supply a default value
+
+dicts-tuples-dict-modify: |-
+  person = {"name": "Alice", "age": 30, "city": "London"}
+
+  # Update an existing value
+  person["age"] = 31
+  print(person)
+
+  # Remove a key with del
+  del person["city"]
+  print(person)
+
+  # .pop() removes and returns the value
+  age = person.pop("age")
+  print(age)      # 31
+  print(person)   # {"name": "Alice"}
+
+dicts-tuples-dict-iterate-keys: |-
+  scores = {"alice": 92, "bob": 78, "carol": 85}
+
+  # Iterating a dict directly gives you its keys
+  for name in scores:
+      print(name)
+
+  # .keys() is explicit and means the same thing
+  for name in scores.keys():
+      print(name)
+
+dicts-tuples-dict-iterate-values: |-
+  scores = {"alice": 92, "bob": 78, "carol": 85}
+
+  for score in scores.values():
+      print(score)
+
+  # Practical use: total up all values
+  total = 0
+  for score in scores.values():
+      total += score
+  print(f"Average: {total / len(scores):.1f}")
+
+dicts-tuples-dict-iterate-items: |-
+  scores = {"alice": 92, "bob": 78, "carol": 85}
+
+  # .items() gives you (key, value) pairs -- unpack them directly
+  for name, score in scores.items():
+      print(f"{name}: {score}")
+
+dicts-tuples-dict-membership: |-
+  person = {"name": "Alice", "age": 30}
+
+  # Check if a key exists
+  print("name" in person)     # True
+  print("email" in person)    # False
+  print("email" not in person) # True
+
+  # Useful for safe access patterns
+  if "email" in person:
+      print(person["email"])
+  else:
+      print("no email on file")
+
+dicts-tuples-dict-nested: |-
+  # A dict whose values are themselves dicts
+  users = {
+      "alice": {"age": 30, "role": "admin"},
+      "bob":   {"age": 25, "role": "viewer"},
+  }
+
+  # Access a nested value: outer key first, then inner key
+  print(users["alice"]["role"])    # admin
+  print(users["bob"]["age"])       # 25
+
+  # Iterate over nested dicts
+  for username, info in users.items():
+      print(f"{username} is a {info['role']}")
+
+challenges-fizzbuzz-starter: |-
+  # FizzBuzz
+  # Loop through numbers 1 to 20.
+  # Print "Fizz" if the number is divisible by 3.
+  # Print "Buzz" if the number is divisible by 5.
+  # Print "FizzBuzz" if divisible by both.
+  # Otherwise print the number itself.
+
+  for i in range(1, 21):
+      # TODO: fill in the conditions
+      pass
+
+challenges-fizzbuzz-solution-a: |-
+  # Approach A: if/elif/else chain
+  # Check the combined case first, then each individually.
+  for i in range(1, 21):
+      if i % 3 == 0 and i % 5 == 0:
+          print("FizzBuzz")
+      elif i % 3 == 0:
+          print("Fizz")
+      elif i % 5 == 0:
+          print("Buzz")
+      else:
+          print(i)
+
+challenges-fizzbuzz-solution-b: |-
+  # Approach B: build the output string, print the number as fallback
+  # Each condition appends to a result string independently.
+  for i in range(1, 21):
+      result = ""
+      if i % 3 == 0:
+          result += "Fizz"
+      if i % 5 == 0:
+          result += "Buzz"
+      print(result if result else i)
+
+challenges-reverse-starter: |-
+  numbers = [1, 2, 3, 4, 5]
+
+  # Reverse the list and print each number on its own line.
+  # Try to think of more than one way to do it.
+
+challenges-reverse-solution-a: |-
+  # Approach A: slicing
+  # [::-1] steps through the list backwards in one go.
+  numbers = [1, 2, 3, 4, 5]
+  reversed_numbers = numbers[::-1]
+  for n in reversed_numbers:
+      print(n)
+
+challenges-reverse-solution-b: |-
+  # Approach B: loop with range() counting backwards
+  # Build a new list by walking the indexes from the end.
+  numbers = [1, 2, 3, 4, 5]
+  result = []
+  for i in range(len(numbers) - 1, -1, -1):
+      result.append(numbers[i])
+  for n in result:
+      print(n)
+
+challenges-grade-starter: |-
+  def get_grade(score):
+      # Return the letter grade for a given score (0-100).
+      # 90+  -> "A"
+      # 80+  -> "B"
+      # 70+  -> "C"
+      # 60+  -> "D"
+      # else -> "F"
+      pass  # replace this with your code
+
+  # Test your function
+  print(get_grade(95))
+  print(get_grade(82))
+  print(get_grade(74))
+  print(get_grade(61))
+  print(get_grade(45))
+
+challenges-grade-solution-a: |-
+  # Approach A: if/elif/else chain
+  def get_grade(score):
+      if score >= 90:
+          return "A"
+      elif score >= 80:
+          return "B"
+      elif score >= 70:
+          return "C"
+      elif score >= 60:
+          return "D"
+      else:
+          return "F"
+
+  print(get_grade(95))
+  print(get_grade(82))
+  print(get_grade(74))
+  print(get_grade(61))
+  print(get_grade(45))
+
+challenges-grade-solution-b: |-
+  # Approach B: thresholds in a list, loop to find the grade
+  # Adding a new grade band means adding one item to the list,
+  # not writing a new elif branch.
+  def get_grade(score):
+      thresholds = [
+          (90, "A"),
+          (80, "B"),
+          (70, "C"),
+          (60, "D"),
+      ]
+      for minimum, grade in thresholds:
+          if score >= minimum:
+              return grade
+      return "F"
+
+  print(get_grade(95))
+  print(get_grade(82))
+  print(get_grade(74))
+  print(get_grade(61))
+  print(get_grade(45))
