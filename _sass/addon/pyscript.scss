@@ -131,6 +131,85 @@ body > div.py-error {
 }
 
 /* -----------------------------------------------------------------------
+ * Challenge spoiler disclosure widget
+ * Usage: <details class="spoiler"><summary>Show solution</summary> ... </details>
+ * ----------------------------------------------------------------------- */
+
+details.spoiler {
+  border: 1px solid var(--language-border-color);
+  border-radius: $base-radius;
+  margin-top: 0.75rem;
+  margin-bottom: 1.2em;
+  background-color: var(--highlight-bg-color);
+  overflow: hidden;
+
+  summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 1rem;
+    font-family: $font-family-base;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--code-header-text-color);
+    cursor: pointer;
+    user-select: none;
+
+    /* hide the default browser disclosure triangle */
+    &::-webkit-details-marker { display: none; }
+    &::marker { display: none; }
+
+    /* chevron via pseudo-element */
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(-45deg);
+      transition: transform 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      color: var(--link-color);
+    }
+  }
+
+  &[open] > summary::before {
+    transform: rotate(45deg);
+  }
+
+  /* content area below the summary */
+  > *:not(summary) {
+    padding: 0 1rem 0.75rem;
+  }
+
+  /* section heading inside the spoiler */
+  .spoiler-section {
+    font-family: $font-family-base;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--code-header-text-color);
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  /* note/callout line inside the spoiler */
+  .spoiler-note {
+    font-family: $font-family-base;
+    font-size: 0.82rem;
+    color: var(--text-muted-color);
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
+}
+
+/* -----------------------------------------------------------------------
  * py-terminal (live MicroPython REPL)
  * ----------------------------------------------------------------------- */
 
