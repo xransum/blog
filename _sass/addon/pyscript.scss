@@ -63,7 +63,7 @@
   /* override the hardcoded fill="#464646" on the SVG path -- makes the icon
      nearly invisible in dark mode; inherit color from the button instead */
   svg path {
-    fill: currentColor;
+    fill: currentcolor;
   }
 }
 
