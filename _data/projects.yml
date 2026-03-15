@@ -131,6 +131,32 @@
   stars: 0
   forks: 0
 
+- name: "reconscan"
+  description: "A URL investigation tool that scans a target URL using a headless browser and presents collected data -- screenshots, HAR, DOM, cookies, TLS info, redirect chains, DNS records, and detected technologies -- through a local web UI."
+  url: "https://github.com/xransum/reconscan"
+  language: "Python"
+  topics:
+    - python
+    - security
+    - osint
+    - automation
+    - browser
+  stars: 0
+  forks: 0
+
+- name: "dalle-gen"
+  description: "CLI tool for generating images with OpenAI DALL-E. Supports post-processing (resize and center-crop) via sharp."
+  url: "https://github.com/xransum/dalle-gen"
+  language: "JavaScript"
+  topics:
+    - cli
+    - javascript
+    - openai
+    - dalle
+    - image-generation
+  stars: 0
+  forks: 0
+
 - name: "script-junkyard"
   description: "Repository name says it all -- a collection of miscellaneous scripts."
   url: "https://github.com/xransum/script-junkyard"

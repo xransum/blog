@@ -1,5 +1,5 @@
 ---
-title: Python Challenges
+title: Python Challenges 01
 author: xransum
 date: 2026-03-13 10:00:00 -0500
 categories:
