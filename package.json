@@ -9,9 +9,9 @@
   "author": "Kevin Haas",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/github.com/xransum/blog/issues"
+    "url": "https://github.com/xransum/blog/issues"
   },
-  "homepage": "https://github.com/github.com/xransum/blog/",
+  "homepage": "https://github.com/xransum/blog/",
   "scripts": {
     "prebuild": "npx rimraf assets/js/dist",
     "build": "NODE_ENV=production npx rollup -c --bundleConfigAsCjs",
