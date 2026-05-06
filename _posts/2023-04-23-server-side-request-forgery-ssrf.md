@@ -1,5 +1,6 @@
 ---
 title: Server Side Request Forgery (SSRF)
+description: Covers how SSRF lets attackers force a vulnerable server to make requests to internal systems or services it has access to.
 author: xransum
 date: 2023-04-23 13:34:00 -0500
 categories:

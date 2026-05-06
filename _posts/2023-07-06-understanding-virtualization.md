@@ -1,5 +1,6 @@
 ---
 title: 'Understanding Virtualization: Unleashing the Power of Virtual Environments'
+description: Covers hypervisors, virtual machines, containers, and VLANs and how virtualization optimizes resource use across physical infrastructure.
 author: xransum
 date: 2023-07-06 19:50:06 -0500
 categories:

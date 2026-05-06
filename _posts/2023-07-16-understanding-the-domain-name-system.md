@@ -1,5 +1,6 @@
 ---
 title: Understanding the Domain Name System
+description: Explains how DNS translates domain names to IP addresses, how the hierarchy works, and what happens during a DNS lookup.
 author: xransum
 date: 2023-07-16 00:08:32 -0500
 categories:

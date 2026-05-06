@@ -28,9 +28,6 @@ url: "https://kevin-haas.com"
 github:
   username: xransum # change to your github username
 
-twitter:
-  username: # change to your twitter username
-
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
@@ -43,8 +40,6 @@ social:
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
-
-google_site_verification: # fill in to your verification string
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
@@ -64,13 +59,6 @@ google_analytics:
 #     dark   - Use the dark color scheme
 #
 theme_mode: # [light|dark]
-
-# The CDN endpoint for images.
-# Notice that once it is assigned, the CDN url
-# will be added to all image (site avatar & posts' images) paths starting with '/'
-#
-# e.g. 'https://cdn.com'
-img_cdn: ""
 
 # the avatar on sidebar, support local or CORS resources
 avatar: "/assets/img/avatar.png"

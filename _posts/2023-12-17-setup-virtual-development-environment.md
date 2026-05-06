@@ -1,5 +1,6 @@
 ---
 title: Setup Virtual Development Environment
+description: Guides you through setting up a VirtualBox-based dev environment with a Linux VM, shared clipboard, and a full dev toolchain.
 author: xransum
 date: 2023-12-7 01:05:00 -0500
 categories:

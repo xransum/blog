@@ -1,5 +1,6 @@
 ---
 title: Linux Permissions
+description: Covers the Linux file permissions model -- read, write, and execute -- and how attackers exploit it for privilege escalation.
 author: xransum
 date: 2023-02-28 00:33:19 -0500
 categories:

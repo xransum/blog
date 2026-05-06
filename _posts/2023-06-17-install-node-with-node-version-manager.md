@@ -1,5 +1,6 @@
 ---
 title: Install Node with Node Version Manager (nvm)
+description: Shows how to install nvm on Linux and use it to install and switch between multiple Node.js versions without needing root access.
 author: xransum
 date: 2023-06-17 02:38:24 -0500
 categories:

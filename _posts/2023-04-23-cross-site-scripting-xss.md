@@ -1,5 +1,6 @@
 ---
 title: Cross Site Scripting (XSS)
+description: Breaks down XSS vulnerability types -- reflected, stored, and DOM-based -- and how attackers inject malicious scripts into pages other users view.
 author: xransum
 date: 2023-04-23 04:38:18 -0500
 categories:

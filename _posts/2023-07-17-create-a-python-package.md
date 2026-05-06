@@ -1,5 +1,6 @@
 ---
 title: Creating a Python Package
+description: Walks through structuring a Python package with setup.py and publishing it to PyPI so it can be installed via pip.
 author: xransum
 date: 2023-07-17 15:13:32 -0500
 categories:

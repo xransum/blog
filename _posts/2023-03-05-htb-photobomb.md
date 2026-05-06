@@ -1,5 +1,6 @@
 ---
 title: HTB - Photobomb
+description: Walkthrough of the HackTheBox Photobomb machine, from credential discovery in a JS file to command injection and two privilege escalation paths.
 author: xransum
 date: 2023-03-05 10:57:13 -0500
 categories:

@@ -1,5 +1,6 @@
 ---
 title: Install Custom Python Version
+description: Walks through compiling and installing a specific Python version locally on a Linux server without root access.
 author: xransum
 date: 2023-05-19 02:19:01 -0500
 categories:

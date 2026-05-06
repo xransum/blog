@@ -1,5 +1,6 @@
 ---
 title: SQL Injection
+description: Shows how SQL injection exploits applications that pass raw user input into database queries, enabling unauthorized data access or manipulation.
 author: xransum
 date: 2023-04-23 12:45:00 -0500
 categories:

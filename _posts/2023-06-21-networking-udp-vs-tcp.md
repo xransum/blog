@@ -1,5 +1,6 @@
 ---
 title: Networking - UDP vs TCP
+description: Compares TCP and UDP at a practical level -- reliability, handshakes, overhead, and when to reach for each protocol.
 author: xransum
 date: 2023-06-21 12:11:04 -0500
 categories:

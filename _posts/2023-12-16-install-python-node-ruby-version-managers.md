@@ -1,5 +1,6 @@
 ---
 title: Install Python, Node, and Ruby Version Managers
+description: One-stop reference for setting up pyenv, nvm, and rvm on Linux, covering system dependencies and shell config for each.
 author: xransum
 date: 2023-12-16 15:01:13 -0500
 categories:

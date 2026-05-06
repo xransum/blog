@@ -1,5 +1,6 @@
 ---
 title: Python REPL (in-browser)
+description: An embedded in-browser Python terminal powered by PyScript, letting you run Python code directly on the page with no install required.
 author: xransum
 date: 2025-12-23 10:00:00 -0500
 categories:

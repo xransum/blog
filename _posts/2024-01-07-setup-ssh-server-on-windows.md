@@ -1,5 +1,6 @@
 ---
 title: Setup SSH Server on Windows
+description: Covers enabling and configuring Windows' built-in OpenSSH server, introduced in Windows 10 1709, for native remote command execution.
 author: xransum
 date: 2024-01-07 00:01:02 -0500
 categories:

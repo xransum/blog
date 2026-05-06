@@ -1,5 +1,6 @@
 ---
 title: How to Install Ruby
+description: Covers Ruby installation across Linux, macOS, and Windows, including common pitfalls and how to resolve them on each platform.
 author: xransum
 date: 2023-06-25 04:10:29 -0500
 categories:

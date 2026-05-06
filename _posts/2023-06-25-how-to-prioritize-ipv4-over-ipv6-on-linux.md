@@ -1,5 +1,6 @@
 ---
 title: How to Prioritize IPv4 over IPv6 on Linux
+description: Quick guide to forcing IPv4 preference on Linux by editing gai.conf or disabling IPv6 entirely, stopping slow connection timeouts.
 author: xransum
 date: 2023-06-25 09:26:07 -0500
 categories:

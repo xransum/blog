@@ -1,5 +1,6 @@
 ---
 title: Setting Up Python Virtual Environment
+description: Explains why Python virtual environments matter for isolating project dependencies and how to create and use one with venv.
 author: xransum
 date: 2023-05-20 11:09:33 -0500
 categories:
