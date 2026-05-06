@@ -1,5 +1,6 @@
 ---
 title: Capture the Flag Resources
+description: A curated collection of CTF platforms, YouTube channels, writeup sites, and learning resources organized by category.
 author: xransum
 date: 2023-07-05 04:01:06 -0500
 categories:

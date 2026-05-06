@@ -1,5 +1,6 @@
 ---
 title: Understanding Physical Servers, Virtualization, and Data Centers
+description: Explains how physical server hardware -- CPU, RAM, storage -- fits into data centers and how virtualization layers on top of it.
 author: xransum
 date: 2023-07-06 20:36:38 -0500
 categories:

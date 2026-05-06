@@ -1,5 +1,6 @@
 ---
 title: Cross Site Request Forgery (CSRF)
+description: Covers how CSRF attacks hijack an authenticated user's session to perform unauthorized actions, and how injected elements trigger them.
 author: xransum
 date: 2023-04-23 21:04:40 -0500
 categories:

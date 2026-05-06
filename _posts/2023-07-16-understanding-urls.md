@@ -1,5 +1,6 @@
 ---
 title: Understanding URL Components
+description: Breaks down every part of a URL -- scheme, host, port, path, query parameters, and fragment -- and what each one does.
 author: xransum
 date: 2023-07-16 08:37:40 -0500
 categories:

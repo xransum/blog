@@ -1,5 +1,6 @@
 ---
 title: Manage VMs with VirtualBox CLI
+description: Explains how to use VBoxManage to control VirtualBox VMs from the command line, including operations the GUI doesn't expose.
 author: xransum
 date: 2024-01-07 00:01:02 -0500
 categories:

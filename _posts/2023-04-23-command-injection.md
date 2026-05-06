@@ -1,5 +1,6 @@
 ---
 title: Command Injection
+description: Explains how command injection works when apps pass unsanitized user input to a system shell, with examples of vulnerable code and exploitation.
 author: xransum
 date: 2023-04-23 16:35:04 -0500
 categories:

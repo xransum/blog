@@ -1,5 +1,6 @@
 ---
 title: Install Ruby Using Ruby Version Manager (RVM)
+description: Concise steps for installing RVM, importing GPG keys, and using it to install and manage multiple Ruby versions on Linux.
 author: xransum
 date: 2023-12-15 00:08:00 -0500
 categories:

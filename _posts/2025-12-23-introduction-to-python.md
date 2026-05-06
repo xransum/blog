@@ -1,5 +1,6 @@
 ---
 title: Introduction to Python
+description: Makes the case for learning Python as a first language and walks through your first program, basic syntax, and why the language is worth your time.
 author: xransum
 date: 2025-12-23 10:00:00 -0500
 categories:

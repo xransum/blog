@@ -1,5 +1,6 @@
 ---
 title: 'Email Spam - Threats, Techniques, and Protection'
+description: Breaks down how email spam works as a social engineering attack, common delivery techniques, and practical ways to protect yourself.
 author: xransum
 date: 2023-07-08 04:00:56 -0500
 categories:

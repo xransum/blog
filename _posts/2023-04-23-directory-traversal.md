@@ -1,5 +1,6 @@
 ---
 title: Directory Traversal
+description: Explains how directory traversal lets attackers read files outside the web root by manipulating unsanitized path input in an application.
 author: xransum
 date: 2023-04-23 17:52:31 -0500
 categories:

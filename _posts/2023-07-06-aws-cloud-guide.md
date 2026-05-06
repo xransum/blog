@@ -1,5 +1,6 @@
 ---
 title: AWS Cloud Guide
+description: Covers core AWS concepts including accounts, regions, availability zones, VPCs, IAM, and key services for building cloud infrastructure.
 author: xransum
 date: 2023-07-06 09:28:16 -0500
 categories:

@@ -1,5 +1,6 @@
 ---
 title: Python Basics
+description: Covers Python fundamentals -- variables, data types, conditionals, loops, and functions -- with interactive in-browser code examples via PyScript.
 author: xransum
 date: 2026-03-07 10:00:00 -0500
 categories:

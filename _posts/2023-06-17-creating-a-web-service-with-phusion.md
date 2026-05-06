@@ -1,5 +1,6 @@
 ---
 title: Creating a Webservice with Phusion
+description: Covers deploying a Python Flask app on shared hosting using Phusion Passenger, working around the lack of sudo or global install access.
 author: xransum
 date: 2023-06-17 00:07:15 -0500
 categories:

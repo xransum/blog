@@ -1,5 +1,6 @@
 ---
 title: Personalizing Vim Config
+description: Shares practical .vimrc settings for line numbers, spell check, search highlighting, indentation, and other workflow-improving configurations.
 author: xransum
 date: 2023-05-01 06:58:47 -0500
 categories:

@@ -1,5 +1,6 @@
 ---
 title: 'Phishing Attacks: Threats, Techniques, and Protection'
+description: Covers how phishing attacks work, their common targets, and how to recognize, report, and protect against them with real statistics.
 author: xransum
 date: 2023-07-08 05:45:16 -0500
 categories:

@@ -1,5 +1,6 @@
 ---
 title: Setup an SSH Server with VirtualBox
+description: Step-by-step guide to configuring a VirtualBox VM with bridged networking and setting up SSH access from the host machine.
 author: xransum
 date: 2023-06-12 11:16:16 -0500
 categories:

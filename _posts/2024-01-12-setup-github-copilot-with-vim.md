@@ -1,5 +1,6 @@
 ---
 title: Setup Github Copilot with VIM
+description: Steps to build Vim from source, install Node, and set up the GitHub Copilot plugin for AI-assisted code completion in Vim.
 author: xransum
 date: 2024-01-12 12:59:00 -0500
 categories:
